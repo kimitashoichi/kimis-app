@@ -8,7 +8,7 @@ import ideaReducer from './ideaReducer';
 const rootReducer = (history: History) =>
   combineReducers({
     router: connectRouter(history),
-    idea: ideaReducer
+    postIdea: ideaReducer
   })
 
 export default rootReducer;

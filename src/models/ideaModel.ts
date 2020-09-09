@@ -3,7 +3,7 @@ import * as ActionTypes from '../constants/actionTypes';
 export interface PostIdea {
   content: string;
   createdAt: Date;
-  updatedAt: Date;
+  updatedAt: Date | null;
   // TODO: before implements
   // uid: string
   // tags: []

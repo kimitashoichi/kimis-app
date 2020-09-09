@@ -10,10 +10,10 @@ export function* runPostIdea(actions: Models.PostIdeaStart) {
   const handler = API.postIdea;
   const { success, error } = yield call(handler, data);
   if( success && !error ) {
-    console.log('POSR IDEA: OK');
+    console.log('POST IDEA: OK');
     yield put(postIdeaAction.success());
   } else {
-    console.log('POSR IDEA: FAILUER');
+    console.log('POST IDEA: FAILUER', error);
     yield put(postIdeaAction.failure());
   }
 }
