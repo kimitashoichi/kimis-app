@@ -1,11 +1,11 @@
-import React, { FC, useState, FormEvent, useEffect } from "react";
+import React, { FC, useState, FormEvent } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
+import styled from 'styled-components';
 
 //  material-ui
-import Input from '@material-ui/core/Input';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 //  file
 import { 
@@ -15,6 +15,44 @@ import {
 import * as Models from '../models/ideaModel';
 import * as TextIndex from '../constants/textIndex';
 import { AppState } from '../models'
+
+const StyledButton = styled(Button)`
+  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  border-radius: 3px;
+  border: 0;
+  color: white;
+  height: 48px;
+  padding: 0 30px;
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+  margin-right: 20px;
+`;
+
+const SubmitButton = styled(Button)`
+  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  border-radius: 3px;
+  border: 0;
+  color: white;
+  height: 48px;
+  padding: 0 30px;
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+  margin-right: 20px;
+`
+
+const StyledTextField = styled(TextareaAutosize)`
+  width: 100%;
+  height: 60%;
+`;
+
+const TextFieldWapper = styled.div`
+  margin: 0 auto;
+  text-align: center;
+  width: 70%;
+`;
+
+const ButtonWapper = styled.div`
+  padding-top: 30px;
+  text-align: right;
+`;
 
 interface DispatchProps {
   createIdea: (payload: Models.PostIdea) => void;
@@ -31,6 +69,7 @@ interface StateProps {
 }
 
 type DefaultProps = DispatchProps & Props & StateProps;
+
 
 const PostIdeaContainer: FC<DefaultProps> = ({
   isLoading,
@@ -57,7 +96,7 @@ const PostIdeaContainer: FC<DefaultProps> = ({
     } else {
       await createIdea(payload);
     }
-    
+
     setIdea('');
     setCrateDate(new Date());
     setUpdateDate(null);
@@ -70,29 +109,36 @@ const PostIdeaContainer: FC<DefaultProps> = ({
      ) : (
       <>
       <div>
-        <TextField
-          id="standard-textarea"
-          label="アイディア"
-          placeholder="アイディアを投稿しよう！"
-          value={idea}
-          onChange={(e) => setIdea(e.target.value)}
-          multiline
-        />
+        
+        <TextFieldWapper>
+          <h3>投稿内容</h3>
+          <div>
+            <StyledTextField
+              className="standard-textarea"
+              placeholder="アイディアを投稿しよう！"
+              value={idea}
+              rowsMax={4}
+              onChange={(e) => setIdea(e.target.value)}
+            />
+          </div>
+          <ButtonWapper>
+            <StyledButton 
+              onClick={handleOnSubmit}
+              onMouseDown={() => setIsDraft(true)}>
+              {TextIndex.DRAFT}
+            </StyledButton>
 
-        <Button 
-          onClick={handleOnSubmit}
-          onMouseDown={() => setIsDraft(true)}
-          variant="contained">
-          {TextIndex.DRAFT}
-        </Button>
+            <SubmitButton
+              className='idea-post-button'
+              onClick={handleOnSubmit}
+              onMouseDown={() => setIsDraft(false)}
+              variant="contained" 
+              color="primary">
+              {TextIndex.SUBMIT}
+            </SubmitButton>
+          </ButtonWapper>
+        </TextFieldWapper>
 
-        <Button 
-          onClick={handleOnSubmit}
-          onMouseDown={() => setIsDraft(false)}
-          variant="contained" 
-          color="primary">
-          {TextIndex.SUBMIT}
-        </Button>
       </div>
       </>
      )}
