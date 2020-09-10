@@ -22,4 +22,24 @@ export const postIdea = async (data: Models.PostIdea) => {
   }
 };
 
+export const postDraftIdea = async (data: Models.PostIdea) => {
+  try {
+    console.log(data)
+    await firebase
+    .firestore()
+    .collection('DraftIdea')
+    .doc()
+    .set(data)
+    .catch((error) => {
+      console.log('error')
+      throw new Error(error.message);
+    })
+    const success = { success: 'PostIdea 200 ok' };
+    return { success }
+  } catch(error) {
+    console.log('error1')
+    return { error }
+  }
+};
+
 

@@ -2,3 +2,9 @@
 export const POST_IDEA_START = 'POST_IDEA_START';
 export const POST_IDEA_SUCCESS = 'POST_IDEA_SUCCESS';
 export const POST_IDEA_FAILURE = 'POST_IDEA_FAILURE';
+
+
+// Create Draft Ideas
+export const DRAFT_IDEA_START = 'DRAFT_IDEA_START';
+export const DRAFT_IDEA_SUCCESS = 'DRAFT_IDEA_SUCCESS';
+export const DRAFT_IDEA_FAILURE = 'DRAFT_IDEA_FAILURE';

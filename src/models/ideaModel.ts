@@ -16,6 +16,7 @@ export interface PostIdeaState {
   postIdeas: PostIdea[];
 };
 
+// POST IDEA
 export interface PostIdeaStart {
   type: typeof ActionTypes.POST_IDEA_START;
   payload: PostIdea
@@ -29,7 +30,24 @@ export interface PostIdeaFailure {
   type: typeof ActionTypes.POST_IDEA_FAILURE;
 }
 
+//  DRAFT IDEA
+export interface DraftIdeaStart {
+  type: typeof ActionTypes.DRAFT_IDEA_START;
+  payload: PostIdea
+}
+
+export interface DraftIdeaSuccess {
+  type: typeof ActionTypes.DRAFT_IDEA_SUCCESS;
+}
+
+export interface DraftIdeaFailure {
+  type: typeof ActionTypes.DRAFT_IDEA_FAILURE;
+}
+
 export type PostIdeaAction = 
   | PostIdeaStart
   | PostIdeaSuccess
-  | PostIdeaFailure;
+  | PostIdeaFailure
+  | DraftIdeaStart
+  | DraftIdeaSuccess
+  | DraftIdeaFailure;
