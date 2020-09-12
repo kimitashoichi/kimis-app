@@ -1,8 +1,8 @@
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
 
 import * as ActionTypes from '../constants/actionTypes';
-import * as Models from '../models/ideaModel'
-import * as API from '../apis/ideaAPI'
+import * as Models from '../models/ideaModel';
+import * as API from '../apis/ideaAPI';
 import { 
   postIdeaAction,
   draftIdeaAction

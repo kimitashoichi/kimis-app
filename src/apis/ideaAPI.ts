@@ -4,7 +4,6 @@ import * as Models from '../models/ideaModel';
 // 投稿処理
 export const postIdea = async (data: Models.PostIdea) => {
   try {
-    console.log(data)
     await firebase
     .firestore()
     .collection('Idea')
