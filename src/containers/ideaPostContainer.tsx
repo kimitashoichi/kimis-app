@@ -11,7 +11,7 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { 
   postIdeaAction,
   draftIdeaAction
- } from '../actions/postIdeaAction';
+ } from '../actions/ideaAction';
 import * as Models from '../models/ideaModel';
 import * as TextIndex from '../constants/textIndex';
 import { AppState } from '../models'
