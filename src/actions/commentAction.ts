@@ -14,4 +14,21 @@ export const createComment = {
   failure: () => ({
     type: ActionTypes.CREATE_COMMENT_FAILURE as typeof ActionTypes.CREATE_COMMENT_FAILURE
   })
-}
+};
+
+export const getCommentById = {
+  // TODO: get comment by idea id
+  start: () => ({
+    type: ActionTypes.GET_COMMENT_START as typeof ActionTypes.GET_COMMENT_START
+  }),
+
+  success: (payload: Models.Comment) => ({
+    type: ActionTypes.GET_COMMENT_SUCCESS as typeof ActionTypes.GET_COMMENT_SUCCESS,
+    payload: payload
+  }),
+
+  failure: () => ({
+    type: ActionTypes.GET_COMMENT_FAILURE as typeof ActionTypes.GET_COMMENT_FAILURE
+  })
+};
+
