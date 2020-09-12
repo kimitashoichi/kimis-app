@@ -1,20 +1,18 @@
-import React, { FC, useState, FormEvent } from "react";
+import React, { FC, useState, FormEvent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
+import styled from 'styled-components'
 
-//  material-ui
+// material-ui
 import Button from '@material-ui/core/Button';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
-//  file
-import { 
-  postIdeaAction,
-  draftIdeaAction
- } from '../actions/ideaAction';
-import * as Models from '../models/ideaModel';
+// file
+import * as Models from '../models/commentModel';
+import * as ActionTypes from '../constants/actionTypes';
 import * as TextIndex from '../constants/textIndex';
-import { AppState } from '../models'
+import { createComment } from '../actions/commentAction';
+import { AppState } from '../models';
 
 const StyledButton = styled(Button)`
   background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
@@ -54,51 +52,37 @@ const ButtonWapper = styled.div`
   text-align: right;
 `;
 
-interface DispatchProps {
-  createIdea: (payload: Models.PostIdea) => void;
-  createDraftIdea: (payload: Models.PostIdea) => void;
-}
-
-interface Props {
-  content?: Models.PostIdea;
-}
 
 interface StateProps {
   isLoading?: boolean;
-  isDraft?: boolean;
 }
 
-type DefaultProps = DispatchProps & Props & StateProps;
+interface DispatchProps {
+  createComment: (payload: Models.Comment) => void;
+}
 
+type DefautProps = StateProps & DispatchProps;
 
-const PostIdeaContainer: FC<DefaultProps> = ({
+const CreateCommentContainer: FC<DefautProps> = ({
   isLoading,
-  content,
-  createIdea,
-  createDraftIdea
+  createComment,
 }) => {
-  const [idea, setIdea] = useState<string>(content ? content.content : '');
-  const [createDate, setCrateDate] = useState<Date>(content ? content.createdAt: new Date());
-  const [updateDate, setUpdateDate] = useState<Date | null>(content ? content.updatedAt : null);
-  const [isDraft, setIsDraft] = useState<boolean>(false);
+
+  const [content, setContent] = useState<string>('');
+  const [createDate, setCrateDate] = useState<Date | null>(new Date());
 
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const payload = {
-      content: idea,
-      createdAt: createDate instanceof Date ? createDate : new Date(),
-      updatedAt: updateDate === null ? null : new Date(),
+      content: content,
+      userName: 'test user',
+      createdAt: createDate instanceof Date ? createDate : new Date()
     }
 
-    if(isDraft) {
-      await createDraftIdea(payload);
-    } else {
-      await createIdea(payload);
-    }
+    await createComment(payload);
 
-    setIdea('');
+    setContent('');
     setCrateDate(new Date());
-    setUpdateDate(null);
   }
 
   return (
@@ -110,27 +94,20 @@ const PostIdeaContainer: FC<DefaultProps> = ({
       <div>
         
         <TextFieldWapper>
-          <h3>投稿内容</h3>
+          <h3>コメント投稿</h3>
           <div>
             <StyledTextField
               className="standard-textarea"
-              placeholder="アイディアを投稿しよう！"
-              value={idea}
-              rowsMax={4}
-              onChange={(e) => setIdea(e.target.value)}
+              placeholder="コメントを投稿しよう！"
+              value={content}
+              rowsMax={5}
+              onChange={(e) => setContent(e.target.value)}
             />
           </div>
           <ButtonWapper>
-            <StyledButton 
-              onClick={handleOnSubmit}
-              onMouseDown={() => setIsDraft(true)}>
-              {TextIndex.DRAFT}
-            </StyledButton>
-
             <SubmitButton
               className='idea-post-button'
               onClick={handleOnSubmit}
-              onMouseDown={() => setIsDraft(false)}
               variant="contained" 
               color="primary">
               {TextIndex.SUBMIT}
@@ -143,19 +120,18 @@ const PostIdeaContainer: FC<DefaultProps> = ({
      )}
     </>
   )
-}
+};
 
 const mapStateToProps = (state: AppState) => ({
-  isLoading: state.postIdea.isLoading
+  isLoading: state.comment.isLoading
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
-    createIdea: payload => postIdeaAction.start(payload),
-    createDraftIdea: payload => draftIdeaAction.start(payload)
-  }, dispatch);
+    createComment: payload => createComment.start(payload)
+  }, dispatch)
 
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostIdeaContainer);
+)(CreateCommentContainer);
