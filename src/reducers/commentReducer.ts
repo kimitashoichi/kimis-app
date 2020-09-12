@@ -36,6 +36,22 @@ const comment: Reducer<
           ...state,
           isLoading: false
         };
+      case ActionTypes.CREATE_COMMENT_SUCCESS:
+        return {
+          ...state,
+          isLoading: true
+        }
+      case ActionTypes.GET_COMMENT_SUCCESS:
+        return {
+          ...state,
+          isLoading: false,
+          comment: action.payload
+        }
+      case ActionTypes.GET_COMMENT_FAILURE:
+        return {
+          ...state,
+          isLoading: false
+        }
       default: {
         return state
       };

@@ -5,7 +5,6 @@ import styled from 'styled-components'
 
 // file
 import * as Models from '../models/ideaModel';
-import * as ActionTypes from '../constants/actionTypes';
 import { getIdeabyId } from '../actions/ideaAction';
 import { AppState } from '../models';
 import { dateToString } from '../utils/utilFunctions';

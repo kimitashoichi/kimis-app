@@ -1,6 +1,6 @@
 // TODO: when login function implements, rename file for loginSaga.ts
 
-import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
 
 import * as ActionTypes from '../constants/actionTypes';
 import * as Models from '../models/userModels';
@@ -28,7 +28,7 @@ export function* runGetUserInfromation() {
 
 
 export function* watchUsers() {
-  yield takeLatest(ActionTypes.GET_USER_PROFILE_START ,runGetUserInfromation)
+  yield takeEvery(ActionTypes.GET_USER_PROFILE_START ,runGetUserInfromation)
 }
 
 export default function* rootSaga() {

@@ -5,7 +5,7 @@ export const createComment = async (data: Models.Comment) => {
   try {
     await firebase
     .firestore()
-    .collection('comments')
+    .collection('')
     .doc()
     .set(data)
     .catch(error => {
@@ -16,4 +16,29 @@ export const createComment = async (data: Models.Comment) => {
   } catch(error) {
     return { error };
   };
+};
+
+export const getCommentbyId = async (id: string) => {
+  try {
+    let comment = null;
+    await firebase
+    .firestore()
+    .collection('comments')
+    .doc(id)
+    .get()
+    .then(doc => {
+      if(!doc.exists) {
+        console.log('comment dose not exist');
+        return;
+      }
+      const data = Object.assign({}, doc.data());
+      data.createdAt = data.createdAt.toDate();
+      comment = data;
+    }).catch(error => {
+      throw new Error(error.message);
+    })
+    return { comment };
+  } catch(error) {
+    return { error };
+  }
 }

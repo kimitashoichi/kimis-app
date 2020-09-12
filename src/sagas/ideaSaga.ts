@@ -1,4 +1,4 @@
-import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
 
 import * as ActionTypes from '../constants/actionTypes';
 import * as Models from '../models/ideaModel';
@@ -50,9 +50,9 @@ export function* runGetIdeaById() {
 }
 
 export function* watchIdeas() {
-  yield takeLatest(ActionTypes.POST_IDEA_START, runPostIdea);
-  yield takeLatest(ActionTypes.DRAFT_IDEA_START, runDraftIdea);
-  yield takeLatest(ActionTypes.GET_IDEA_START, runGetIdeaById);
+  yield takeEvery(ActionTypes.POST_IDEA_START, runPostIdea);
+  yield takeEvery(ActionTypes.DRAFT_IDEA_START, runDraftIdea);
+  yield takeEvery(ActionTypes.GET_IDEA_START, runGetIdeaById);
 }
 
 
