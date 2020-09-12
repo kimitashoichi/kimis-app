@@ -5,8 +5,9 @@ import * as Models from '../models/ideaModel';
 import * as API from '../apis/ideaAPI';
 import { 
   postIdeaAction,
-  draftIdeaAction
-} from '../actions/postIdeaAction';
+  draftIdeaAction,
+  getIdeabyId
+} from '../actions/ideaAction';
 
 export function* runPostIdea(actions: Models.PostIdeaStart) {
   const data = actions.payload;
@@ -32,9 +33,26 @@ export function* runDraftIdea(actions: Models.DraftIdeaStart) {
   };
 }
 
+
+// TODO: arg is change for idea id.
+// Temporary support Under development.
+export function* runGetIdeaById() {
+   const data = 'testGetIdeaById';
+   const handler = API.getIdeabyId;
+   const {idea, error} = yield call(handler, data);
+   if(idea && !error) {
+     console.log('runGetIdeaById OK');
+     yield put(getIdeabyId.success(idea))
+   } else {
+    console.log('runGetIdeaById NG');
+     yield put(getIdeabyId.failure());
+   }
+}
+
 export function* watchIdeas() {
   yield takeLatest(ActionTypes.POST_IDEA_START, runPostIdea);
   yield takeLatest(ActionTypes.DRAFT_IDEA_START, runDraftIdea);
+  yield takeLatest(ActionTypes.GET_IDEA_START, runGetIdeaById);
 }
 
 

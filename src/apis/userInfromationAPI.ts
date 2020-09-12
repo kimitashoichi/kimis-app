@@ -18,7 +18,6 @@ export const getUserInfromation = async (uid: string) => {
     }).catch(error => {
       throw new Error(error.message);
     });
-    console.log(userInfromation, 'userInfromation')
     return { userInfromation };
   } catch(error) {
     return { error }

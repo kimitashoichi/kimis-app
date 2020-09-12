@@ -44,10 +44,27 @@ export interface DraftIdeaFailure {
   type: typeof ActionTypes.DRAFT_IDEA_FAILURE;
 }
 
+//  GET IDEA BY ID
+export interface GetIdeaStart {
+  type: typeof ActionTypes.GET_IDEA_START;
+}
+
+export interface GetIdeaSuccess {
+  type: typeof ActionTypes.GET_IDEA_SUCCESS;
+  payload: PostIdea
+}
+
+export interface GetIdeaFailure {
+  type: typeof ActionTypes.GET_IDEA_FAILURE;
+}
+
 export type PostIdeaAction = 
   | PostIdeaStart
   | PostIdeaSuccess
   | PostIdeaFailure
   | DraftIdeaStart
   | DraftIdeaSuccess
-  | DraftIdeaFailure;
+  | DraftIdeaFailure
+  | GetIdeaStart
+  | GetIdeaSuccess
+  | GetIdeaFailure;
