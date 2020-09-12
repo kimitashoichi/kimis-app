@@ -1,6 +1,5 @@
 import * as ActionTypes from '../constants/actionTypes';
 import * as Models from '../models/ideaModel';
-import { type } from 'os';
 
 export const postIdeaAction = {
   start: (payload: Models.PostIdea) => ({
