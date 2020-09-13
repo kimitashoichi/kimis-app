@@ -4,6 +4,7 @@ export interface PostIdea {
   content: string;
   createdAt: Date;
   updatedAt: Date | null;
+  goodCount?: number;
   // TODO: before implements
   // uid: string
   // tags: []
@@ -58,6 +59,20 @@ export interface GetIdeaFailure {
   type: typeof ActionTypes.GET_IDEA_FAILURE;
 }
 
+// Good Count TODO: いいね数を投稿に持たせて、いいねしているかどうかの判定をどこで行うか
+export interface AddGoodCountStart {
+  type: typeof ActionTypes.GOOD_COUNT_CHANGE_START;
+  // TODO: Add Payload for confirm ideaId, and good is done?
+}
+
+export interface AddGoodCountSuccess {
+  type: typeof ActionTypes.GOOD_COUNT_CHANGE_SUCCESS;
+}
+
+export interface AddGoodCountFailure {
+  type: typeof ActionTypes.GOOD_COUNT_CHANGE_FAILURE;
+}
+
 export type PostIdeaAction = 
   | PostIdeaStart
   | PostIdeaSuccess
@@ -67,4 +82,7 @@ export type PostIdeaAction =
   | DraftIdeaFailure
   | GetIdeaStart
   | GetIdeaSuccess
-  | GetIdeaFailure;
+  | GetIdeaFailure
+  | AddGoodCountStart
+  | AddGoodCountSuccess
+  | AddGoodCountFailure;
