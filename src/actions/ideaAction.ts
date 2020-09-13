@@ -48,3 +48,17 @@ export const getIdeabyId = {
     type: ActionTypes.GET_IDEA_FAILURE as typeof ActionTypes.GET_IDEA_FAILURE
   })
 }
+
+export const chagneGoodCount =  {
+  start: () => ({
+    type: ActionTypes.GOOD_COUNT_CHANGE_START as typeof ActionTypes.GOOD_COUNT_CHANGE_START,
+  }),
+
+  success: () => ({
+    type: ActionTypes.GOOD_COUNT_CHANGE_SUCCESS as typeof ActionTypes.GOOD_COUNT_CHANGE_SUCCESS
+  }),
+
+  failure: () => ({
+    type: ActionTypes.GOOD_COUNT_CHANGE_FAILURE as typeof ActionTypes.GOOD_COUNT_CHANGE_FAILURE
+  })
+};

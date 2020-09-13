@@ -69,6 +69,44 @@ export const getIdeabyId = async (ideaId: string) => {
     console.log('Error getIdeaById ');
     return (error)
   }
-} 
+};
+
+// いいね機能
+export const changeGoodCount = async (id: string) => {
+  try {
+    let currentCount = null;
+
+    // いいね数を更新したい投稿の取得処理
+    await firebase
+    .firestore()
+    .collection('Idea')
+    .doc(id)
+    .get()
+    .then(doc => {
+      if(!doc.exists) {
+        throw new Error();
+      }
+      const data = Object.assign({}, doc.data());
+      currentCount = data.goodCount;
+    }).catch(error => {
+      throw new Error(error.message);
+    });
+
+    // いいね数の更新処理
+    await firebase
+    .firestore()
+    .collection('Idea')
+    .doc(id)
+    .update({
+      goodCount: currentCount ? currentCount + 1 : 666
+    }).catch(error => {
+      throw new Error(error.message);
+    });
+    const success = { success: "OK change good count"};
+    return { success };
+  } catch(error) {
+    return { error };
+  };
+};
 
 

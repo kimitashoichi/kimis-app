@@ -7,6 +7,7 @@ const initialState: Models.PostIdeaState = {
   isLoading: false,
   postIdea: {
     content: '',
+    goodCount: 0,
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -60,6 +61,21 @@ const idea: Reducer<Models.PostIdeaState, Models.PostIdeaAction> = (
         postIdea: action.payload
       }
     case ActionTypes.GET_IDEA_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
+    case ActionTypes.GOOD_COUNT_CHANGE_START:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case ActionTypes.GOOD_COUNT_CHANGE_SUCCESS:
+      return {
+        ...state,
+        isLoading: false
+      }
+    case ActionTypes.GOOD_COUNT_CHANGE_FAILURE:
       return {
         ...state,
         isLoading: false

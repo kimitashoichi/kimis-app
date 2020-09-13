@@ -6,7 +6,8 @@ import * as API from '../apis/ideaAPI';
 import { 
   postIdeaAction,
   draftIdeaAction,
-  getIdeabyId
+  getIdeabyId,
+  chagneGoodCount
 } from '../actions/ideaAction';
 
 export function* runPostIdea(actions: Models.PostIdeaStart) {
@@ -37,9 +38,9 @@ export function* runDraftIdea(actions: Models.DraftIdeaStart) {
 // TODO: arg is change for idea id.
 // Temporary support Under development.
 export function* runGetIdeaById() {
-   const data = 'testGetIdeaById';
+   const mockId = 'testGetIdeaById';
    const handler = API.getIdeabyId;
-   const {idea, error} = yield call(handler, data);
+   const {idea, error} = yield call(handler, mockId);
    if(idea && !error) {
      console.log('runGetIdeaById OK');
      yield put(getIdeabyId.success(idea))
@@ -49,10 +50,26 @@ export function* runGetIdeaById() {
    }
 }
 
+// good coutn update
+// TODO: 投稿に関連づけることと、すでにいいねしていた場合にもう一度いいねを押すといいねすうが減少するようにする
+export function* runChangeGoodCount() {
+  const mockId = 'testGetIdeaById';
+  const handler = API.changeGoodCount;
+  const { success, error } = yield call(handler, mockId);
+  if(success && !error) {
+    console.log('OK changeGoodCount Saga');
+    yield put(chagneGoodCount.success());
+  } else {
+    console.log('NG changeGoodCount Saga');
+    yield put(chagneGoodCount.failure());
+  }
+}
+
 export function* watchIdeas() {
   yield takeEvery(ActionTypes.POST_IDEA_START, runPostIdea);
   yield takeEvery(ActionTypes.DRAFT_IDEA_START, runDraftIdea);
   yield takeEvery(ActionTypes.GET_IDEA_START, runGetIdeaById);
+  yield takeEvery(ActionTypes.GOOD_COUNT_CHANGE_START, runChangeGoodCount)
 }
 
 

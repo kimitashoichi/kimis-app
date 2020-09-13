@@ -1,11 +1,16 @@
-import React, {FC, useEffect} from 'react';
+import React, {FC, useEffect, FormEvent} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components'
 
+import Button from '@material-ui/core/Button'
+
 // file
 import * as Models from '../models/ideaModel';
-import { getIdeabyId } from '../actions/ideaAction';
+import { 
+  getIdeabyId,
+  chagneGoodCount
+ } from '../actions/ideaAction';
 import { AppState } from '../models';
 import { dateToString } from '../utils/utilFunctions';
 
@@ -21,6 +26,16 @@ const IdeaContent = styled.div`
   width: 60%;
   margin: 0 auto;
 `
+const SubmitButton = styled(Button)`
+  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  border-radius: 3px;
+  border: 0;
+  color: white;
+  height: 48px;
+  padding: 0 30px;
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+  margin-right: 20px;
+`
 
 
 interface Props {
@@ -34,6 +49,7 @@ interface StateProps {
 interface DispatchProps {
   // under implemetns arg is none, but arg is ideaId when production.
   getIdeabyId: () => void;
+  chagneGoodCount: () => void;
 }
 
 type DefaultProps = Props & StateProps & DispatchProps;
@@ -41,12 +57,19 @@ type DefaultProps = Props & StateProps & DispatchProps;
 const ShowIdeabyIdContainer: FC<DefaultProps> = ({
   isLoading,
   getIdeabyId,
+  chagneGoodCount,
   idea
 }) => {
 
   useEffect(() => {
     getIdeabyId()
   }, []);
+
+  const handleOnGoodCount = async (e: FormEvent) => {
+    e.preventDefault();
+    await chagneGoodCount();
+    await getIdeabyId();
+  }
 
   return (
     <>
@@ -57,6 +80,8 @@ const ShowIdeabyIdContainer: FC<DefaultProps> = ({
           <div>
             { idea.content }
           </div>
+          <h1>{ idea.goodCount }</h1>
+          <SubmitButton onClick={(e) => handleOnGoodCount(e)}>いいね</SubmitButton>
         </IdeaContent>
       ): (<IdeaContent>{NOT_FOUND_IDEA}</IdeaContent>)}
     </>
@@ -70,7 +95,8 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDisoatchToProps = (dispatch: Dispatch) => 
   bindActionCreators({
-    getIdeabyId: () => getIdeabyId.start()
+    getIdeabyId: () => getIdeabyId.start(),
+    chagneGoodCount: () => chagneGoodCount.start()
   }, dispatch)
 
 export default connect(

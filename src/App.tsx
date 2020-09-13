@@ -16,6 +16,7 @@ const App: React.FC = () => {
      <StylesProvider injectFirst>
        <FbShareButton />
        <TwShareButton />
+       <ShowIdeabyIdContainer />
      </StylesProvider>
     </>
   )

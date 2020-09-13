@@ -9,7 +9,6 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 // file
 import * as Models from '../models/commentModel';
-import * as ActionTypes from '../constants/actionTypes';
 import * as TextIndex from '../constants/textIndex';
 import { createComment } from '../actions/commentAction';
 import { AppState } from '../models';
