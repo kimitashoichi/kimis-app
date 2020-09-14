@@ -6,16 +6,16 @@ import styled from 'styled-components';
 // material ui
 
 // file
-import * as Models from '../models/commentModel';
-import { getCommentById } from '../actions/commentAction';
-import { AppState } from '../models';
-import { dateToString } from '../utils/utilFunctions';
+import * as Models from '../../models/commentModel';
+import { getCommentById } from '../../actions/commentAction';
+import { AppState } from '../../models';
+import { dateToString } from '../../utils/utilFunctions';
 
 // texts
 import {
   NOT_FOUND_IDEA,
   CREATED_AT
-} from '../constants/textIndex';
+} from '../../constants/textIndex';
 
 // styled elements
 const IdeaContent = styled.div`

@@ -5,7 +5,7 @@ export const createComment = async (data: Models.Comment) => {
   try {
     await firebase
     .firestore()
-    .collection('')
+    .collection('comments')
     .doc()
     .set(data)
     .catch(error => {

@@ -8,10 +8,10 @@ import Button from '@material-ui/core/Button';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 // file
-import * as Models from '../models/commentModel';
-import * as TextIndex from '../constants/textIndex';
-import { createComment } from '../actions/commentAction';
-import { AppState } from '../models';
+import * as Models from '../../models/commentModel';
+import * as TextIndex from '../../constants/textIndex';
+import { createComment } from '../../actions/commentAction';
+import { AppState } from '../../models';
 
 const StyledButton = styled(Button)`
   background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
@@ -29,26 +29,25 @@ const SubmitButton = styled(Button)`
   border-radius: 3px;
   border: 0;
   color: white;
-  height: 48px;
+  height: 38px;
   padding: 0 30px;
   box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
-  margin-right: 20px;
 `
 
 const StyledTextField = styled(TextareaAutosize)`
-  width: 100%;
   height: 60%;
+  width: 60%;
 `;
 
 const TextFieldWapper = styled.div`
   margin: 0 auto;
-  text-align: center;
-  width: 70%;
+  text-align: left;
+  width: 60%;
 `;
 
 const ButtonWapper = styled.div`
-  padding-top: 30px;
-  text-align: right;
+  padding-top: 20px;
+  text-align: left;
 `;
 
 
