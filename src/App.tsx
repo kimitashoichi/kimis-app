@@ -4,6 +4,7 @@ import { StylesProvider } from '@material-ui/styles';
 
 import ShowIdeaContainer from './containers/showIdea/index';
 import IdeaCreateAndEditContainer from './containers/createAndEditIdea/index'
+import HeaderContainer from './containers/headerContainer';
 import FbShareButton from './components/fbShareButton';
 import TwShareButton from './components/twShareButton';
 
@@ -11,7 +12,7 @@ const App: React.FC = () => {
   return (
     <>
      <StylesProvider injectFirst>
-       <IdeaCreateAndEditContainer />
+       <HeaderContainer />
      </StylesProvider>
     </>
   )

@@ -2,8 +2,11 @@ import * as ActionTypes from '../constants/actionTypes';
 
 export interface LoginUser {
   userId: string;
-  userName: string;
-  introduce: string;
+  email?: string ;
+  displayName?: string;
+  phoneNumber?: string;
+  userName?: string;
+  introduce?: string;
   // add any properties
 };
 
@@ -26,8 +29,42 @@ export interface GetLoginUserFailure {
   type: typeof ActionTypes.GET_USER_PROFILE_FAILURE
 };
 
+// user login action
+export interface LoginStart {
+  type: typeof ActionTypes.USER_LOGIN_START
+  payload: string
+};
+
+export interface LoginSuccess {
+  type: typeof ActionTypes.USER_LOGIN_SUCCESS
+  payload: LoginUser
+};
+
+export interface LoginFailure {
+  type: typeof ActionTypes.USER_LOGIN_FAILURE
+};
+
+// user logout action
+export interface LogoutStart {
+  type: typeof ActionTypes.USER_LOGOUT_START
+};
+
+export interface LogoutSuccess {
+  type: typeof ActionTypes.USER_LOGOUT_SUCCESS
+};
+
+export interface LogoutFailure {
+  type: typeof ActionTypes.USER_LOGOUT_FAILURE
+};
+
 export type getUserAction = 
   | GetLoginUserStart
   | GetLoginUserSuccess
-  | GetLoginUserFailure;
+  | GetLoginUserFailure
+  | LoginStart
+  | LoginSuccess
+  | LoginFailure
+  | LogoutStart
+  | LogoutSuccess
+  | LogoutFailure;
 

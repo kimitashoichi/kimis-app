@@ -6,11 +6,7 @@ import * as Models from '../models/userModels';
 
 const InitialState: Models.LoginUserState = {
   isLoading: false,
-  loginUser: {
-    userId: '',
-    userName: '',
-    introduce: ''
-  }
+  loginUser: { userId: '' }
 };
 
 const user: Reducer<
@@ -37,6 +33,37 @@ const user: Reducer<
         ...state,
         isLoading: false
       };
+    case ActionTypes.USER_LOGIN_START:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case ActionTypes.USER_LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        loginUser : action.payload
+      }
+    case ActionTypes.USER_LOGIN_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
+    case ActionTypes.USER_LOGOUT_START:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case ActionTypes.USER_LOGOUT_SUCCESS:
+        return {
+          ...state,
+          isLoading: false
+        }
+    case ActionTypes.USER_LOGOUT_FAILURE:
+        return {
+          ...state,
+          isLoading: false
+        }
     default: {
       return state;
     };
