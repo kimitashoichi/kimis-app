@@ -6,20 +6,20 @@ import styled from 'styled-components'
 import Button from '@material-ui/core/Button'
 
 // file
-import * as Models from '../models/ideaModel';
+import * as Models from '../../models/ideaModel';
 import { 
   getIdeabyId,
   chagneGoodCount
- } from '../actions/ideaAction';
-import { AppState } from '../models';
-import { dateToString } from '../utils/utilFunctions';
+ } from '../../actions/ideaAction';
+import { AppState } from '../../models';
+import { dateToString } from '../../utils/utilFunctions';
 
 // texts
 import {
   NOT_FOUND_IDEA,
   CREATED_AT,
   UPDATED_AT
-} from '../constants/textIndex';
+} from '../../constants/textIndex';
 
 // styled elements
 const IdeaContent = styled.div`
@@ -27,14 +27,13 @@ const IdeaContent = styled.div`
   margin: 0 auto;
 `
 const SubmitButton = styled(Button)`
-  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  background: linear-gradient(45deg, #6babfe 30%, #6b6dfe 90%);
   border-radius: 3px;
   border: 0;
   color: white;
-  height: 48px;
+  height: 38px;
   padding: 0 30px;
-  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
-  margin-right: 20px;
+  box-shadow: 0 3px 5px 2px rgba(0,153,255, .3);
 `
 
 

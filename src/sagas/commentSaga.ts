@@ -13,10 +13,10 @@ export function* runCretaeComment(action: Models.CreateCommentStart) {
   const handler = API.createComment;
   const {success, error} = yield call(handler, data);
   if(success && !error) {
-    console.log('OK CommetSaga');
+    console.log('OK CommetSaga create');
     yield put(createComment.success());
   } else {
-    console.log('NG CommentSaga');
+    console.log('NG CommentSaga create');
     yield put(createComment.failure());
   }
 }
@@ -28,10 +28,10 @@ export function* runGetCommentById() {
   const handler = API.getCommentbyId;
   const {comment, error} = yield call(handler, id);
   if(comment && !error) {
-    console.log('OK commentSaga');
+    console.log('OK commentSaga get');
     yield put(getCommentById.success(comment));
   } else {
-    console.log('NG commentSaga');
+    console.log('NG commentSaga get');
     yield put(getCommentById.failure());
   }
 }

@@ -8,9 +8,9 @@ import styled from 'styled-components';
 // file
 import {
   getUserInformation
-} from '../actions/userAction';
-import * as Models from '../models/userModels';
-import { AppState } from '../models';
+} from '../../actions/userAction';
+import * as Models from '../../models/userModels';
+import { AppState } from '../../models';
 
 const UserProf = styled.div`
   width: 60%;
