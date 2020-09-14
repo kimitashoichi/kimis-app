@@ -11,19 +11,19 @@ import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 import { 
   postIdeaAction,
   draftIdeaAction
- } from '../actions/ideaAction';
-import * as Models from '../models/ideaModel';
-import * as TextIndex from '../constants/textIndex';
-import { AppState } from '../models'
+ } from '../../actions/ideaAction';
+import * as Models from '../../models/ideaModel';
+import * as TextIndex from '../../constants/textIndex';
+import { AppState } from '../../models'
 
 const StyledButton = styled(Button)`
-  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  background: linear-gradient(45deg, #808080 30%, #a9a9a9 90%);
   border-radius: 3px;
   border: 0;
   color: white;
-  height: 48px;
-  padding: 0 30px;
-  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+  height: 38px;
+  padding: 0 20px;
+  box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.2);
   margin-right: 20px;
 `;
 
@@ -32,10 +32,9 @@ const SubmitButton = styled(Button)`
   border-radius: 3px;
   border: 0;
   color: white;
-  height: 48px;
-  padding: 0 30px;
+  height: 38px;
+  padding: 0 20px;
   box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
-  margin-right: 20px;
 `
 
 const StyledTextField = styled(TextareaAutosize)`
@@ -46,14 +45,19 @@ const StyledTextField = styled(TextareaAutosize)`
 const TextFieldWapper = styled.div`
   margin: 0 auto;
   text-align: center;
-  width: 70%;
+  width: 50%;
 `;
 
 const ButtonWapper = styled.div`
-  padding-top: 30px;
+  padding-top: 20px;
   text-align: right;
 `;
 
+const TitleLabel = styled.h3`
+text-align: left;
+`
+
+// git reset --soft HEAD~
 interface DispatchProps {
   createIdea: (payload: Models.PostIdea) => void;
   createDraftIdea: (payload: Models.PostIdea) => void;
@@ -104,29 +108,26 @@ const PostIdeaContainer: FC<DefaultProps> = ({
   return (
     <>
      { isLoading ? (
-       <div>Now Loading</div>
+       <TextFieldWapper>
+         <TitleLabel>投稿内容</TitleLabel>
+         <h2>Now Sending...</h2>
+       </TextFieldWapper>
      ) : (
       <>
-      <div>
-        
         <TextFieldWapper>
-          <h3>投稿内容</h3>
-          <div>
+          <TitleLabel>投稿内容</TitleLabel>
             <StyledTextField
               className="standard-textarea"
               placeholder="アイディアを投稿しよう！"
               value={idea}
-              rowsMax={4}
-              onChange={(e) => setIdea(e.target.value)}
-            />
-          </div>
+              rowsMin={10}
+              onChange={(e) => setIdea(e.target.value)}/>
           <ButtonWapper>
             <StyledButton 
               onClick={handleOnSubmit}
               onMouseDown={() => setIsDraft(true)}>
               {TextIndex.DRAFT}
             </StyledButton>
-
             <SubmitButton
               className='idea-post-button'
               onClick={handleOnSubmit}
@@ -137,8 +138,6 @@ const PostIdeaContainer: FC<DefaultProps> = ({
             </SubmitButton>
           </ButtonWapper>
         </TextFieldWapper>
-
-      </div>
       </>
      )}
     </>
