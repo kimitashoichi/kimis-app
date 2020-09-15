@@ -1,8 +1,5 @@
 import firebase from '../utils/firebase';
 import * as Models from '../models/userModels';
-import { async } from 'q';
-
-
 
 function setUserInfo(fuser: firebase.User | null): Models.LoginUser | null {
   if (!fuser) {
@@ -61,6 +58,25 @@ export const userLogin = async () => {
     return { error };
   };
 };
+
+export const loginCheck = async () => {
+  try {
+    let loginUser = null;
+    await firebase
+    .auth()
+    .onAuthStateChanged(user => {
+      if(!user) {
+        return;
+      }
+      const data = Object.assign({}, setUserInfo(user));
+      loginUser = data;
+      console.log(loginUser, 'login check user');
+    })
+    return { loginUser };
+  } catch(error) {
+    return { error };
+  }
+}
 
 export const userLogout = async () => {
   try {

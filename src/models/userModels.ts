@@ -44,6 +44,20 @@ export interface LoginFailure {
   type: typeof ActionTypes.USER_LOGIN_FAILURE
 };
 
+// user already login action
+export interface alreadyLoginStart {
+  type: typeof ActionTypes.USER_ALREADY_LOGIN_START
+};
+
+export interface alreadyLoginSuccess {
+  type: typeof ActionTypes.USER_ALREADY_LOGIN_SUCCESS
+  payload: LoginUser
+};
+
+export interface alreadyLoginFailure {
+  type: typeof ActionTypes.USER_ALREADY_LOGIN_FAILURE
+};
+
 // user logout action
 export interface LogoutStart {
   type: typeof ActionTypes.USER_LOGOUT_START
@@ -66,5 +80,8 @@ export type getUserAction =
   | LoginFailure
   | LogoutStart
   | LogoutSuccess
-  | LogoutFailure;
+  | LogoutFailure
+  | alreadyLoginStart
+  | alreadyLoginSuccess
+  | alreadyLoginFailure;
 

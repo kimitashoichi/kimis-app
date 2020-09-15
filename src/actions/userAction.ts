@@ -46,4 +46,19 @@ export const logoutUserAction = {
   })
 };
 
+export const alreadyLoginUserAction = {
+  start: () => ({
+    type: ActionTypes.USER_ALREADY_LOGIN_START as typeof ActionTypes.USER_ALREADY_LOGIN_START
+  }),
+
+  success: (loginUser: Models.LoginUser) => ({
+    type: ActionTypes.USER_ALREADY_LOGIN_SUCCESS as typeof ActionTypes.USER_ALREADY_LOGIN_SUCCESS,
+    payload: loginUser
+  }),
+
+  failure: () => ({
+    type: ActionTypes.USER_ALREADY_LOGIN_FAILURE as typeof ActionTypes.USER_ALREADY_LOGIN_FAILURE
+  })
+};
+
 

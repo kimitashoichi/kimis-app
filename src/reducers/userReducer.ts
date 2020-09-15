@@ -64,6 +64,22 @@ const user: Reducer<
           ...state,
           isLoading: false
         }
+    case ActionTypes.USER_ALREADY_LOGIN_START:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case ActionTypes.USER_ALREADY_LOGIN_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        loginUser: action.payload
+      }
+    case ActionTypes.USER_ALREADY_LOGIN_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
     default: {
       return state;
     };

@@ -1,14 +1,14 @@
 // TODO: when login function implements, rename file for loginSaga.ts
 
-import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
+import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import * as ActionTypes from '../constants/actionTypes';
-import * as Models from '../models/userModels';
 import * as API from '../apis/userAPI'; // TODO: implemets get user infromation API
 import {
   getUserInformation,
   loginUserAction,
-  logoutUserAction
+  logoutUserAction,
+  alreadyLoginUserAction
 } from '../actions/userAction';
 
 export function* runGetUserInfromation() {
@@ -38,6 +38,18 @@ export function* runLoginUser() {
   }
 }
 
+export function* runAlreadyLogin() {
+  const handler = API.loginCheck;
+  const { loginUser, error } = yield call(handler);
+  if(loginUser && !error) {
+    console.log('ALREADY LOGIN SAGA OK');
+    yield put(alreadyLoginUserAction.success(loginUser));
+  } else {
+    console.log('ALREADY LOGIN SAGA NG');
+    yield put(alreadyLoginUserAction.failure());
+  }
+}
+
 export function* runLogout() {
   const handler = API.userLogout;
   const { success, error } = yield call(handler);
@@ -51,9 +63,10 @@ export function* runLogout() {
 }
 
 export function* watchUsers() {
-  yield takeEvery(ActionTypes.GET_USER_PROFILE_START ,runGetUserInfromation)
-  yield takeEvery(ActionTypes.USER_LOGIN_START, runLoginUser)
-  yield takeEvery(ActionTypes.USER_LOGOUT_START, runLogout)
+  yield takeEvery(ActionTypes.GET_USER_PROFILE_START ,runGetUserInfromation);
+  yield takeEvery(ActionTypes.USER_LOGIN_START, runLoginUser);
+  yield takeEvery(ActionTypes.USER_LOGOUT_START, runLogout);
+  yield takeLatest(ActionTypes.USER_ALREADY_LOGIN_START, runAlreadyLogin);
 }
 
 export default function* rootSaga() {
