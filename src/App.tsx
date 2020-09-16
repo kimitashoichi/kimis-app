@@ -6,13 +6,14 @@ import { StylesProvider } from '@material-ui/styles';
 // import IdeaCreateAndEditContainer from './containers/createAndEditIdea/index'
 // import FbShareButton from './components/fbShareButton';
 // import TwShareButton from './components/twShareButton';
-import HeaderContainer from './containers/headerContainer';
+// import HeaderContainer from './containers/headerContainer';
+import FooterComponent from './components/footer'
 
 const App: React.FC = () => {
   return (
     <>
      <StylesProvider injectFirst>
-       <HeaderContainer />
+       <FooterComponent />
      </StylesProvider>
     </>
   )
