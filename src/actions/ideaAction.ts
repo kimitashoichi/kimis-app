@@ -6,11 +6,9 @@ export const postIdeaAction = {
     type: ActionTypes.POST_IDEA_START as typeof ActionTypes.POST_IDEA_START,
     payload: payload
   }),
-
   success: () => ({
     type: ActionTypes.POST_IDEA_SUCCESS as typeof ActionTypes.POST_IDEA_SUCCESS
   }),
-
   failure: () => ({
     type: ActionTypes.POST_IDEA_FAILURE as typeof ActionTypes.POST_IDEA_FAILURE
   })
@@ -21,11 +19,9 @@ export const draftIdeaAction =  {
     type: ActionTypes.DRAFT_IDEA_START as typeof ActionTypes.DRAFT_IDEA_START,
     payload: payload
   }),
-
   success: () => ({
     type: ActionTypes.DRAFT_IDEA_SUCCESS as typeof ActionTypes.DRAFT_IDEA_SUCCESS
   }),
-
   failure: () => ({
     type: ActionTypes.DRAFT_IDEA_FAILURE as typeof ActionTypes.DRAFT_IDEA_FAILURE
   })
@@ -37,13 +33,11 @@ export const getIdeabyId = {
   start: () => ({
     type: ActionTypes.GET_IDEA_START as typeof ActionTypes.GET_IDEA_START
   }),
-
   // TODO: rename 'PostIdea', beacuse anywhere use 'PostIdea' interface
   success: (payload: Models.PostIdea) => ({
     type: ActionTypes.GET_IDEA_SUCCESS as typeof ActionTypes.GET_IDEA_SUCCESS,
     payload: payload
   }),
-
   failure: () => ({
     type: ActionTypes.GET_IDEA_FAILURE as typeof ActionTypes.GET_IDEA_FAILURE
   })
@@ -53,12 +47,38 @@ export const chagneGoodCount =  {
   start: () => ({
     type: ActionTypes.GOOD_COUNT_CHANGE_START as typeof ActionTypes.GOOD_COUNT_CHANGE_START,
   }),
-
   success: () => ({
     type: ActionTypes.GOOD_COUNT_CHANGE_SUCCESS as typeof ActionTypes.GOOD_COUNT_CHANGE_SUCCESS
   }),
-
   failure: () => ({
     type: ActionTypes.GOOD_COUNT_CHANGE_FAILURE as typeof ActionTypes.GOOD_COUNT_CHANGE_FAILURE
   })
 };
+
+//  全ての記事を最新順に取得
+export const getIdeasByLatest = {
+  start: () => ({
+    type: ActionTypes.GET_ALL_IDEA_LATEST_START as typeof ActionTypes.GET_ALL_IDEA_LATEST_START
+  }),
+  success: (payload: Models.PostIdea[]) => ({
+    type: ActionTypes.GET_ALL_IDEA_LATEST_SUCCESS as typeof ActionTypes.GET_ALL_IDEA_LATEST_SUCCESS,
+    payload: payload
+  }),
+  failure: () => ({
+    type: ActionTypes.GET_ALL_IDEA_LATEST_FAILURE as typeof ActionTypes.GET_ALL_IDEA_LATEST_FAILURE
+  })
+}
+
+//  全ての記事をいいね順で取得
+export const getIdeasByGoodCount = {
+  start: () => ({
+    type: ActionTypes.GET_ALL_IDEA_GOOD_START as typeof ActionTypes.GET_ALL_IDEA_GOOD_START
+  }),
+  success: (payload: Models.PostIdea[]) => ({
+    type: ActionTypes.GET_ALL_IDEA_GOOD_SUCCESS as typeof ActionTypes.GET_ALL_IDEA_LATEST_SUCCESS,
+    payload: payload
+  }),
+  failure: () => ({
+    type: ActionTypes.GET_ALL_IDEA_GOOD_FAILURE as typeof ActionTypes.GET_ALL_IDEA_GOOD_FAILURE
+  })
+}

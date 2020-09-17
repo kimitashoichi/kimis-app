@@ -1,6 +1,7 @@
 import * as ActionTypes from '../constants/actionTypes';
 
 export interface PostIdea {
+  title?: string;
   content: string;
   createdAt: Date;
   updatedAt: Date | null;
@@ -73,6 +74,34 @@ export interface AddGoodCountFailure {
   type: typeof ActionTypes.GOOD_COUNT_CHANGE_FAILURE;
 }
 
+//  GET IDEAS BY LATEST
+export interface GetIdeasbyLatestStart {
+  type: typeof ActionTypes.GET_ALL_IDEA_LATEST_START;
+}
+
+export interface GetIdeasbyLatestSuccess {
+  type: typeof ActionTypes.GET_ALL_IDEA_LATEST_SUCCESS;
+  payload: PostIdea[]
+}
+
+export interface GetIdeasbyLatestFailure {
+  type: typeof ActionTypes.GET_ALL_IDEA_LATEST_FAILURE;
+}
+
+//  GET IDEAS BY GOOD COUNT
+export interface GetIdeasByGoodStart {
+  type: typeof ActionTypes.GET_ALL_IDEA_GOOD_START;
+}
+
+export interface GetIdeasByGoodSuccess {
+  type: typeof ActionTypes.GET_ALL_IDEA_GOOD_SUCCESS;
+  payload: PostIdea[]
+}
+
+export interface GetIdeasByGoodFailure {
+  type: typeof ActionTypes.GET_ALL_IDEA_GOOD_FAILURE;
+}
+
 export type PostIdeaAction = 
   | PostIdeaStart
   | PostIdeaSuccess
@@ -85,4 +114,10 @@ export type PostIdeaAction =
   | GetIdeaFailure
   | AddGoodCountStart
   | AddGoodCountSuccess
-  | AddGoodCountFailure;
+  | AddGoodCountFailure
+  | GetIdeasbyLatestStart
+  | GetIdeasbyLatestSuccess
+  | GetIdeasbyLatestFailure
+  | GetIdeasByGoodStart
+  | GetIdeasByGoodSuccess
+  | GetIdeasByGoodFailure;

@@ -2,10 +2,12 @@ import { Reducer } from 'redux';
 
 import * as ActionTypes from '../constants/actionTypes';
 import * as Models from '../models/ideaModel';
+import { turquoise } from 'color-name';
 
 const initialState: Models.PostIdeaState = {
   isLoading: false,
   postIdea: {
+    title: '',
     content: '',
     goodCount: 0,
     createdAt: new Date(),
@@ -79,6 +81,38 @@ const idea: Reducer<Models.PostIdeaState, Models.PostIdeaAction> = (
       return {
         ...state,
         isLoading: false
+      }
+    case ActionTypes.GET_ALL_IDEA_LATEST_START:
+      return {
+        ...state,
+        isLoading: true,
+      }
+    case ActionTypes.GET_ALL_IDEA_LATEST_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        postIdeas: action.payload
+      }
+    case ActionTypes.GET_ALL_IDEA_LATEST_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
+      }
+    case ActionTypes.GET_ALL_IDEA_GOOD_START:
+      return {
+        ...state,
+        isLoading: true,
+      }
+    case ActionTypes.GET_ALL_IDEA_GOOD_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+        postIdeas: action.payload
+      }
+    case ActionTypes.GET_ALL_IDEA_GOOD_FAILURE:
+      return {
+        ...state,
+        isLoading: false,
       }
     default:{
       return state;

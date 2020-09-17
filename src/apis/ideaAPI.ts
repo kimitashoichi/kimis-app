@@ -109,4 +109,68 @@ export const changeGoodCount = async (id: string) => {
   };
 };
 
+// アイディアの全件取得
+export const getIdeasByLatest = async () => {
+  try {
+    const ideas: Models.PostIdea[] = [];
+    await firebase
+    .firestore()
+    .collection('Idea')
+    .orderBy('updatedAt', 'desc')
+    .get()
+    .then(snapShot => {
+      if(snapShot.empty){
+        return;
+      }
+      console.log('snapShot', snapShot)
+      snapShot.forEach(doc => {
+        ideas.push({
+          title: doc.data().title ? doc.data().title : 'not title',
+          content: doc.data().content,
+          createdAt: doc.data().createdAt.toDate(),
+          updatedAt: doc.data().updatedAt ? doc.data().updatedAt.toDate() : null,
+          goodCount: doc.data().goodCount ? doc.data().goodCount : null
+        });
+      });
+    }).catch(error => {
+      throw new Error(error.message);
+    })
+    return { ideas };
+  } catch(error) {
+    return { error };
+  }
+};
+
+// アイディアのいいね順取得
+export const getIdeasByGood = async () => {
+  try {
+    const ideas: Models.PostIdea[] = [];
+    await firebase
+    .firestore()
+    .collection('Idea')
+    .orderBy('goodCount', 'desc')
+    .get()
+    .then(snapShot => {
+      if(snapShot.empty){
+        return;
+      }
+      console.log('snapShot', snapShot)
+      snapShot.forEach(doc => {
+        ideas.push({
+          title: doc.data().title ? doc.data().title : 'not title',
+          content: doc.data().content,
+          createdAt: doc.data().createdAt.toDate(),
+          updatedAt: doc.data().updatedAt ? doc.data().updatedAt.toDate() : null,
+          goodCount: doc.data().goodCount ? doc.data().goodCount : null
+        });
+      });
+    }).catch(error => {
+      throw new Error(error.message);
+    })
+    return { ideas };
+  } catch(error) {
+    return { error };
+  }
+};
+
 

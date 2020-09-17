@@ -8,12 +8,18 @@ import { StylesProvider } from '@material-ui/styles';
 // import TwShareButton from './components/twShareButton';
 // import HeaderContainer from './containers/headerContainer';
 import FooterComponent from './components/footer'
+import IdeaSingleComponent from './components/ideaSingleComponent';
+import LatestIdeaComponent from './containers/topPageComponent/latestIdeaContainer';
+import GoodCountIdeaComponent from './containers/topPageComponent/goodCountIdeaComponent'
+
+import * as Models from './models/ideaModel';
+
 
 const App: React.FC = () => {
   return (
     <>
      <StylesProvider injectFirst>
-       <FooterComponent />
+       <GoodCountIdeaComponent />
      </StylesProvider>
     </>
   )

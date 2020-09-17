@@ -7,7 +7,9 @@ import {
   postIdeaAction,
   draftIdeaAction,
   getIdeabyId,
-  chagneGoodCount
+  chagneGoodCount,
+  getIdeasByLatest,
+  getIdeasByGoodCount
 } from '../actions/ideaAction';
 
 export function* runPostIdea(actions: Models.PostIdeaStart) {
@@ -65,11 +67,37 @@ export function* runChangeGoodCount() {
   }
 }
 
+export function* runGetIdeasByLatest() {
+  const handler = API.getIdeasByLatest;
+  const {ideas, error} = yield call(handler);
+  if(ideas && !error) {
+    console.log('OK GetIdeas Saga');
+    yield put(getIdeasByLatest.success(ideas));
+  } else {
+    console.log('NG GetIdeas Saga');
+    yield put(getIdeasByLatest.failure());
+  }
+}
+
+export function* runGetIdeasByGood() {
+  const handler = API.getIdeasByGood;
+  const {ideas, error} = yield call(handler);
+  if(ideas && !error) {
+    console.log('OK GetIdeas Saga');
+    yield put(getIdeasByGoodCount.success(ideas));
+  } else {
+    console.log('NG GetIdeas Saga');
+    yield put(getIdeasByGoodCount.failure());
+  }
+}
+
 export function* watchIdeas() {
   yield takeEvery(ActionTypes.POST_IDEA_START, runPostIdea);
   yield takeEvery(ActionTypes.DRAFT_IDEA_START, runDraftIdea);
   yield takeEvery(ActionTypes.GET_IDEA_START, runGetIdeaById);
   yield takeEvery(ActionTypes.GOOD_COUNT_CHANGE_START, runChangeGoodCount)
+  yield takeEvery(ActionTypes.GET_ALL_IDEA_LATEST_START, runGetIdeasByLatest);
+  yield takeEvery(ActionTypes.GET_ALL_IDEA_GOOD_START, runGetIdeasByGood);
 }
 
 
