@@ -1,5 +1,6 @@
 import firebase from '../utils/firebase';
 import * as Models from '../models/userModels';
+import { firestore } from 'firebase';
 
 function setUserInfo(fuser: firebase.User | null): Models.LoginUser | null {
   if (!fuser) {
@@ -49,6 +50,7 @@ export const userLogin = async () => {
         return;
       }
       const data = Object.assign({}, setUserInfo(user.user));
+      firstUserSignUp(data);
       loginUser = data;
     }).catch(error => {
       throw new Error(error.message);
@@ -58,6 +60,42 @@ export const userLogin = async () => {
     return { error };
   };
 };
+
+// create user model
+export const firstUserSignUp = async(data: Models.LoginUser) => {
+  try {
+    let flag: boolean = true;
+
+    // check already signup user
+    await firebase
+    .firestore()
+    .collection('users')
+    .doc(data.userId)
+    .get()
+    .then(userData => {
+      if(userData.exists){
+        flag = false;
+      }
+    })
+
+    // create user model
+    if(flag) {
+      await firebase
+      .firestore()
+      .collection('users')
+      .doc(data.userId)
+      .set(data)
+      .catch(error => {
+        throw new Error(error.message);
+      })
+    }
+
+    const success = {success: '200 OK firstUserSignUp API'};
+    return { success };
+  } catch(error) {
+    return { error }; 
+  }
+}
 
 export const loginCheck = async () => {
   try {
@@ -93,4 +131,23 @@ export const userLogout = async () => {
   } catch(error) {
     return { error };
   };
+};
+
+export const editProfile = async (data: Models.LoginUser) => {
+  console.log(data, 'editProfile Data');
+  try {
+    await firebase
+    .firestore()
+    .collection('users')
+    .doc(data.userId)
+    .update(data)
+    .catch(error => {
+      throw new Error(error.message);
+    })
+    
+    const success = {success: '200 OK: editProfile API'};
+    return { success };
+  } catch(error) {
+    return { error }
+  }
 };
