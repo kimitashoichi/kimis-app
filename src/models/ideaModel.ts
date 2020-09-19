@@ -102,6 +102,36 @@ export interface GetIdeasByGoodFailure {
   type: typeof ActionTypes.GET_ALL_IDEA_GOOD_FAILURE;
 }
 
+//  all posted idea for user my page posted idea 
+export interface GetAllPostedIdeasForUserStart {
+  type: typeof ActionTypes.GET_USER_POST_IDEA_START;
+  payload: string;
+}
+
+export interface GetAllPostedIdeasForUserSuccess {
+  type: typeof ActionTypes.GET_USER_POST_IDEA_SUCCESS;
+  payload: PostIdea[]
+}
+
+export interface GetAllPostedIdeasForUserFailure {
+  type: typeof ActionTypes.GET_USER_POST_IDEA_FAILURE;
+}
+
+//  all drafted idea for user my page posted idea 
+export interface GetAllDraftedIdeasForUserStart {
+  type: typeof ActionTypes.GET_USER_DRAFT_IDEA_START;
+  payload: string;
+}
+
+export interface GetAllDraftedIdeasForUserSuccess {
+  type: typeof ActionTypes.GET_USER_DRAFT_IDEA_SUCCESS;
+  payload: PostIdea[]
+}
+
+export interface GetAllDraftedIdeasForUserFailure {
+  type: typeof ActionTypes.GET_USER_DRAFT_IDEA_FAILURE;
+}
+
 export type PostIdeaAction = 
   | PostIdeaStart
   | PostIdeaSuccess
@@ -120,4 +150,10 @@ export type PostIdeaAction =
   | GetIdeasbyLatestFailure
   | GetIdeasByGoodStart
   | GetIdeasByGoodSuccess
-  | GetIdeasByGoodFailure;
+  | GetIdeasByGoodFailure
+  | GetAllPostedIdeasForUserStart
+  | GetAllPostedIdeasForUserSuccess
+  | GetAllPostedIdeasForUserFailure
+  | GetAllDraftedIdeasForUserStart
+  | GetAllDraftedIdeasForUserSuccess
+  | GetAllDraftedIdeasForUserFailure;
