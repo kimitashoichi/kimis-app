@@ -12,8 +12,8 @@ import { StylesProvider } from '@material-ui/styles';
 // import LatestIdeaComponent from './containers/topPageComponent/latestIdeaContainer';
 // import GoodCountIdeaComponent from './containers/topPageComponent/goodCountIdeaComponent'
 // import EditUserProfile from './containers/editUserProfileContainer';
-// import UserMyPagePostedIdeas from './containers/userMyPagePostedIdeaComponent';
-import UserMyPageDraftedIdeas from './containers/userMyPageDrafedIdeaComponent';
+import UserMyPage from './containers/myPage/index';
+
 
 
 
@@ -21,7 +21,7 @@ const App: React.FC = () => {
   return (
     <>
      <StylesProvider injectFirst>
-       <UserMyPageDraftedIdeas />
+       <UserMyPage />
      </StylesProvider>
     </>
   )

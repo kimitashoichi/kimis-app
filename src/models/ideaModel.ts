@@ -18,6 +18,18 @@ export interface PostIdeaState {
   postIdeas: PostIdea[];
 };
 
+export interface UserPostedIdeaState {
+  isLoading: boolean;
+  postIdea: PostIdea;
+  postIdeas: PostIdea[];
+};
+
+export interface UserDraftedPostIdeaState {
+  isLoading: boolean;
+  postIdea: PostIdea;
+  postIdeas: PostIdea[];
+};
+
 // POST IDEA
 export interface PostIdeaStart {
   type: typeof ActionTypes.POST_IDEA_START;

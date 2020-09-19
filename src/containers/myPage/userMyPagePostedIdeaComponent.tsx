@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 
-import * as Models from '../models/ideaModel';
-import { AppState } from '../models';
-import { getIdeasUserPosted } from '../actions/ideaAction';
+import * as Models from '../../models/ideaModel';
+import { AppState } from '../../models';
+import { getIdeasUserPosted } from '../../actions/ideaAction';
 
 interface DispatchProps {
   getIdeasUserPosted: (uid: string) => void;

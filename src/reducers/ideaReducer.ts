@@ -2,7 +2,6 @@ import { Reducer } from 'redux';
 
 import * as ActionTypes from '../constants/actionTypes';
 import * as Models from '../models/ideaModel';
-import { turquoise } from 'color-name';
 
 const initialState: Models.PostIdeaState = {
   isLoading: false,
