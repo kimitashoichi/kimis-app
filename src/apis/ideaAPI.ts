@@ -173,4 +173,66 @@ export const getIdeasByGood = async () => {
   }
 };
 
+export const getUserPostedIdeas = async (uid: string) => {
+  try {
+    const postedIdeas: Models.PostIdea[] = [];
+    await firebase
+    .firestore()
+    .collection('Idea')
+    .doc('c62EgmuKdcBZB1md3Nvz')
+    .collection('postedIdea')
+    .get()
+    .then(doc => {
+      if(doc.empty){
+        return;
+      }
+      doc.forEach(snapShot => {
+        postedIdeas.push({
+          title: snapShot.data().title,
+          content: snapShot.data().content,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          goodCount: 10
+        });
+      });
+    }) .catch(error => {
+      throw new Error(error.message);
+    })
+    return { postedIdeas };
+  } catch(error) {
+    return { error };
+  }
+};
+
+export const getUserDraftedIdeas = async (uid: string) => {
+  try {
+    const draftedIdeas: Models.PostIdea[] = [];
+    await firebase
+    .firestore()
+    .collection('Idea')
+    .doc('c62EgmuKdcBZB1md3Nvz') // 本当はここにUIDを入れてユーザーごとのデータを取得できるようにする
+    .collection('draftedIdea')
+    .get()
+    .then(doc => {
+      if(doc.empty){
+        return;
+      }
+      doc.forEach(snapShot => {
+        draftedIdeas.push({
+          title: snapShot.data().title,
+          content: snapShot.data().content,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          goodCount: 10
+        });
+      });
+    }) .catch(error => {
+      throw new Error(error.message);
+    })
+    return { draftedIdeas };
+  } catch(error) {
+    return { error };
+  }
+};
+
 

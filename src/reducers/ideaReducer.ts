@@ -114,6 +114,38 @@ const idea: Reducer<Models.PostIdeaState, Models.PostIdeaAction> = (
         ...state,
         isLoading: false,
       }
+    case ActionTypes.GET_USER_POST_IDEA_START:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case ActionTypes.GET_USER_POST_IDEA_SUCCESS:
+      return {
+        ...state,
+        postIdeas: action.payload,
+        isLoading: false
+      }
+    case ActionTypes.GET_USER_POST_IDEA_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
+    case ActionTypes.GET_USER_DRAFT_IDEA_START:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case ActionTypes.GET_USER_DRAFT_IDEA_SUCCESS:
+      return {
+        ...state,
+        postIdeas: action.payload,
+        isLoading: false
+      }
+    case ActionTypes.GET_USER_DRAFT_IDEA_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
     default:{
       return state;
     }

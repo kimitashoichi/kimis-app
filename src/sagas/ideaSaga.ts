@@ -9,7 +9,9 @@ import {
   getIdeabyId,
   chagneGoodCount,
   getIdeasByLatest,
-  getIdeasByGoodCount
+  getIdeasByGoodCount,
+  getIdeasUserPosted,
+  getIdeasUserDrafted
 } from '../actions/ideaAction';
 
 export function* runPostIdea(actions: Models.PostIdeaStart) {
@@ -91,6 +93,32 @@ export function* runGetIdeasByGood() {
   }
 }
 
+export function* runGetPostedIdea(actions: Models.GetAllPostedIdeasForUserStart) {
+  const data = actions.payload;
+  const handler = API.getUserPostedIdeas;
+  const {postedIdeas, error} = yield call(handler, data);
+  if(postedIdeas && !error) {
+    console.log('OK runGetPostedIdea Saga');
+    yield put(getIdeasUserPosted.success(postedIdeas));
+  } else {
+    console.log('NG unGetPostedIdea Saga');
+    yield put(getIdeasUserPosted.failure());
+  }
+}
+
+export function* runGetDraftedIdea(actions: Models.GetAllPostedIdeasForUserStart) {
+  const data = actions.payload;
+  const handler = API.getUserDraftedIdeas;
+  const {draftedIdeas, error} = yield call(handler, data);
+  if(draftedIdeas && !error) {
+    console.log('OK runGetDraftedIdea Saga');
+    yield put(getIdeasUserDrafted.success(draftedIdeas));
+  } else {
+    console.log('NG runGetDraftedIdea Saga');
+    yield put(getIdeasUserDrafted.failure());
+  }
+}
+
 export function* watchIdeas() {
   yield takeEvery(ActionTypes.POST_IDEA_START, runPostIdea);
   yield takeEvery(ActionTypes.DRAFT_IDEA_START, runDraftIdea);
@@ -98,6 +126,8 @@ export function* watchIdeas() {
   yield takeEvery(ActionTypes.GOOD_COUNT_CHANGE_START, runChangeGoodCount)
   yield takeEvery(ActionTypes.GET_ALL_IDEA_LATEST_START, runGetIdeasByLatest);
   yield takeEvery(ActionTypes.GET_ALL_IDEA_GOOD_START, runGetIdeasByGood);
+  yield takeEvery(ActionTypes.GET_USER_POST_IDEA_START, runGetPostedIdea);
+  yield takeEvery(ActionTypes.GET_USER_DRAFT_IDEA_START, runGetDraftedIdea);
 }
 
 

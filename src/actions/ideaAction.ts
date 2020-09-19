@@ -82,3 +82,33 @@ export const getIdeasByGoodCount = {
     type: ActionTypes.GET_ALL_IDEA_GOOD_FAILURE as typeof ActionTypes.GET_ALL_IDEA_GOOD_FAILURE
   })
 }
+
+//  ユーザーマイページに表示する投稿データ一覧取得
+export const getIdeasUserPosted = {
+  start: (uid: string) => ({
+    type: ActionTypes.GET_USER_POST_IDEA_START as typeof ActionTypes.GET_USER_POST_IDEA_START,
+    payload: uid
+  }),
+  success: (payload: Models.PostIdea[]) => ({
+    type: ActionTypes.GET_USER_POST_IDEA_SUCCESS as typeof ActionTypes.GET_USER_POST_IDEA_SUCCESS,
+    payload: payload
+  }),
+  failure: () => ({
+    type: ActionTypes.GET_USER_POST_IDEA_FAILURE as typeof ActionTypes.GET_USER_POST_IDEA_FAILURE
+  })
+}
+
+//  ユーザーマイページに表示する下書きデータ一覧取得
+export const getIdeasUserDrafted = {
+  start: (uid: string) => ({
+    type: ActionTypes.GET_USER_DRAFT_IDEA_START as typeof ActionTypes.GET_USER_DRAFT_IDEA_START,
+    payload: uid
+  }),
+  success: (payload: Models.PostIdea[]) => ({
+    type: ActionTypes.GET_USER_DRAFT_IDEA_SUCCESS as typeof ActionTypes.GET_USER_DRAFT_IDEA_SUCCESS,
+    payload: payload
+  }),
+  failure: () => ({
+    type: ActionTypes.GET_USER_DRAFT_IDEA_FAILURE as typeof ActionTypes.GET_USER_DRAFT_IDEA_FAILURE
+  })
+}
