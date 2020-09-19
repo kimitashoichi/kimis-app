@@ -80,6 +80,22 @@ const user: Reducer<
         ...state,
         isLoading: false
       }
+    case ActionTypes.USER_PROFILE_EDIT_START:
+        return {
+          ...state,
+          isLoading: true,
+          loginUser: action.payload
+        }
+    case ActionTypes.USER_PROFILE_EDIT_SUCCESS:
+      return {
+        ...state,
+        isLoading: false,
+      }
+    case ActionTypes.USER_PROFILE_EDIT_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
     default: {
       return state;
     };

@@ -2,7 +2,7 @@ import * as ActionTypes from '../constants/actionTypes';
 
 export interface LoginUser {
   userId: string;
-  email?: string ;
+  email?: string;
   displayName?: string;
   phoneNumber?: string;
   userName?: string;
@@ -71,6 +71,20 @@ export interface LogoutFailure {
   type: typeof ActionTypes.USER_LOGOUT_FAILURE
 };
 
+// user edit profile
+export interface editProfileStart {
+  type: typeof ActionTypes.USER_PROFILE_EDIT_START
+  payload: LoginUser
+};
+
+export interface editProfileSuccess {
+  type: typeof ActionTypes.USER_PROFILE_EDIT_SUCCESS
+};
+
+export interface editProfileSFailure {
+  type: typeof ActionTypes.USER_PROFILE_EDIT_FAILURE
+};
+
 export type getUserAction = 
   | GetLoginUserStart
   | GetLoginUserSuccess
@@ -83,5 +97,8 @@ export type getUserAction =
   | LogoutFailure
   | alreadyLoginStart
   | alreadyLoginSuccess
-  | alreadyLoginFailure;
+  | alreadyLoginFailure
+  | editProfileStart
+  | editProfileSuccess
+  | editProfileSFailure;
 

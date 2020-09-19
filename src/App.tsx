@@ -7,19 +7,19 @@ import { StylesProvider } from '@material-ui/styles';
 // import FbShareButton from './components/fbShareButton';
 // import TwShareButton from './components/twShareButton';
 // import HeaderContainer from './containers/headerContainer';
-import FooterComponent from './components/footer'
-import IdeaSingleComponent from './components/ideaSingleComponent';
-import LatestIdeaComponent from './containers/topPageComponent/latestIdeaContainer';
-import GoodCountIdeaComponent from './containers/topPageComponent/goodCountIdeaComponent'
+// import FooterComponent from './components/footer'
+// import IdeaSingleComponent from './components/ideaSingleComponent';
+// import LatestIdeaComponent from './containers/topPageComponent/latestIdeaContainer';
+// import GoodCountIdeaComponent from './containers/topPageComponent/goodCountIdeaComponent'
+import EditUserProfile from './containers/editUserProfileContainer';
 
-import * as Models from './models/ideaModel';
 
 
 const App: React.FC = () => {
   return (
     <>
      <StylesProvider injectFirst>
-       <GoodCountIdeaComponent />
+       <EditUserProfile />
      </StylesProvider>
     </>
   )

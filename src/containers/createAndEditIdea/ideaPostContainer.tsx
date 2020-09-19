@@ -54,8 +54,8 @@ const ButtonWapper = styled.div`
 `;
 
 const TitleLabel = styled.h3`
-text-align: left;
-`
+  text-align: left;
+`;
 
 // git reset --soft HEAD~
 interface DispatchProps {

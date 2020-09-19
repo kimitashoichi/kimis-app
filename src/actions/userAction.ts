@@ -61,4 +61,20 @@ export const alreadyLoginUserAction = {
   })
 };
 
+export const editUserProfile = {
+  // TODO: add paylod => uid: fireabase auth uid; beacuse, this action user after login.
+  start: (editData: Models.LoginUser) => ({
+    type: ActionTypes.USER_PROFILE_EDIT_START as typeof ActionTypes.USER_PROFILE_EDIT_START,
+    payload: editData
+  }),
+
+  success: () => ({
+    type: ActionTypes.USER_PROFILE_EDIT_SUCCESS as typeof ActionTypes.USER_PROFILE_EDIT_SUCCESS
+  }),
+
+  failure: () => ({
+    type: ActionTypes.USER_PROFILE_EDIT_FAILURE as typeof ActionTypes.USER_PROFILE_EDIT_FAILURE
+  })
+};
+
 
