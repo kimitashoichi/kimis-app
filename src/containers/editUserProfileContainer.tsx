@@ -4,6 +4,8 @@ import { bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 
 // material ui
+import Button from '@material-ui/core/Button';
+import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 import * as Models from '../models/userModels';
 import { 
@@ -12,6 +14,32 @@ import {
  } from '../actions/userAction';
 import { AppState } from '../models';
 import HeaderContainer from './headerContainer';
+import { Input } from '@material-ui/core';
+
+const SubmitButton = styled(Button)`
+  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
+  border-radius: 3px;
+  border: 0;
+  color: white;
+  height: 38px;
+  padding: 0 20px;
+  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
+`;
+
+const TextFieldWapper = styled.div`
+  margin: 0 auto;
+  text-align: center;
+  width: 50%;
+`;
+
+const StyledTextField = styled(TextareaAutosize)`
+  width: 100%;
+  height: 60%;
+`;
+
+const TitleLabel = styled.div`
+  text-align: left;
+`;
 
 interface DispatchProps {
   editUserProfile: (editData: Models.LoginUser) => void;
@@ -31,15 +59,15 @@ const EditUserProfile: FC<DefaultProps> = ({
   editUserProfile,
   alreadyLoginUserAction
 }) => {
-  const [displayName, setDisplayName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  const [introduce, setIntroduce] = useState<string>('');
-  const [phoneNumber, setPhoneNumber] = useState<string>('');
-  const [userName, setUserName] = useState<string>('');
+  const [displayName, setDisplayName] = useState<string | undefined> (loginUser ? loginUser.displayName : '');
+  const [email, setEmail] = useState<string | undefined>(loginUser ? loginUser.email : '');
+  const [introduce, setIntroduce] = useState<string | undefined>(loginUser ? loginUser.introduce : '');
+  const [phoneNumber, setPhoneNumber] = useState<string | undefined>(loginUser ? loginUser.phoneNumber : '');
+  const [userName, setUserName] = useState<string | undefined>(loginUser ? loginUser.userName : '');
 
-  useEffect(() => {
-    alreadyLoginUserAction();
-  }, []);
+  // useEffect(() => {
+  //   alreadyLoginUserAction();
+  // }, []);
 
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -60,26 +88,42 @@ const EditUserProfile: FC<DefaultProps> = ({
       <HeaderContainer />
       { loginUser ? 
         (
-          <div>
-            <textarea
+          <TextFieldWapper>
+            <TitleLabel>displayName</TitleLabel>
+            <StyledTextField
+              value={displayName}
               onChange={e => setDisplayName(e.target.value)}
-            >{loginUser.displayName}</textarea>
-            <textarea
+            />
+
+            <TitleLabel>email</TitleLabel>
+            <StyledTextField
+              value={email}
               onChange={e => setEmail(e.target.value)}
-            >{loginUser.email}</textarea>
-            <textarea
+            />
+
+            <TitleLabel>introduce</TitleLabel>
+            <StyledTextField
+              value={introduce}
               onChange={e => setIntroduce(e.target.value)}
-            >{loginUser.introduce}</textarea>
-            <textarea
+            />
+
+            <TitleLabel>phoneNumber</TitleLabel>
+            <StyledTextField
+              value={phoneNumber}
               onChange={e => setPhoneNumber(e.target.value)}
-            >{loginUser.phoneNumber}</textarea>
-            <textarea
+            />
+
+            <TitleLabel>userName</TitleLabel>
+            <StyledTextField
+              value={userName}
               onChange={e => setUserName(e.target.value)}
-            >{loginUser.userName}</textarea>
-            <button
+            />
+
+
+            <SubmitButton
               onClick={handleOnSubmit}
-            >更新</button>
-          </div>
+            >更新</SubmitButton>
+          </TextFieldWapper>
         ) : (
           <div>Login Please</div>
         )
