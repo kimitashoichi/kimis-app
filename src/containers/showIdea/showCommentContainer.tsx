@@ -25,7 +25,7 @@ const IdeaContent = styled.div`
 `
 
 interface Props {
-  comment: Models.Comment;
+  comments: Models.Comment[];
 };
 
 interface DispatchProps {
@@ -40,7 +40,7 @@ type DefaultProps = Props & DispatchProps & StateProps;
 
 const ShowCommentContainer: FC<DefaultProps> = ({
   isLoading,
-  comment,
+  comments,
   getCommentById
 }) => {
 
@@ -48,20 +48,24 @@ const ShowCommentContainer: FC<DefaultProps> = ({
     getCommentById()
   }, []);
 
-
-
   return (
     <>
-      { comment ? (
-        <IdeaContent>
-          <div style={{marginRight: '30px'}}>
-            <h5>{ comment.userName }</h5>
-          </div>
-          <div>
-            <h5>{ comment.content }</h5>
-            <h6>{CREATED_AT + ' ' + dateToString(comment.createdAt) }</h6>
-          </div>
-        </IdeaContent>
+      { comments ? (
+        <>
+          { comments.map(comment => {
+            return (
+              <IdeaContent>
+                <div style={{marginRight: '30px'}}>
+                  <h5>{ comment.userName }</h5>
+                </div>
+                <div>
+                  <h5>{ comment.content }</h5>
+                  <h6>{CREATED_AT + ' ' + dateToString(comment.createdAt) }</h6>
+                </div>
+              </IdeaContent>
+            )
+          })}
+        </>
       ): (<IdeaContent>{NOT_FOUND_IDEA}</IdeaContent>)}
     </>
   );
@@ -69,7 +73,7 @@ const ShowCommentContainer: FC<DefaultProps> = ({
 
 const mapStateToProps = (state: AppState) => ({
   isLoading: state.comment.isLoading,
-  comment: state.comment.comment
+  comments: state.comment.comments
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>

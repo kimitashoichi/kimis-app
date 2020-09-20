@@ -2,18 +2,10 @@
 import * as React from 'react';
 import { StylesProvider } from '@material-ui/styles';
 
-// import ShowIdeaContainer from './containers/showIdea/index';
-// import IdeaCreateAndEditContainer from './containers/createAndEditIdea/index'
-// import FbShareButton from './components/fbShareButton';
-// import TwShareButton from './components/twShareButton';
-// import HeaderContainer from './containers/headerContainer';
-// import FooterComponent from './components/footer'
-// import IdeaSingleComponent from './components/ideaSingleComponent';
-// import LatestIdeaComponent from './containers/topPageComponent/latestIdeaContainer';
-// import GoodCountIdeaComponent from './containers/topPageComponent/goodCountIdeaComponent'
-// import EditUserProfile from './containers/editUserProfileContainer';
-// import UserMyPage from './containers/myPage/index';
-import TopIndexComponent from './containers/topPageComponent/index'
+import UserMyPage from './containers/myPage';
+import TopIndexComponent from './containers/topPageComponent';
+import ShowIdeaContainer from './containers/showIdea';
+import IdeaCreateAndEditContainer from './containers/createAndEditIdea';
 
 
 
@@ -22,7 +14,7 @@ const App: React.FC = () => {
   return (
     <>
      <StylesProvider injectFirst>
-       <TopIndexComponent />
+       <UserMyPage />
      </StylesProvider>
     </>
   )

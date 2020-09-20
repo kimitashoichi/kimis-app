@@ -8,6 +8,7 @@ import {
   characterLimit
  } from '../utils/utilFunctions';
 
+//  TODO: divタグで作成しているが呼び出ししている親コンポーネントで囲っている要素がpタグなのでコンソールにエラーが出ている。elemet要素を変更してエラーが出ないようにする
 const IdeaBox = styled.div`
   height: 250px;
 `;

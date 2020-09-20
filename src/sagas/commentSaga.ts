@@ -23,13 +23,11 @@ export function* runCretaeComment(action: Models.CreateCommentStart) {
 
 // TODO: get comment by idea id
 export function* runGetCommentById() {
-  // mock id
-  const id = 'C8Al8oz9t3pgqoEx053r'
-  const handler = API.getCommentbyId;
-  const {comment, error} = yield call(handler, id);
-  if(comment && !error) {
+  const handler = API.getAllComment;
+  const {comments, error} = yield call(handler);
+  if(comments && !error) {
     console.log('OK commentSaga get');
-    yield put(getCommentById.success(comment));
+    yield put(getCommentById.success(comments));
   } else {
     console.log('NG commentSaga get');
     yield put(getCommentById.failure());

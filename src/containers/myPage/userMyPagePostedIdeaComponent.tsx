@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import * as Models from '../../models/ideaModel';
 import { AppState } from '../../models';
 import { getIdeasUserPosted } from '../../actions/ideaAction';
+import IdeaSingleComponent from '../../components/ideaSingleComponent';
 
 interface DispatchProps {
   getIdeasUserPosted: (uid: string) => void;
@@ -13,14 +14,14 @@ interface DispatchProps {
 
 interface StateProps {
   isLoading: boolean;
-  postedIdea: Models.PostIdea[];
+  postedIdeas: Models.PostIdea[];
 }
 
 type DefaultProps = DispatchProps & StateProps;
 
 const UserMyPagePostedIdeas: FC<DefaultProps> = ({
   isLoading,
-  postedIdea,
+  postedIdeas,
   getIdeasUserPosted
 }) => {
 
@@ -31,14 +32,27 @@ const UserMyPagePostedIdeas: FC<DefaultProps> = ({
   // 取得した投稿データを```IdeaSingleComponent```に渡して繰り返し表示させればOK
   return (
     <>
-      {console.log('UserMyPagePostedIdeas', postedIdea)}
+     { postedIdeas ? (
+        <>
+          { postedIdeas.map((idea) => {
+              return (
+                <IdeaSingleComponent idea={idea} key={idea.content.length} />
+              )})
+          }
+        </>
+      ) : (
+        <>
+          <p>No posts yet.</p>
+        </>
+      ) 
+      }
     </>
   )
 };
 
 const mapStateToProps = (state: AppState) => ({
   isLoading: state.postIdea.isLoading,
-  postedIdea: state.postIdea.postIdeas
+  postedIdeas: state.postIdea.userPostedIdeas
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) =>

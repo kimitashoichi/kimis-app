@@ -22,7 +22,7 @@ export const getCommentById = {
     type: ActionTypes.GET_COMMENT_START as typeof ActionTypes.GET_COMMENT_START
   }),
 
-  success: (payload: Models.Comment) => ({
+  success: (payload: Models.Comment[]) => ({
     type: ActionTypes.GET_COMMENT_SUCCESS as typeof ActionTypes.GET_COMMENT_SUCCESS,
     payload: payload
   }),

@@ -14,7 +14,8 @@ import {
  } from '../actions/userAction';
 import { AppState } from '../models';
 import HeaderContainer from './headerContainer';
-import { Input } from '@material-ui/core';
+import FooterComponent from '../components/footer';
+
 
 const SubmitButton = styled(Button)`
   background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
@@ -128,7 +129,7 @@ const EditUserProfile: FC<DefaultProps> = ({
           <div>Login Please</div>
         )
       }
-
+      <FooterComponent />
     </>
   );
 };

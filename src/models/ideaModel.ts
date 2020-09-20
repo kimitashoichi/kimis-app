@@ -17,7 +17,8 @@ export interface PostIdeaState {
   postIdea: PostIdea;
   postIdeas: PostIdea[];
   postIdeasbyLatest: PostIdea[];
-  draftedIdeas: PostIdea[];
+  userDraftedIdeas: PostIdea[];
+  userPostedIdeas: PostIdea[];
   ideasByGoodCount: PostIdea[];
 };
 

@@ -2,6 +2,8 @@ import React, { FC } from 'react';
 import styled from 'styled-components';
 
 import PostIdeaContainer from './ideaPostContainer';
+import HeaderContainer from '../headerContainer';
+import FooterComponent from '../../components/footer';
 
 const IdeaCreateAndEditWarapper = styled.div`
   width: 60%
@@ -11,10 +13,14 @@ const IdeaCreateAndEditWarapper = styled.div`
 
 const IdeaCreateAndEditContainer: FC = () => {
   return (
-    <IdeaCreateAndEditWarapper>
-      <PostIdeaContainer />
-    </IdeaCreateAndEditWarapper>
+    <>
+      <HeaderContainer />
+      <IdeaCreateAndEditWarapper>
+        <PostIdeaContainer />
+      </IdeaCreateAndEditWarapper>
+      <FooterComponent />
+    </>
   );
 };
 
-export default IdeaCreateAndEditContainer
+export default IdeaCreateAndEditContainer;

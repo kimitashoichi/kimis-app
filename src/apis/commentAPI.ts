@@ -42,3 +42,31 @@ export const getCommentbyId = async (id: string) => {
     return { error };
   }
 }
+
+export const getAllComment = async () => {
+  try {
+    const comments: Models.Comment[] = [];
+    await firebase
+    .firestore()
+    .collection('comments')
+    .get()
+    .then(snapShot => {
+      if(snapShot.empty) {
+        console.log('comment dose not exist');
+        return;
+      }
+      snapShot.forEach(com => {
+        comments.push({
+          content: com.data().content ? com.data().content : 'no content',
+          userName: com.data().userName ? com.data().userName: 'no author',
+          createdAt: com.data().createdAt ? com.data().createdAt.toDate() : null
+        });
+      });
+    }).catch(error => {
+      throw new Error(error.message);
+    })
+    return { comments };
+  } catch(error) {
+    return { error };
+  }
+}
