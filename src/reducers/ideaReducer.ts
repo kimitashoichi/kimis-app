@@ -12,7 +12,10 @@ const initialState: Models.PostIdeaState = {
     createdAt: new Date(),
     updatedAt: new Date()
   },
-  postIdeas: []
+  postIdeas: [],
+  postIdeasbyLatest: [],
+  draftedIdeas: [],
+  ideasByGoodCount: []
 }
 
 const idea: Reducer<Models.PostIdeaState, Models.PostIdeaAction> = (
@@ -90,7 +93,7 @@ const idea: Reducer<Models.PostIdeaState, Models.PostIdeaAction> = (
       return {
         ...state,
         isLoading: false,
-        postIdeas: action.payload
+        postIdeasbyLatest: action.payload
       }
     case ActionTypes.GET_ALL_IDEA_LATEST_FAILURE:
       return {
@@ -106,7 +109,7 @@ const idea: Reducer<Models.PostIdeaState, Models.PostIdeaAction> = (
       return {
         ...state,
         isLoading: false,
-        postIdeas: action.payload
+        ideasByGoodCount: action.payload
       }
     case ActionTypes.GET_ALL_IDEA_GOOD_FAILURE:
       return {
