@@ -12,7 +12,8 @@ import { StylesProvider } from '@material-ui/styles';
 // import LatestIdeaComponent from './containers/topPageComponent/latestIdeaContainer';
 // import GoodCountIdeaComponent from './containers/topPageComponent/goodCountIdeaComponent'
 // import EditUserProfile from './containers/editUserProfileContainer';
-import UserMyPage from './containers/myPage/index';
+// import UserMyPage from './containers/myPage/index';
+import TopIndexComponent from './containers/topPageComponent/index'
 
 
 
@@ -21,7 +22,7 @@ const App: React.FC = () => {
   return (
     <>
      <StylesProvider injectFirst>
-       <UserMyPage />
+       <TopIndexComponent />
      </StylesProvider>
     </>
   )

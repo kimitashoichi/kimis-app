@@ -42,7 +42,7 @@ const LatestIdeaComponent: FC<DefaultProps> = ({
 
 const mapStateToProps = (state: AppState) => ({
   isLoading: state.postIdea.isLoading,
-  ideas: state.postIdea.postIdeas
+  ideas: state.postIdea.postIdeasbyLatest
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => 

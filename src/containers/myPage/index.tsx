@@ -1,18 +1,8 @@
-import React, { FC, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
+import React, { FC, useState } from 'react';
 
-import { makeStyles, Theme } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-
-import * as Models from '../../models/ideaModel';
-import { AppState } from '../../models';
-import { alreadyLoginUserAction } from '../../actions/userAction';
 
 import UserMyPageDraftedIdeas from './userMyPageDrafedIdeaComponent';
 import UserMyPagePostedIdeas from './userMyPagePostedIdeaComponent';

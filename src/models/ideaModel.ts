@@ -16,6 +16,9 @@ export interface PostIdeaState {
   isLoading: boolean;
   postIdea: PostIdea;
   postIdeas: PostIdea[];
+  postIdeasbyLatest: PostIdea[];
+  draftedIdeas: PostIdea[];
+  ideasByGoodCount: PostIdea[];
 };
 
 export interface UserPostedIdeaState {

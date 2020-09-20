@@ -42,7 +42,7 @@ const GoodCountIdeaComponent: FC<DefaultProps> = ({
 
 const mapStateToProps = (state: AppState) => ({
   isLoading: state.postIdea.isLoading,
-  ideas: state.postIdea.postIdeas
+  ideas: state.postIdea.ideasByGoodCount
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) => 
