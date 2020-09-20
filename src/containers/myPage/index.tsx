@@ -6,7 +6,9 @@ import Tab from '@material-ui/core/Tab';
 
 import UserMyPageDraftedIdeas from './userMyPageDrafedIdeaComponent';
 import UserMyPagePostedIdeas from './userMyPagePostedIdeaComponent';
-import IdeaShowUserProfile from '../showIdea/showIdeaUserProfile'
+import IdeaShowUserProfile from '../showIdea/showIdeaUserProfile';
+import HeaderContainer from '../headerContainer';
+import FooterComponent from '../../components/footer';
 import * as Styles from '../../utils/style';
 
 interface StateProps {
@@ -32,6 +34,7 @@ const UserMyPage: FC<DefaultProps> = ({
 
   return (
     <>
+      <HeaderContainer />
       <IdeaShowUserProfile />
       <div className={Styles.useStyles().root}>
         <AppBar position="static">
@@ -51,6 +54,7 @@ const UserMyPage: FC<DefaultProps> = ({
           Item Three
         </Styles.TabPanel>
       </div>
+      <FooterComponent />
     </>
   )
 }

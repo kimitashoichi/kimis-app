@@ -14,7 +14,8 @@ const initialState: Models.PostIdeaState = {
   },
   postIdeas: [],
   postIdeasbyLatest: [],
-  draftedIdeas: [],
+  userDraftedIdeas: [],
+  userPostedIdeas: [],
   ideasByGoodCount: []
 }
 
@@ -124,7 +125,7 @@ const idea: Reducer<Models.PostIdeaState, Models.PostIdeaAction> = (
     case ActionTypes.GET_USER_POST_IDEA_SUCCESS:
       return {
         ...state,
-        postIdeas: action.payload,
+        userPostedIdeas: action.payload,
         isLoading: false
       }
     case ActionTypes.GET_USER_POST_IDEA_FAILURE:
@@ -140,7 +141,7 @@ const idea: Reducer<Models.PostIdeaState, Models.PostIdeaAction> = (
     case ActionTypes.GET_USER_DRAFT_IDEA_SUCCESS:
       return {
         ...state,
-        postIdeas: action.payload,
+        userDraftedIdeas: action.payload,
         isLoading: false
       }
     case ActionTypes.GET_USER_DRAFT_IDEA_FAILURE:

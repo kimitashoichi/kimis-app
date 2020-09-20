@@ -45,7 +45,7 @@ const comment: Reducer<
         return {
           ...state,
           isLoading: false,
-          comment: action.payload
+          comments: action.payload
         }
       case ActionTypes.GET_COMMENT_FAILURE:
         return {

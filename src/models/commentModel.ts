@@ -36,7 +36,7 @@ export interface GetCommentStart {
 
 export interface GetCommentSuccess {
   type: typeof ActionTypes.GET_COMMENT_SUCCESS,
-  payload: Comment
+  payload: Comment[]
 }
 
 export interface GetCommentFailure {
