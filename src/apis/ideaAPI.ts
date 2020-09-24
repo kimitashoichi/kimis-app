@@ -58,7 +58,7 @@ export const getIdeabyId = async (ideaId: string) => {
       }
       const data = Object.assign({}, doc.data());
       data.createdAt = data.createdAt.toDate();
-      data.updatedAt = data.updatedAt.toDate();
+      data.updatedAt = data.updatedAt ? data.updatedAt.toDate() : null;
       idea = data;
     }).catch(error => {
       console.log('Error getIdeaById firebase');
@@ -125,6 +125,7 @@ export const getIdeasByLatest = async () => {
       console.log('snapShot', snapShot)
       snapShot.forEach(doc => {
         ideas.push({
+          ideaId: doc.data().ideaId ? doc.data().ideaId : 404,
           title: doc.data().title ? doc.data().title : 'not title',
           content: doc.data().content,
           createdAt: doc.data().createdAt.toDate(),

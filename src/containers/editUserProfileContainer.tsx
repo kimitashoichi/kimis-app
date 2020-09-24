@@ -13,8 +13,6 @@ import {
   alreadyLoginUserAction,
  } from '../actions/userAction';
 import { AppState } from '../models';
-import HeaderContainer from './headerContainer';
-import FooterComponent from '../components/footer';
 
 
 const SubmitButton = styled(Button)`
@@ -86,7 +84,6 @@ const EditUserProfile: FC<DefaultProps> = ({
 
   return (
     <>
-      <HeaderContainer />
       { loginUser ? 
         (
           <TextFieldWapper>
@@ -129,7 +126,6 @@ const EditUserProfile: FC<DefaultProps> = ({
           <div>Login Please</div>
         )
       }
-      <FooterComponent />
     </>
   );
 };
