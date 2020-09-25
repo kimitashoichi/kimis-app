@@ -31,6 +31,8 @@ const IdeaSingleComponent: FC<StateProps> = ({idea}) => {
     urlParams = idea.ideaId.toString()
   }
 
+  // ユーザーのプロフィールページでルーティングする時に今のままだと投稿詳細ページにうまく遷移しない
+  // ユーザーのプロフィールページで投稿者名を出す必要もないのでそこも考える
   return (
     <>
       <IdeaBox>
@@ -38,7 +40,9 @@ const IdeaSingleComponent: FC<StateProps> = ({idea}) => {
           <h3>{characterLimit(idea.content)}</h3>
         </LinkComponent>
         <DateBox>
-          <h4>Author Name</h4>
+          <LinkComponent src={'/profile/author_name'}>
+            <h4>Author Name</h4>
+          </LinkComponent>
           <h4>{CREATED_AT} :</h4>
           <h4>{dateToString(idea.createdAt)}</h4>
         </DateBox>

@@ -1,7 +1,11 @@
 import React, {FC, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import styed from 'styled-components';
+import styled from 'styled-components';
+import { 
+  BrowserRouter as Router, 
+  Route
+} from 'react-router-dom';
 
 // material ui
 import Button from '@material-ui/core/Button'
@@ -14,7 +18,8 @@ import {
   alreadyLoginUserAction
  } from '../actions/userAction';
 import { AppState } from '../models';
-import styled from 'styled-components';
+
+import LinkComponent from '../components/LinkComponest';
 
 const HeaderBox = styled.div`
   height: 50px;
@@ -22,19 +27,24 @@ const HeaderBox = styled.div`
   justify-content: center;
 `;
 
-const LoginInfo = styed.ul`
+const LoginInfo = styled.ul`
   list-style: none;
   display: flex;
 `;
 
-const LoginInfoNav = styed.li`
+const LoginInfoNav = styled.li`
   text-align: center;
   height: 50px;
   line-height: 50px;
   margin-right: 30px;
 `;
 
-const SessionButton = styed(Button)`
+const SessionButton = styled(Button)`
+  margin-left: auto;
+  margin-right: 200px;
+`;
+
+const CreateButton = styled(Button)`
   margin-left: auto;
   margin-right: 200px;
 `;
@@ -82,6 +92,11 @@ const HeaderContainer: FC<DefaultProps> = ({
               onClick={logoutUserAction}
               color="primary"
               variant="contained">Logout</SessionButton>
+            <LinkComponent src={'/create'}>
+              <SessionButton 
+                color="primary"
+                variant="contained">Create</SessionButton>
+            </LinkComponent>
           </LoginInfo>
         </HeaderBox>
       ) : (

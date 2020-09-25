@@ -158,6 +158,7 @@ export const getIdeasByGood = async () => {
       console.log('snapShot', snapShot)
       snapShot.forEach(doc => {
         ideas.push({
+          ideaId: doc.data().ideaId ? doc.data().ideaId : 404,
           title: doc.data().title ? doc.data().title : 'not title',
           content: doc.data().content,
           createdAt: doc.data().createdAt.toDate(),

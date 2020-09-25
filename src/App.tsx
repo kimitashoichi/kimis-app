@@ -18,12 +18,14 @@ const App: React.FC = () => {
   return (
     <>
      <StylesProvider injectFirst>
-      <HeaderContainer />
         <Router>
-          <Route exact path='/' component={TopIndexComponent} />
-          <Route path='/show/:ideaId' component={ShowIdeaContainer} />
+          <HeaderContainer />
+            <Route exact path='/' component={TopIndexComponent} />
+            <Route path='/create' component={IdeaCreateAndEditContainer} />
+            <Route path='/show/:ideaId' component={ShowIdeaContainer} />
+            <Route path='/profile/:author_name' component={UserMyPage} />
+          <FooterComponent />
         </Router>
-      <FooterComponent />
      </StylesProvider>
     </>
   )
