@@ -12,7 +12,10 @@ import {
   chagneGoodCount
  } from '../../actions/ideaAction';
 import { AppState } from '../../models';
-import { dateToString } from '../../utils/utilFunctions';
+import { 
+  dateToString,
+  getUrlId
+ } from '../../utils/utilFunctions';
 
 // texts
 import {
@@ -47,7 +50,7 @@ interface StateProps {
 
 interface DispatchProps {
   // under implemetns arg is none, but arg is ideaId when production.
-  getIdeabyId: () => void;
+  getIdeabyId: (ideaId: string) => void;
   chagneGoodCount: () => void;
 }
 
@@ -60,14 +63,15 @@ const ShowIdeabyIdContainer: FC<DefaultProps> = ({
   idea
 }) => {
 
+  // util methodでURLからPostIDを取得するものを定義する
   useEffect(() => {
-    getIdeabyId()
+    getIdeabyId(getUrlId())
   }, []);
 
   const handleOnGoodCount = async (e: FormEvent) => {
     e.preventDefault();
     await chagneGoodCount();
-    await getIdeabyId();
+    await getIdeabyId(getUrlId());
   }
 
   return (
@@ -94,7 +98,7 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDisoatchToProps = (dispatch: Dispatch) => 
   bindActionCreators({
-    getIdeabyId: () => getIdeabyId.start(),
+    getIdeabyId: (ideaId: string) => getIdeabyId.start(ideaId),
     chagneGoodCount: () => chagneGoodCount.start()
   }, dispatch)
 

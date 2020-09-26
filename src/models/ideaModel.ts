@@ -1,7 +1,7 @@
 import * as ActionTypes from '../constants/actionTypes';
 
 export interface PostIdea {
-  ideaId?: number;
+  ideaId?: string;
   title?: string;
   content: string;
   createdAt: Date;
@@ -66,6 +66,7 @@ export interface DraftIdeaFailure {
 //  GET IDEA BY ID
 export interface GetIdeaStart {
   type: typeof ActionTypes.GET_IDEA_START;
+  payload: string
 }
 
 export interface GetIdeaSuccess {

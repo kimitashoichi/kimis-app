@@ -41,10 +41,10 @@ export function* runDraftIdea(actions: Models.DraftIdeaStart) {
 
 // TODO: arg is change for idea id.
 // Temporary support Under development.
-export function* runGetIdeaById() {
-   const mockId = 'sc8oMiX69PLux8FhGR5E';
+export function* runGetIdeaById(action: Models.GetIdeaStart) {
+   const ideaId = action.payload;
    const handler = API.getIdeabyId;
-   const {idea, error} = yield call(handler, mockId);
+   const {idea, error} = yield call(handler, ideaId);
    if(idea && !error) {
      console.log('runGetIdeaById OK');
      yield put(getIdeabyId.success(idea))
