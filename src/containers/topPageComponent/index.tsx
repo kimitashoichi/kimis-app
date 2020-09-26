@@ -8,8 +8,6 @@ import Tab from '@material-ui/core/Tab';
 import GoodCountIdeaComponent from './goodCountIdeaComponent';
 import LatestIdeaComponent from './latestIdeaContainer';
 import IdeaShowUserProfile from '../showIdea/showIdeaUserProfile';
-import HeaderContainer from '../headerContainer';
-import FooterComponent from '../../components/footer';
 import * as Styles from '../../utils/style';
 
 //  ユーザーのログイン判定のために使用する？
@@ -18,7 +16,6 @@ interface StateProps {
 }
 
 const TopIndexComponent: FC = ({}) => {
-
   const [value, setValue] = useState<number>(0);
 
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -27,7 +24,6 @@ const TopIndexComponent: FC = ({}) => {
 
   return (
     <>
-     <HeaderContainer />
      <IdeaShowUserProfile />
       <div className={Styles.useStyles().root}>
         <AppBar position="static">
@@ -47,7 +43,6 @@ const TopIndexComponent: FC = ({}) => {
           フォロー中のユーザーの投稿が表示される
         </Styles.TabPanel>
       </div>
-      <FooterComponent />
     </>
   );
 };

@@ -42,7 +42,7 @@ export function* runDraftIdea(actions: Models.DraftIdeaStart) {
 // TODO: arg is change for idea id.
 // Temporary support Under development.
 export function* runGetIdeaById() {
-   const mockId = 'testGetIdeaById';
+   const mockId = 'sc8oMiX69PLux8FhGR5E';
    const handler = API.getIdeabyId;
    const {idea, error} = yield call(handler, mockId);
    if(idea && !error) {

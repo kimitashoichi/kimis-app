@@ -1,6 +1,7 @@
 import * as ActionTypes from '../constants/actionTypes';
 
 export interface PostIdea {
+  ideaId?: number;
   title?: string;
   content: string;
   createdAt: Date;

@@ -6,6 +6,7 @@ import * as Models from '../models/ideaModel';
 const initialState: Models.PostIdeaState = {
   isLoading: false,
   postIdea: {
+    ideaId: 0,
     title: '',
     content: '',
     goodCount: 0,

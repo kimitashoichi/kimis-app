@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import styled from 'styled-components';
 
+import LinkComponent from '../components/LinkComponest';
+
 const Footer = styled.footer`
   width: 100%;
   height: 150px;
@@ -24,18 +26,27 @@ const FooterMenu = styled.li`
 
 
 const FooterComponent: FC = () => {
+  const paths = ['administrator', 'privacy', 'terms', 'about', 'feedback']
   return (
     <>
-      
       <Footer>
         <ProductLogo>Product Logo</ProductLogo>
         <FooterUl>
-          <FooterMenu><a href='#'>home ｜</a></FooterMenu>
-          <FooterMenu><a href='#'>運営者情報 ｜</a></FooterMenu>
-          <FooterMenu><a href='#'>利用規約 ｜</a></FooterMenu>
-          <FooterMenu><a href='#'>プライバシーポリシー ｜</a></FooterMenu>
-          <FooterMenu><a href='#'>お問い合わせ ｜</a></FooterMenu>
-          <FooterMenu><a href='#'>フィードバック</a></FooterMenu>
+          <FooterMenu>
+            <LinkComponent src={paths[0]}>home ｜</LinkComponent>
+          </FooterMenu>
+          <FooterMenu>
+            <LinkComponent src={paths[1]}>運営者情報 ｜</LinkComponent>
+          </FooterMenu>
+          <FooterMenu>
+            <LinkComponent src={paths[2]}>プライバシーポリシー ｜</LinkComponent>
+          </FooterMenu>
+          <FooterMenu>
+            <LinkComponent src={paths[3]}>お問い合わせ ｜</LinkComponent>
+          </FooterMenu>
+          <FooterMenu>
+            <LinkComponent src={paths[4]}>フィードバック ｜</LinkComponent>
+          </FooterMenu>
         </FooterUl>
         <p>© All rights reserved by shoichi kimita.</p>
       </Footer>
