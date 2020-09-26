@@ -30,8 +30,9 @@ export const draftIdeaAction =  {
 export const getIdeabyId = {
   // MUST TODO: start action need idea id, beacuse for show pages one idea specific.
   // dummy start action is not id now.
-  start: () => ({
-    type: ActionTypes.GET_IDEA_START as typeof ActionTypes.GET_IDEA_START
+  start: (ideaId: string) => ({
+    type: ActionTypes.GET_IDEA_START as typeof ActionTypes.GET_IDEA_START,
+    payload: ideaId
   }),
   // TODO: rename 'PostIdea', beacuse anywhere use 'PostIdea' interface
   success: (payload: Models.PostIdea) => ({

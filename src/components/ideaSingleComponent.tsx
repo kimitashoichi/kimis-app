@@ -23,20 +23,14 @@ interface StateProps {
 }
 
 const IdeaSingleComponent: FC<StateProps> = ({idea}) => {
-  let urlParams: string = '';
   if(!idea) return null;
-  if(idea.ideaId === 404){
-    urlParams = '404'
-  } else if (idea.ideaId !== 404 && idea.ideaId){
-    urlParams = idea.ideaId.toString()
-  }
 
   // ユーザーのプロフィールページでルーティングする時に今のままだと投稿詳細ページにうまく遷移しない
   // ユーザーのプロフィールページで投稿者名を出す必要もないのでそこも考える
   return (
     <>
       <IdeaBox>
-        <LinkComponent src={`show/${urlParams}`}>
+        <LinkComponent src={`show/${idea.ideaId}`}>
           <h3>{characterLimit(idea.content)}</h3>
         </LinkComponent>
         <DateBox>
