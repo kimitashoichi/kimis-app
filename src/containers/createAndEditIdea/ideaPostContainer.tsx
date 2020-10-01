@@ -1,4 +1,4 @@
-import React, { FC, useState, FormEvent } from "react";
+import React, { FC, useState, useEffect, FormEvent } from "react";
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
@@ -12,7 +12,9 @@ import {
   postIdeaAction,
   draftIdeaAction
  } from '../../actions/ideaAction';
+import { alreadyLoginUserAction } from '../../actions/userAction';
 import * as Models from '../../models/ideaModel';
+import * as UModels from '../../models/userModels';
 import * as TextIndex from '../../constants/textIndex';
 import { AppState } from '../../models'
 
@@ -42,6 +44,11 @@ const StyledTextField = styled(TextareaAutosize)`
   height: 60%;
 `;
 
+const StyledTitleField = styled(TextareaAutosize)`
+  width: 100%;
+  height: 30%;
+`;
+
 const TextFieldWapper = styled.div`
   margin: 0 auto;
   text-align: center;
@@ -57,10 +64,15 @@ const TitleLabel = styled.h3`
   text-align: left;
 `;
 
+const ContentLabel = styled.h4`
+  text-align: left;
+`;
+
 // git reset --soft HEAD~
 interface DispatchProps {
   createIdea: (payload: Models.PostIdea) => void;
   createDraftIdea: (payload: Models.PostIdea) => void;
+  alreadyLogin: () => void;
 }
 
 interface Props {
@@ -69,6 +81,7 @@ interface Props {
 
 interface StateProps {
   isLoading?: boolean;
+  userInfo: UModels.LoginUser;
   isDraft?: boolean;
 }
 
@@ -79,17 +92,27 @@ const PostIdeaContainer: FC<DefaultProps> = ({
   isLoading,
   content,
   createIdea,
-  createDraftIdea
+  createDraftIdea,
+  alreadyLogin,
+  userInfo
 }) => {
-  const [idea, setIdea] = useState<string>(content ? content.content : '');
+  const [title, setTitle] = useState<string | undefined>(content ? content.title : '');
+  const [ideaContent, setIdeaContent] = useState<string>(content ? content.content : '');
   const [createDate, setCrateDate] = useState<Date>(content ? content.createdAt: new Date());
   const [updateDate, setUpdateDate] = useState<Date | null>(content ? content.updatedAt : null);
   const [isDraft, setIsDraft] = useState<boolean>(false);
 
+  useEffect(() => {
+    alreadyLogin()
+  }, []);
+  
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const payload = {
-      content: idea,
+      uid: userInfo.userId,
+      title: title,
+      content: ideaContent,
+      goodCount: 0,
       createdAt: createDate instanceof Date ? createDate : new Date(),
       updatedAt: updateDate === null ? null : new Date(),
     }
@@ -100,7 +123,8 @@ const PostIdeaContainer: FC<DefaultProps> = ({
       await createIdea(payload);
     }
 
-    setIdea('');
+    setIdeaContent('');
+    setTitle('');
     setCrateDate(new Date());
     setUpdateDate(null);
   }
@@ -116,12 +140,20 @@ const PostIdeaContainer: FC<DefaultProps> = ({
       <>
         <TextFieldWapper>
           <TitleLabel>投稿内容</TitleLabel>
+            <ContentLabel>アイディアタイトル</ContentLabel>
+            <StyledTitleField
+              className="standard-textarea"
+              placeholder="タイトル"
+              value={title}
+              rowsMin={2}
+              onChange={(e) => setTitle(e.target.value)}/>
+            <ContentLabel>アイディア内容</ContentLabel>
             <StyledTextField
               className="standard-textarea"
-              placeholder="アイディアを投稿しよう！"
-              value={idea}
+              placeholder="アイディアの詳細を記載"
+              value={ideaContent}
               rowsMin={10}
-              onChange={(e) => setIdea(e.target.value)}/>
+              onChange={(e) => setIdeaContent(e.target.value)}/>
           <ButtonWapper>
             <StyledButton 
               onClick={handleOnSubmit}
@@ -145,13 +177,15 @@ const PostIdeaContainer: FC<DefaultProps> = ({
 }
 
 const mapStateToProps = (state: AppState) => ({
-  isLoading: state.postIdea.isLoading
+  isLoading: state.postIdea.isLoading,
+  userInfo: state.userInfromation.loginUser
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     createIdea: payload => postIdeaAction.start(payload),
-    createDraftIdea: payload => draftIdeaAction.start(payload)
+    createDraftIdea: payload => draftIdeaAction.start(payload),
+    alreadyLogin: () => alreadyLoginUserAction.start()
   }, dispatch);
 
 export default connect(

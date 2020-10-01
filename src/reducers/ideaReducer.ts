@@ -7,6 +7,7 @@ const initialState: Models.PostIdeaState = {
   isLoading: false,
   postIdea: {
     ideaId: '',
+    uid: '',
     title: '',
     content: '',
     goodCount: 0,
