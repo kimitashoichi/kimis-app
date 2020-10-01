@@ -1,7 +1,9 @@
 import * as ActionTypes from '../constants/actionTypes';
 
+// オプショナルなプロパティはできるだけ無くしたい
 export interface PostIdea {
   ideaId?: string;
+  uid?: string;
   title?: string;
   content: string;
   createdAt: Date;

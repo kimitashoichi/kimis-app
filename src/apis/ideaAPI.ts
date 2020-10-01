@@ -6,7 +6,7 @@ export const postIdea = async (data: Models.PostIdea) => {
   try {
     await firebase
     .firestore()
-    .collection('Idea')
+    .collection('LinkedIdea')
     .doc()
     .set(data)
     .catch((error) => {
@@ -27,7 +27,7 @@ export const postDraftIdea = async (data: Models.PostIdea) => {
     console.log(data)
     await firebase
     .firestore()
-    .collection('DraftIdea')
+    .collection('LinkedDraftedIdea')
     .doc()
     .set(data)
     .catch((error) => {
@@ -116,16 +116,16 @@ export const getIdeasByLatest = async () => {
     await firebase
     .firestore()
     .collection('Idea')
-    .orderBy('updatedAt', 'desc')
     .get()
     .then(snapShot => {
       if(snapShot.empty){
         return;
       }
-      console.log('snapShot', snapShot)
       snapShot.forEach(doc => {
+        console.log('doc', doc.data());
         ideas.push({
           ideaId: doc.id,
+          uid: doc.id,
           title: doc.data().title ? doc.data().title : 'not title',
           content: doc.data().content,
           createdAt: doc.data().createdAt.toDate(),
