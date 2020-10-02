@@ -8,6 +8,7 @@ const initialState: Models.PostIdeaState = {
   postIdea: {
     ideaId: '',
     uid: '',
+    authorName: '',
     title: '',
     content: '',
     goodCount: 0,

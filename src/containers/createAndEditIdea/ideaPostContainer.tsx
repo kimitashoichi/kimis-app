@@ -110,6 +110,7 @@ const PostIdeaContainer: FC<DefaultProps> = ({
     e.preventDefault();
     const payload = {
       uid: userInfo.userId,
+      authorName: userInfo.userName,
       title: title,
       content: ideaContent,
       goodCount: 0,

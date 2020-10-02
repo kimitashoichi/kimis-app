@@ -48,7 +48,7 @@ export const getIdeabyId = async (ideaId: string) => {
     let idea = null;
     await firebase
     .firestore()
-    .collection('Idea')
+    .collection('LinkedIdea')
     .doc(ideaId)
     .get()
     .then(doc => {
@@ -79,7 +79,7 @@ export const changeGoodCount = async (id: string) => {
     // いいね数を更新したい投稿の取得処理
     await firebase
     .firestore()
-    .collection('Idea')
+    .collection('LinkedIdea')
     .doc(id)
     .get()
     .then(doc => {
@@ -95,7 +95,7 @@ export const changeGoodCount = async (id: string) => {
     // いいね数の更新処理
     await firebase
     .firestore()
-    .collection('Idea')
+    .collection('LinkedIdea')
     .doc(id)
     .update({
       goodCount: currentCount ? currentCount + 1 : 666
@@ -115,7 +115,7 @@ export const getIdeasByLatest = async () => {
     const ideas: Models.PostIdea[] = [];
     await firebase
     .firestore()
-    .collection('Idea')
+    .collection('LinkedIdea')
     .get()
     .then(snapShot => {
       if(snapShot.empty){
@@ -125,7 +125,8 @@ export const getIdeasByLatest = async () => {
         console.log('doc', doc.data());
         ideas.push({
           ideaId: doc.id,
-          uid: doc.id,
+          uid: doc.data().uid ? doc.data().uid : 'empty',
+          authorName: doc.data().authorName ? doc.data().authorName : 'no author',
           title: doc.data().title ? doc.data().title : 'not title',
           content: doc.data().content,
           createdAt: doc.data().createdAt.toDate(),
@@ -148,7 +149,7 @@ export const getIdeasByGood = async () => {
     const ideas: Models.PostIdea[] = [];
     await firebase
     .firestore()
-    .collection('Idea')
+    .collection('LinkedIdea')
     .orderBy('goodCount', 'desc')
     .get()
     .then(snapShot => {
@@ -180,9 +181,8 @@ export const getUserPostedIdeas = async (uid: string) => {
     const postedIdeas: Models.PostIdea[] = [];
     await firebase
     .firestore()
-    .collection('Idea')
-    .doc('c62EgmuKdcBZB1md3Nvz')
-    .collection('postedIdea')
+    .collection('LinkedIdea')
+    .where('uid', '==', uid)
     .get()
     .then(doc => {
       if(doc.empty){
