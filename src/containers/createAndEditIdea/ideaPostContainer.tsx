@@ -8,10 +8,7 @@ import Button from '@material-ui/core/Button';
 import TextareaAutosize from '@material-ui/core/TextareaAutosize';
 
 //  file
-import { 
-  postIdeaAction,
-  draftIdeaAction
- } from '../../actions/ideaAction';
+import { postIdeaAction } from '../../actions/ideaAction';
 import { alreadyLoginUserAction } from '../../actions/userAction';
 import * as Models from '../../models/ideaModel';
 import * as UModels from '../../models/userModels';
@@ -71,7 +68,6 @@ const ContentLabel = styled.h4`
 // git reset --soft HEAD~
 interface DispatchProps {
   createIdea: (payload: Models.PostIdea) => void;
-  createDraftIdea: (payload: Models.PostIdea) => void;
   alreadyLogin: () => void;
 }
 
@@ -82,7 +78,6 @@ interface Props {
 interface StateProps {
   isLoading?: boolean;
   userInfo: UModels.LoginUser;
-  isDraft?: boolean;
 }
 
 type DefaultProps = DispatchProps & Props & StateProps;
@@ -92,7 +87,6 @@ const PostIdeaContainer: FC<DefaultProps> = ({
   isLoading,
   content,
   createIdea,
-  createDraftIdea,
   alreadyLogin,
   userInfo
 }) => {
@@ -100,7 +94,7 @@ const PostIdeaContainer: FC<DefaultProps> = ({
   const [ideaContent, setIdeaContent] = useState<string>(content ? content.content : '');
   const [createDate, setCrateDate] = useState<Date>(content ? content.createdAt: new Date());
   const [updateDate, setUpdateDate] = useState<Date | null>(content ? content.updatedAt : null);
-  const [isDraft, setIsDraft] = useState<boolean>(false);
+  const [postFlag, setPostFlag] = useState<boolean>(true);
 
   useEffect(() => {
     alreadyLogin()
@@ -114,18 +108,16 @@ const PostIdeaContainer: FC<DefaultProps> = ({
       title: title,
       content: ideaContent,
       goodCount: 0,
+      postFlag: postFlag,
       createdAt: createDate instanceof Date ? createDate : new Date(),
       updatedAt: updateDate === null ? null : new Date(),
     }
 
-    if(isDraft) {
-      await createDraftIdea(payload);
-    } else {
-      await createIdea(payload);
-    }
+    await createIdea(payload);
 
     setIdeaContent('');
     setTitle('');
+    setPostFlag(true)
     setCrateDate(new Date());
     setUpdateDate(null);
   }
@@ -158,13 +150,13 @@ const PostIdeaContainer: FC<DefaultProps> = ({
           <ButtonWapper>
             <StyledButton 
               onClick={handleOnSubmit}
-              onMouseDown={() => setIsDraft(true)}>
+              onMouseDown={() => setPostFlag(false)}>
               {TextIndex.DRAFT}
             </StyledButton>
             <SubmitButton
               className='idea-post-button'
               onClick={handleOnSubmit}
-              onMouseDown={() => setIsDraft(false)}
+              onMouseDown={() => setPostFlag(true)}
               variant="contained" 
               color="primary">
               {TextIndex.SUBMIT}
@@ -185,7 +177,6 @@ const mapStateToProps = (state: AppState) => ({
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     createIdea: payload => postIdeaAction.start(payload),
-    createDraftIdea: payload => draftIdeaAction.start(payload),
     alreadyLogin: () => alreadyLoginUserAction.start()
   }, dispatch);
 

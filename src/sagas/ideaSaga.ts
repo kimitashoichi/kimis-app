@@ -5,7 +5,6 @@ import * as Models from '../models/ideaModel';
 import * as API from '../apis/ideaAPI';
 import { 
   postIdeaAction,
-  draftIdeaAction,
   getIdeabyId,
   chagneGoodCount,
   getIdeasByLatest,
@@ -26,18 +25,6 @@ export function* runPostIdea(actions: Models.PostIdeaStart) {
     yield put(postIdeaAction.failure());
   }
 }
-
-export function* runDraftIdea(actions: Models.DraftIdeaStart) {
-  const data = actions.payload;
-  const handler = API.postDraftIdea;
-  const { success, error } = yield call(handler, data);
-  if(success && !error) {
-    yield put(draftIdeaAction.success());
-  } else {
-    yield put(draftIdeaAction.failure());
-  };
-}
-
 
 // TODO: arg is change for idea id.
 // Temporary support Under development.
@@ -121,7 +108,6 @@ export function* runGetDraftedIdea(actions: Models.GetAllPostedIdeasForUserStart
 
 export function* watchIdeas() {
   yield takeEvery(ActionTypes.POST_IDEA_START, runPostIdea);
-  yield takeEvery(ActionTypes.DRAFT_IDEA_START, runDraftIdea);
   yield takeEvery(ActionTypes.GET_IDEA_START, runGetIdeaById);
   yield takeEvery(ActionTypes.GOOD_COUNT_CHANGE_START, runChangeGoodCount)
   yield takeEvery(ActionTypes.GET_ALL_IDEA_LATEST_START, runGetIdeasByLatest);

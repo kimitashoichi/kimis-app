@@ -12,6 +12,7 @@ const initialState: Models.PostIdeaState = {
     title: '',
     content: '',
     goodCount: 0,
+    postFlag: true,
     createdAt: new Date(),
     updatedAt: new Date()
   },
@@ -38,21 +39,6 @@ const idea: Reducer<Models.PostIdeaState, Models.PostIdeaAction> = (
         isLoading: false
       }
     case ActionTypes.POST_IDEA_FAILURE:
-      return {
-        ...state,
-        isLoading: false
-      }
-    case ActionTypes.DRAFT_IDEA_START:
-      return {
-        ...state,
-        isLoading: true
-      }
-    case ActionTypes.DRAFT_IDEA_SUCCESS:
-      return {
-        ...state,
-        isLoading: false
-      }
-    case ActionTypes.DRAFT_IDEA_FAILURE:
       return {
         ...state,
         isLoading: false

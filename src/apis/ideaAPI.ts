@@ -6,7 +6,7 @@ export const postIdea = async (data: Models.PostIdea) => {
   try {
     await firebase
     .firestore()
-    .collection('LinkedIdea')
+    .collection('AllIdea')
     .doc()
     .set(data)
     .catch((error) => {
@@ -21,34 +21,13 @@ export const postIdea = async (data: Models.PostIdea) => {
   }
 };
 
-// 下書き投稿処理
-export const postDraftIdea = async (data: Models.PostIdea) => {
-  try {
-    console.log(data)
-    await firebase
-    .firestore()
-    .collection('LinkedDraftedIdea')
-    .doc()
-    .set(data)
-    .catch((error) => {
-      console.log('postDraftIdea Error Firebase')
-      throw new Error(error.message);
-    })
-    const success = { success: 'PostIdea 200 ok' };
-    return { success }
-  } catch(error) {
-    console.log('postDraftIdea Error')
-    return { error }
-  }
-};
-
 // IDによるデータ取得
 export const getIdeabyId = async (ideaId: string) => {
   try {
     let idea = null;
     await firebase
     .firestore()
-    .collection('LinkedIdea')
+    .collection('AllIdea')
     .doc(ideaId)
     .get()
     .then(doc => {
@@ -115,7 +94,8 @@ export const getIdeasByLatest = async () => {
     const ideas: Models.PostIdea[] = [];
     await firebase
     .firestore()
-    .collection('LinkedIdea')
+    .collection('AllIdea')
+    .where('postFlag', '==', true)
     .get()
     .then(snapShot => {
       if(snapShot.empty){
@@ -129,6 +109,7 @@ export const getIdeasByLatest = async () => {
           authorName: doc.data().authorName ? doc.data().authorName : 'no author',
           title: doc.data().title ? doc.data().title : 'not title',
           content: doc.data().content,
+          postFlag: doc.data().postFlag,
           createdAt: doc.data().createdAt.toDate(),
           updatedAt: doc.data().updatedAt ? doc.data().updatedAt.toDate() : null,
           goodCount: doc.data().goodCount ? doc.data().goodCount : null
@@ -162,6 +143,9 @@ export const getIdeasByGood = async () => {
           ideaId: doc.id,
           title: doc.data().title ? doc.data().title : 'not title',
           content: doc.data().content,
+          uid: doc.data().uid,
+          authorName: doc.data().uid,
+          postFlag: doc.data().postFlag,
           createdAt: doc.data().createdAt.toDate(),
           updatedAt: doc.data().updatedAt ? doc.data().updatedAt.toDate() : null,
           goodCount: doc.data().goodCount ? doc.data().goodCount : null
@@ -181,8 +165,9 @@ export const getUserPostedIdeas = async (uid: string) => {
     const postedIdeas: Models.PostIdea[] = [];
     await firebase
     .firestore()
-    .collection('LinkedIdea')
+    .collection('AllIdea')
     .where('uid', '==', uid)
+    .where('postFlag', '==', true)
     .get()
     .then(doc => {
       if(doc.empty){
@@ -190,11 +175,15 @@ export const getUserPostedIdeas = async (uid: string) => {
       }
       doc.forEach(snapShot => {
         postedIdeas.push({
+          ideaId: snapShot.id,
+          uid: snapShot.data().uid,
+          authorName: snapShot.data().authorName,
           title: snapShot.data().title,
           content: snapShot.data().content,
+          goodCount: snapShot.data().goodCount,
+          postFlag: snapShot.data().postFlag,
           createdAt: new Date(),
           updatedAt: new Date(),
-          goodCount: 10
         });
       });
     }) .catch(error => {
@@ -211,8 +200,9 @@ export const getUserDraftedIdeas = async (uid: string) => {
     const draftedIdeas: Models.PostIdea[] = [];
     await firebase
     .firestore()
-    .collection('LinkedDraftedIdea')
+    .collection('AllIdea')
     .where('uid', '==', uid)
+    .where('postFlag', '==', false)
     .get()
     .then(doc => {
       if(doc.empty){
@@ -220,11 +210,15 @@ export const getUserDraftedIdeas = async (uid: string) => {
       }
       doc.forEach(snapShot => {
         draftedIdeas.push({
+          ideaId: snapShot.id,
+          uid: snapShot.data().uid,
+          authorName: snapShot.data().authorName,
           title: snapShot.data().title,
           content: snapShot.data().content,
+          goodCount: snapShot.data().goodCount,
+          postFlag: snapShot.data().postFlag,
           createdAt: new Date(),
           updatedAt: new Date(),
-          goodCount: 10
         });
       });
     }) .catch(error => {

@@ -14,19 +14,6 @@ export const postIdeaAction = {
   })
 };
 
-export const draftIdeaAction =  {
-  start: (payload: Models.PostIdea) => ({
-    type: ActionTypes.DRAFT_IDEA_START as typeof ActionTypes.DRAFT_IDEA_START,
-    payload: payload
-  }),
-  success: () => ({
-    type: ActionTypes.DRAFT_IDEA_SUCCESS as typeof ActionTypes.DRAFT_IDEA_SUCCESS
-  }),
-  failure: () => ({
-    type: ActionTypes.DRAFT_IDEA_FAILURE as typeof ActionTypes.DRAFT_IDEA_FAILURE
-  })
-};
-
 export const getIdeabyId = {
   // MUST TODO: start action need idea id, beacuse for show pages one idea specific.
   // dummy start action is not id now.

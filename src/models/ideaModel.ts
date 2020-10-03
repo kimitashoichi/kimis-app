@@ -8,6 +8,7 @@ export interface PostIdea {
   authorName?: string;
   content: string;
   createdAt: Date;
+  postFlag: boolean;
   updatedAt: Date | null;
   goodCount?: number;
   // TODO: before implements
@@ -52,19 +53,6 @@ export interface PostIdeaFailure {
   type: typeof ActionTypes.POST_IDEA_FAILURE;
 }
 
-//  DRAFT IDEA
-export interface DraftIdeaStart {
-  type: typeof ActionTypes.DRAFT_IDEA_START;
-  payload: PostIdea
-}
-
-export interface DraftIdeaSuccess {
-  type: typeof ActionTypes.DRAFT_IDEA_SUCCESS;
-}
-
-export interface DraftIdeaFailure {
-  type: typeof ActionTypes.DRAFT_IDEA_FAILURE;
-}
 
 //  GET IDEA BY ID
 export interface GetIdeaStart {
@@ -157,9 +145,6 @@ export type PostIdeaAction =
   | PostIdeaStart
   | PostIdeaSuccess
   | PostIdeaFailure
-  | DraftIdeaStart
-  | DraftIdeaSuccess
-  | DraftIdeaFailure
   | GetIdeaStart
   | GetIdeaSuccess
   | GetIdeaFailure
