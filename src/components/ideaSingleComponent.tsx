@@ -30,7 +30,7 @@ const IdeaSingleComponent: FC<StateProps> = ({idea}) => {
   return (
     <>
       <IdeaBox>
-        <LinkComponent src={`show/${idea.ideaId}`}>
+        <LinkComponent src={`/show/${idea.ideaId}`}>
           <h3>{characterLimit(idea.content)}</h3>
         </LinkComponent>
         <DateBox>
