@@ -5,6 +5,7 @@ export interface PostIdea {
   ideaId?: string;
   uid?: string;
   title?: string;
+  authorName?: string;
   content: string;
   createdAt: Date;
   updatedAt: Date | null;

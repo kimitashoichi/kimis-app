@@ -34,8 +34,8 @@ const IdeaSingleComponent: FC<StateProps> = ({idea}) => {
           <h3>{characterLimit(idea.content)}</h3>
         </LinkComponent>
         <DateBox>
-          <LinkComponent src={'/profile/author_name'}>
-            <h4>Author Name</h4>
+          <LinkComponent src={`/profile/${idea.uid}`}>
+            <h4>{ idea.authorName }</h4>
           </LinkComponent>
           <h4>{CREATED_AT} :</h4>
           <h4>{dateToString(idea.createdAt)}</h4>

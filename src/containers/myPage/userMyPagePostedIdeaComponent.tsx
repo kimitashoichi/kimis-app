@@ -7,6 +7,7 @@ import * as Models from '../../models/ideaModel';
 import { AppState } from '../../models';
 import { getIdeasUserPosted } from '../../actions/ideaAction';
 import IdeaSingleComponent from '../../components/ideaSingleComponent';
+import { getUrlId } from '../../utils/utilFunctions';
 
 interface DispatchProps {
   getIdeasUserPosted: (uid: string) => void;
@@ -26,7 +27,7 @@ const UserMyPagePostedIdeas: FC<DefaultProps> = ({
 }) => {
 
   useEffect(() => {
-    getIdeasUserPosted('c62EgmuKdcBZB1md3Nvz')
+    getIdeasUserPosted(getUrlId())
   }, [])
 
   // 取得した投稿データを```IdeaSingleComponent```に渡して繰り返し表示させればOK
