@@ -211,9 +211,8 @@ export const getUserDraftedIdeas = async (uid: string) => {
     const draftedIdeas: Models.PostIdea[] = [];
     await firebase
     .firestore()
-    .collection('Idea')
-    .doc('c62EgmuKdcBZB1md3Nvz') // 本当はここにUIDを入れてユーザーごとのデータを取得できるようにする
-    .collection('draftedIdea')
+    .collection('LinkedDraftedIdea')
+    .where('uid', '==', uid)
     .get()
     .then(doc => {
       if(doc.empty){
