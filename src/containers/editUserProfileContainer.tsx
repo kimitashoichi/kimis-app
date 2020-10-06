@@ -46,8 +46,8 @@ interface DispatchProps {
 }
 
 interface StateProps {
-  loginUser: Models.LoginUser
-  isLoading: boolean
+  loginUser: Models.LoginUser;
+  isLoading: boolean;
 }
 
 type DefaultProps = DispatchProps & StateProps;
@@ -64,9 +64,9 @@ const EditUserProfile: FC<DefaultProps> = ({
   const [phoneNumber, setPhoneNumber] = useState<string | undefined>(loginUser ? loginUser.phoneNumber : '');
   const [userName, setUserName] = useState<string | undefined>(loginUser ? loginUser.userName : '');
 
-  // useEffect(() => {
-  //   alreadyLoginUserAction();
-  // }, []);
+  useEffect(() => {
+    alreadyLoginUserAction();
+  }, []);
 
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
