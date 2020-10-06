@@ -7,7 +7,7 @@ import ideaReducer from './ideaReducer';
 import userReducer from './userReducer';
 import commentReducer from './commentReducer';
 
-const rootReducer = (history: History) =>
+const rootReducer = (history: History<any>) =>
   combineReducers({
     router: connectRouter(history),
     postIdea: ideaReducer,

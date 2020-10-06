@@ -21,6 +21,44 @@ export const postIdea = async (data: Models.PostIdea) => {
   }
 };
 
+// 投稿の編集
+export const updateIdea = async(data: Models.PostIdea) => {
+  try {
+    console.log(data);
+    await firebase
+    .firestore()
+    .collection('AllIdea')
+    .doc(data.ideaId)
+    .update(data)
+    .catch(error => {
+      throw new Error(error.message)
+    });
+    const success = {success: "200 ok, success"}
+    return {success};
+  } catch (error) {
+    return { error };
+  }
+}
+
+// 投稿の削除
+export const deleteIdea = async(ideaId: string) => {
+  try {
+    console.log(ideaId)
+    await firebase
+    .firestore()
+    .collection('AllIdea')
+    .doc(ideaId)
+    .delete()
+    .catch(error => {
+      throw new Error(error.message)
+    });
+    const success = {success: "200 ok, success"}
+    return {success};
+  } catch (error) {
+    return { error };
+  }
+}
+
 // IDによるデータ取得
 export const getIdeabyId = async (ideaId: string) => {
   try {
@@ -38,7 +76,10 @@ export const getIdeabyId = async (ideaId: string) => {
       const data = Object.assign({}, doc.data());
       data.createdAt = data.createdAt.toDate();
       data.updatedAt = data.updatedAt ? data.updatedAt.toDate() : null;
+      data.ideaId = doc.id;
+      console.log(doc.id)
       idea = data;
+      console.log(idea)
     }).catch(error => {
       console.log('Error getIdeaById firebase');
       throw new Error(error.message);

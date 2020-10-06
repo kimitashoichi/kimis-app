@@ -10,7 +10,9 @@ import {
   getIdeasByLatest,
   getIdeasByGoodCount,
   getIdeasUserPosted,
-  getIdeasUserDrafted
+  getIdeasUserDrafted,
+  updateIdeaAction,
+  deleteIdeaAction
 } from '../actions/ideaAction';
 
 export function* runPostIdea(actions: Models.PostIdeaStart) {
@@ -106,6 +108,32 @@ export function* runGetDraftedIdea(actions: Models.GetAllPostedIdeasForUserStart
   }
 }
 
+export function* runUpdateIdea(action: Models.UpdateIdeaStart) {
+  const data = action.payload;
+  const handler = API.updateIdea;
+  const {success, error} = yield call(handler, data);
+  if(success && !error){
+    console.log('OK runUpdateIdea Saga');
+    yield put(updateIdeaAction.success())
+  } else {
+    console.log('NG runUpdateIdea Saga');
+    yield put(updateIdeaAction.failure())
+  }
+}
+
+export function* runDeleteIdea(action: Models.DeleteIdeaStart) {
+  const data = action.payload;
+  const handler = API.deleteIdea;
+  const {success, error} = yield call(handler, data);
+  if(success && !error){
+    console.log('OK runDeleteIdea Saga');
+    yield put(deleteIdeaAction.success())
+  } else {
+    console.log('NG runDeleteIdea Saga');
+    yield put(deleteIdeaAction.failure())
+  }
+}
+
 export function* watchIdeas() {
   yield takeEvery(ActionTypes.POST_IDEA_START, runPostIdea);
   yield takeEvery(ActionTypes.GET_IDEA_START, runGetIdeaById);
@@ -114,6 +142,8 @@ export function* watchIdeas() {
   yield takeEvery(ActionTypes.GET_ALL_IDEA_GOOD_START, runGetIdeasByGood);
   yield takeEvery(ActionTypes.GET_USER_POST_IDEA_START, runGetPostedIdea);
   yield takeEvery(ActionTypes.GET_USER_DRAFT_IDEA_START, runGetDraftedIdea);
+  yield takeEvery(ActionTypes.UPDATE_IDEA_START, runUpdateIdea);
+  yield takeEvery(ActionTypes.DELETE_IDEA_START, runDeleteIdea);
 }
 
 

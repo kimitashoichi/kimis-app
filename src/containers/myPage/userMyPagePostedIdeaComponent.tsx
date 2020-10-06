@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import * as Models from '../../models/ideaModel';
 import { AppState } from '../../models';
 import { getIdeasUserPosted } from '../../actions/ideaAction';
-import IdeaSingleComponent from '../../components/ideaSingleComponent';
+import UserMyPageIdeaComponent from '../../components/userMyPageIdeaComponent'
 import { getUrlId } from '../../utils/utilFunctions';
 
 interface DispatchProps {
@@ -37,7 +37,7 @@ const UserMyPagePostedIdeas: FC<DefaultProps> = ({
         <>
           { postedIdeas.map((idea) => {
               return (
-                <IdeaSingleComponent idea={idea} key={idea.content.length} />
+                <UserMyPageIdeaComponent idea={idea} key={idea.content.length} />
               )})
           }
         </>

@@ -9,7 +9,7 @@ const IdeaCreateAndEditWarapper = styled.div`
 `
 
 
-const IdeaCreateAndEditContainer: FC = () => {
+const IdeaCreateContainer: FC = () => {
   return (
     <>
       <IdeaCreateAndEditWarapper>
@@ -19,4 +19,4 @@ const IdeaCreateAndEditContainer: FC = () => {
   );
 };
 
-export default IdeaCreateAndEditContainer;
+export default IdeaCreateContainer;
