@@ -43,6 +43,36 @@ const idea: Reducer<Models.PostIdeaState, Models.PostIdeaAction> = (
         ...state,
         isLoading: false
       }
+    case ActionTypes.UPDATE_IDEA_START:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case ActionTypes.UPDATE_IDEA_SUCCESS:
+      return {
+        ...state,
+        isLoading: false
+      }
+    case ActionTypes.UPDATE_IDEA_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
+    case ActionTypes.DELETE_IDEA_START:
+      return {
+        ...state,
+        isLoading: true
+      }
+    case ActionTypes.DELETE_IDEA_SUCCESS:
+      return {
+        ...state,
+        isLoading: false
+      }
+    case ActionTypes.DELETE_IDEA_FAILURE:
+      return {
+        ...state,
+        isLoading: false
+      }
     case ActionTypes.GET_IDEA_START:
       return {
         ...state,

@@ -15,6 +15,7 @@
     "@types/react-dom": "^16.9.8",
     "connected-react-router": "^6.8.0",
     "firebase": "^7.19.1",
+    "history": "^5.0.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-redux": "^7.2.1",

@@ -49,7 +49,6 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  // under implemetns arg is none, but arg is ideaId when production.
   getIdeabyId: (ideaId: string) => void;
   chagneGoodCount: () => void;
 }
@@ -63,7 +62,6 @@ const ShowIdeabyIdContainer: FC<DefaultProps> = ({
   idea
 }) => {
 
-  // util methodでURLからPostIDを取得するものを定義する
   useEffect(() => {
     getIdeabyId(getUrlId())
   }, []);

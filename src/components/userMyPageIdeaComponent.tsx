@@ -8,8 +8,11 @@ import {
   characterLimit
  } from '../utils/utilFunctions';
 import LinkComponent from '../components/LinkComponest';
+import { deleteIdeaAction } from '../actions/ideaAction';
+import { connect } from 'react-redux';
+import { AppState } from '../models';
+import { Dispatch, bindActionCreators } from 'redux';
 
-//  TODO: divタグで作成しているが呼び出ししている親コンポーネントで囲っている要素がpタグなのでコンソールにエラーが出ている。elemet要素を変更してエラーが出ないようにする
 const IdeaBox = styled.div`
   height: 250px;
 `;
@@ -20,10 +23,20 @@ const DateBox = styled.div`
 
 interface StateProps {
   idea?: Models.PostIdea
+  deleteIdeaAction: (id: string) => void;
 }
 
-const IdeaSingleComponent: FC<StateProps> = ({idea}) => {
+const UserMyPageIdeaComponent: FC<StateProps> = ({
+  idea,
+  deleteIdeaAction
+}) => {
   if(!idea) return null;
+
+  const handleOnDelete = () => {
+    if(idea.ideaId) {
+       deleteIdeaAction(idea.ideaId);
+    }
+  }
 
   return (
     <>
@@ -31,10 +44,9 @@ const IdeaSingleComponent: FC<StateProps> = ({idea}) => {
         <LinkComponent src={`/show/${idea.ideaId}`}>
           <h3>{characterLimit(idea.content)}</h3>
         </LinkComponent>
+        <LinkComponent src={`/edit/${idea.ideaId}`}>Edit</LinkComponent>
+        <button onClick={handleOnDelete}>Delete</button>
         <DateBox>
-          <LinkComponent src={`/profile/${idea.uid}`}>
-            <h4>{ idea.authorName }</h4>
-          </LinkComponent>
           <h4>{CREATED_AT} :</h4>
           <h4>{dateToString(idea.createdAt)}</h4>
         </DateBox>
@@ -45,5 +57,17 @@ const IdeaSingleComponent: FC<StateProps> = ({idea}) => {
   )
 };
 
+const mapStateToProps = () => ({
 
-export default IdeaSingleComponent;
+})
+
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators({
+    deleteIdeaAction: id => deleteIdeaAction.start(id)
+  }, dispatch);
+
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserMyPageIdeaComponent)

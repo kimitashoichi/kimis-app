@@ -9,7 +9,8 @@ import {
 import UserMyPage from './containers/myPage';
 import TopIndexComponent from './containers/topPageComponent';
 import ShowIdeaContainer from './containers/showIdea';
-import IdeaCreateAndEditContainer from './containers/createAndEditIdea';
+import IdeaCreateContainer from './containers/createIdea';
+import IdeaEditContainer from './containers/editIdea';
 import HeaderContainer from './containers/headerContainer';
 import FooterComponent from './components/footer';
 
@@ -21,9 +22,10 @@ const App: React.FC = () => {
         <Router>
           <HeaderContainer />
             <Route exact path='/' component={TopIndexComponent} />
-            <Route path='/create' component={IdeaCreateAndEditContainer} />
+            <Route path='/create' component={IdeaCreateContainer} />
             <Route path='/show/:ideaId' component={ShowIdeaContainer} />
             <Route path='/profile/:author_name' component={UserMyPage} />
+            <Route path='/edit/:ideaId' component={IdeaEditContainer} />
           <FooterComponent />
         </Router>
      </StylesProvider>

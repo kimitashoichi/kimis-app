@@ -14,6 +14,32 @@ export const postIdeaAction = {
   })
 };
 
+export const updateIdeaAction = {
+  start: (payload: Models.PostIdea) => ({
+    type: ActionTypes.UPDATE_IDEA_START as typeof ActionTypes.UPDATE_IDEA_START,
+    payload: payload
+  }),
+  success: () => ({
+    type: ActionTypes.UPDATE_IDEA_SUCCESS as typeof ActionTypes.UPDATE_IDEA_SUCCESS
+  }),
+  failure: () => ({
+    type: ActionTypes.UPDATE_IDEA_FAILURE as typeof ActionTypes.UPDATE_IDEA_FAILURE
+  })
+};
+
+export const deleteIdeaAction = {
+  start: (ideaId: string) => ({
+    type: ActionTypes.DELETE_IDEA_START as typeof ActionTypes.DELETE_IDEA_START,
+    payload: ideaId
+  }),
+  success: () => ({
+    type: ActionTypes.DELETE_IDEA_SUCCESS as typeof ActionTypes.DELETE_IDEA_SUCCESS
+  }),
+  failure: () => ({
+    type: ActionTypes.DELETE_IDEA_FAILURE as typeof ActionTypes.DELETE_IDEA_FAILURE
+  })
+};
+
 export const getIdeabyId = {
   // MUST TODO: start action need idea id, beacuse for show pages one idea specific.
   // dummy start action is not id now.

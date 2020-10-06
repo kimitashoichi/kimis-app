@@ -53,6 +53,33 @@ export interface PostIdeaFailure {
   type: typeof ActionTypes.POST_IDEA_FAILURE;
 }
 
+// UPDATE IDEA
+export interface UpdateIdeaStart {
+  type: typeof ActionTypes.UPDATE_IDEA_START;
+  payload: PostIdea
+}
+
+export interface UpdateIdeaSuccess {
+  type: typeof ActionTypes.UPDATE_IDEA_SUCCESS;
+}
+
+export interface UpdateIdeaFailure {
+  type: typeof ActionTypes.UPDATE_IDEA_FAILURE;
+}
+
+// DELETE IDEA
+export interface DeleteIdeaStart {
+  type: typeof ActionTypes.DELETE_IDEA_START;
+  payload: string;
+}
+
+export interface DeleteIdeaSuccess {
+  type: typeof ActionTypes.DELETE_IDEA_SUCCESS;
+}
+
+export interface DeleteIdeaFailure {
+  type: typeof ActionTypes.DELETE_IDEA_FAILURE;
+}
 
 //  GET IDEA BY ID
 export interface GetIdeaStart {
@@ -162,4 +189,10 @@ export type PostIdeaAction =
   | GetAllPostedIdeasForUserFailure
   | GetAllDraftedIdeasForUserStart
   | GetAllDraftedIdeasForUserSuccess
-  | GetAllDraftedIdeasForUserFailure;
+  | GetAllDraftedIdeasForUserFailure
+  | UpdateIdeaStart
+  | UpdateIdeaSuccess
+  | UpdateIdeaFailure
+  | DeleteIdeaStart
+  | DeleteIdeaSuccess
+  | DeleteIdeaFailure;
