@@ -15,10 +15,10 @@ import * as Models from '../models/userModels';
 import { 
   loginUserAction,
   logoutUserAction,
-  alreadyLoginUserAction
+  alreadyLoginUserAction,
+  getUserInformation
  } from '../actions/userAction';
 import { AppState } from '../models';
-
 import LinkComponent from '../components/LinkComponest';
 
 const HeaderBox = styled.div`
@@ -61,6 +61,7 @@ interface DispatchProps {
   loginUserAction: () => void;
   logoutUserAction: () => void;
   alreadyLogin: () => void;
+  getloginUserInfo: (uid: string) => void;
 }
 
 type DefaultProps = StateProps & DispatchProps & Props;
@@ -70,12 +71,19 @@ const HeaderContainer: FC<DefaultProps> = ({
   userInfo,
   loginUserAction,
   logoutUserAction,
-  alreadyLogin
+  alreadyLogin,
+  getloginUserInfo
 }) => {
   
   useEffect(() => {
     alreadyLogin()
+    getloginUserInfo(userInfo.userId);
+    console.log(userInfo.userId);
   }, []);
+
+  if(userInfo){
+    console.log(userInfo.userId ? userInfo.userId : 'nothing user id');
+  }
 
   return (
     <>
@@ -123,7 +131,8 @@ const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     loginUserAction: () => loginUserAction.start(),
     logoutUserAction: () => logoutUserAction.start(),
-    alreadyLogin: () => alreadyLoginUserAction.start()
+    alreadyLogin: () => alreadyLoginUserAction.start(),
+    getloginUserInfo: uid => getUserInformation.start(uid)
   }, dispatch)
 
 export default connect(

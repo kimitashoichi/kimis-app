@@ -17,7 +17,8 @@ export interface LoginUserState {
 
 // get login user information
 export interface GetLoginUserStart {
-  type: typeof ActionTypes.GET_USER_PROFILE_START
+  type: typeof ActionTypes.GET_USER_PROFILE_START;
+  payload: string;
 };
 
 export interface GetLoginUserSuccess {
