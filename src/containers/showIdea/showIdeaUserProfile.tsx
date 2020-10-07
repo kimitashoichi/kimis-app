@@ -6,9 +6,7 @@ import styled from 'styled-components';
 // material ui
 
 // file
-import {
-  getUserInformation
-} from '../../actions/userAction';
+import { getUserInformation } from '../../actions/userAction';
 import * as Models from '../../models/userModels';
 import { AppState } from '../../models';
 
@@ -22,8 +20,7 @@ interface Props {
 }
 
 interface DispatchProps {
-  // TODO: use login uid
-  getUserInfromation: () => void;
+  getUserInfromation: (uid: string) => void;
 }
 
 interface StateProps {
@@ -37,8 +34,11 @@ const IdeaShowUserProfile: FC<DefaultProps> = ({
   userInfromation,
   getUserInfromation
 }) => {
+
   useEffect(() => {
-    getUserInfromation()
+    if(userInfromation){
+      getUserInfromation(userInfromation.userId)
+    }
   }, [])
 
   return (
@@ -64,7 +64,7 @@ const mapStateToProps = (state: AppState) => ({
 
 const mapDispatchToState = (dispatch: Dispatch) => 
   bindActionCreators({
-    getUserInfromation: () => getUserInformation.start()
+    getUserInfromation: uid => getUserInformation.start(uid)
   }, dispatch);
 
 export default connect(

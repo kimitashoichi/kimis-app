@@ -99,7 +99,8 @@ export const firstUserSignUp = async(data: Models.LoginUser) => {
 
 export const loginCheck = async () => {
   try {
-    let loginUser = null;
+    let uid: string = '';
+    let userInfo = null;
     await firebase
     .auth()
     .onAuthStateChanged(user => {
@@ -107,10 +108,26 @@ export const loginCheck = async () => {
         return;
       }
       const data = Object.assign({}, setUserInfo(user));
-      loginUser = data;
-      console.log(loginUser, 'login check user');
+      uid = data.userId;
+      console.log(data.userId, 'login check user');
     })
-    return { loginUser };
+    
+    if(uid){
+      console.log(uid)
+      await firebase
+      .firestore()
+      .collection('users')
+      .doc(uid)
+      .get()
+      .then(doc => {
+        if(!doc){
+          return;
+        }
+        const uData = Object.assign({}, doc.data());
+        userInfo = uData
+      })
+    }
+    return { userInfo }
   } catch(error) {
     return { error };
   }

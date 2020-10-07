@@ -10,15 +10,13 @@ import {
   loginUserAction,
   logoutUserAction,
   alreadyLoginUserAction,
-  editUserProfile
+  editUserProfile,
 } from '../actions/userAction';
 
-export function* runGetUserInfromation() {
-  // TODO: This function after Login, baceuse uid is trigger, get user information;
-  // this function must be change
-  const data = 'testUser' // mock uid
+export function* runGetUserInfromation(action: Models.GetLoginUserStart) {
+  const uid = action.payload
   const handler = API.getUserInfromation;
-  const { userInfromation, error } = yield call(handler, data);
+  const { userInfromation, error } = yield call(handler, uid);
   if(userInfromation && !error) {
     console.log('GET USERINFROMATION OK')
     yield put(getUserInformation.success(userInfromation))
@@ -42,10 +40,10 @@ export function* runLoginUser() {
 
 export function* runAlreadyLogin() {
   const handler = API.loginCheck;
-  const { loginUser, error } = yield call(handler);
-  if(loginUser && !error) {
+  const { userInfo, error } = yield call(handler);
+  if(userInfo && !error) {
     console.log('ALREADY LOGIN SAGA OK');
-    yield put(alreadyLoginUserAction.success(loginUser));
+    yield put(alreadyLoginUserAction.success(userInfo));
   } else {
     console.log('ALREADY LOGIN SAGA NG');
     yield put(alreadyLoginUserAction.failure());
