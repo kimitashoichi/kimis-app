@@ -13,6 +13,7 @@ interface DispatchProps {
 }
 
 interface StateProps {
+  userId: string | null;
   isLoading: boolean;
   postedIdeas: Models.PostIdea[];
 }
@@ -21,6 +22,7 @@ type DefaultProps = DispatchProps & StateProps;
 
 const UserMyPagePostedIdeas: FC<DefaultProps> = ({
   isLoading,
+  userId,
   postedIdeas,
   getIdeasUserPosted
 }) => {
@@ -36,7 +38,7 @@ const UserMyPagePostedIdeas: FC<DefaultProps> = ({
         <>
           { postedIdeas.map((idea) => {
               return (
-                <UserMyPageIdeaComponent idea={idea} key={idea.content.length} />
+                <UserMyPageIdeaComponent idea={idea} userId={userId} key={idea.content.length} />
               )})
           }
         </>

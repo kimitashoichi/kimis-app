@@ -25,12 +25,14 @@ const IdeaBox = styled(Card)`
 `;
 
 interface StateProps {
-  idea?: Models.PostIdea
+  idea: Models.PostIdea;
+  userId: string | null;
   deleteIdeaAction: (id: string) => void;
 }
 
 const UserMyPageIdeaComponent: FC<StateProps> = ({
   idea,
+  userId,
   deleteIdeaAction
 }) => {
   if(!idea) return null;
@@ -60,12 +62,14 @@ const UserMyPageIdeaComponent: FC<StateProps> = ({
           </Typography>
         </CardContent>
         
-        <CardActions>
-          <Button size="small" onClick={handleOnDelete}>Delete</Button>
-          <Button size="small">
-            <LinkComponent src={`/edit/${idea.ideaId}`}>Edit</LinkComponent>
-          </Button>
-        </CardActions>
+        { userId ? (
+          <CardActions>
+            <Button size="small" onClick={handleOnDelete}>Delete</Button>
+            <Button size="small">
+              <LinkComponent src={`/edit/${idea.ideaId}`}>Edit</LinkComponent>
+            </Button>
+          </CardActions>
+        ) : (null)}
       </IdeaBox>
     </>
   )

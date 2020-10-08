@@ -35,6 +35,7 @@ const UserMyPage: FC<DefaultProps> = ({
   userInfo
 }) => {
   const [value, setValue] = useState<number>(0);
+  const [userId, setUserId] = useState<string | null>(userInfo ? userInfo.userId : null);
   
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
@@ -63,7 +64,7 @@ const UserMyPage: FC<DefaultProps> = ({
           </Tabs>
         </AppBar>
         <Styles.TabPanel value={value} index={0}>
-          <UserMyPagePostedIdeas />
+          <UserMyPagePostedIdeas userId={userId}/>
         </Styles.TabPanel>
         <Styles.TabPanel value={value} index={1}>
           <UserMyPageDraftedIdeas />

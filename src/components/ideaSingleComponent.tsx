@@ -41,7 +41,7 @@ const IdeaSingleComponent: FC<StateProps> = ({idea}) => {
         <CardContent>
           <Typography variant="h5" component="h2">
             <LinkComponent src={`/show/${idea.ideaId}`}>
-              {characterLimit(idea.content)}
+             <h3>{characterLimit(idea.content)}</h3>
             </LinkComponent>
           </Typography>
 
@@ -51,7 +51,7 @@ const IdeaSingleComponent: FC<StateProps> = ({idea}) => {
             </LinkComponent>
           </Typography>
 
-          <Typography variant="body2" component="h4">
+          <Typography variant="body2" component="p">
             {CREATED_AT}: {dateToString(idea.createdAt)}
           </Typography>
 
