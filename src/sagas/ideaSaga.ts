@@ -45,10 +45,10 @@ export function* runGetIdeaById(action: Models.GetIdeaStart) {
 
 // good coutn update
 // TODO: 投稿に関連づけることと、すでにいいねしていた場合にもう一度いいねを押すといいねすうが減少するようにする
-export function* runChangeGoodCount() {
-  const mockId = 'testGetIdeaById';
+export function* runChangeGoodCount(action: Models.AddGoodCountStart) {
+  const ideaId = action.payload;
   const handler = API.changeGoodCount;
-  const { success, error } = yield call(handler, mockId);
+  const { success, error } = yield call(handler, ideaId);
   if(success && !error) {
     console.log('OK changeGoodCount Saga');
     yield put(chagneGoodCount.success());

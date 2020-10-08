@@ -2,10 +2,6 @@ import React, {FC, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
-import { 
-  BrowserRouter as Router, 
-  Route
-} from 'react-router-dom';
 
 // material ui
 import Button from '@material-ui/core/Button'
@@ -20,15 +16,15 @@ import {
  } from '../actions/userAction';
 import { AppState } from '../models';
 import LinkComponent from '../components/LinkComponest';
+import TextField from '@material-ui/core/TextField/TextField';
 
 const HeaderBox = styled.div`
-  height: 50px;
+  height: 70px;
   align-items: center;
   justify-content: center;
 `;
 
 const LoginInfo = styled.ul`
-  list-style: none;
   display: flex;
 `;
 
@@ -37,6 +33,8 @@ const LoginInfoNav = styled.li`
   height: 50px;
   line-height: 50px;
   margin-right: 30px;
+  margin-left: 20px;
+  display: inline-block;
 `;
 
 const SessionButton = styled(Button)`
@@ -44,9 +42,13 @@ const SessionButton = styled(Button)`
   margin-right: 200px;
 `;
 
-const CreateButton = styled(Button)`
-  margin-left: auto;
-  margin-right: 200px;
+const Navli = styled.li`
+  margin: 10px;
+  display: inline-block;
+`;
+
+const SearchFiled = styled(TextField)`
+  margin-left: 30px;
 `;
 
 interface Props {
@@ -74,7 +76,6 @@ const HeaderContainer: FC<DefaultProps> = ({
   alreadyLogin,
   getloginUserInfo
 }) => {
-  
   useEffect(() => {
     alreadyLogin()
     getloginUserInfo(userInfo.userId);
@@ -91,30 +92,32 @@ const HeaderContainer: FC<DefaultProps> = ({
         <HeaderBox>
           <LoginInfo>
             <h3>Product Logo</h3>
-            <textarea></textarea>
+            <SearchFiled id="outlined-basic" label="serch word" variant="outlined" />
             <LoginInfoNav>{userInfo.displayName}</LoginInfoNav>
             <LoginInfoNav>{userInfo.userId}</LoginInfoNav>
-            <LoginInfoNav>{userInfo.userName}</LoginInfoNav>
-            <LoginInfoNav>{userInfo.introduce}</LoginInfoNav>
-            <SessionButton 
-              onClick={logoutUserAction}
-              color="primary"
-              variant="contained">Logout</SessionButton>
-            <LinkComponent src={'/create'}>
-              <SessionButton 
-                color="primary"
-                variant="contained">Create</SessionButton>
-            </LinkComponent>
+            <LoginInfo>
+              <Navli>
+                <LinkComponent src={'/create'}>
+                  <Button color="primary" variant="contained">Create</Button>
+                </LinkComponent>
+              </Navli>
+              <Navli>
+                <SessionButton onClick={logoutUserAction} color="primary" variant="contained">Logout</SessionButton>
+              </Navli>
+            </LoginInfo>
           </LoginInfo>
         </HeaderBox>
       ) : (
         <HeaderBox>
           <LoginInfo>
             <h3>Product Logo</h3>
-            <SessionButton 
-              onClick={loginUserAction}
-              color="primary"
-              variant="contained">Login</SessionButton>
+            <SearchFiled id="outlined-basic" label="serch word" variant="outlined" />
+            <Navli>
+              <SessionButton 
+                onClick={loginUserAction}
+                color="primary"
+                variant="contained">Login</SessionButton>
+            </Navli>
           </LoginInfo>
         </HeaderBox>
       )}

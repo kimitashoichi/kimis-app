@@ -99,7 +99,7 @@ export interface GetIdeaFailure {
 // Good Count TODO: いいね数を投稿に持たせて、いいねしているかどうかの判定をどこで行うか
 export interface AddGoodCountStart {
   type: typeof ActionTypes.GOOD_COUNT_CHANGE_START;
-  // TODO: Add Payload for confirm ideaId, and good is done?
+  payload: string;
 }
 
 export interface AddGoodCountSuccess {

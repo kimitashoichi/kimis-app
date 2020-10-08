@@ -94,12 +94,12 @@ export const getIdeabyId = async (ideaId: string) => {
 // いいね機能
 export const changeGoodCount = async (id: string) => {
   try {
-    let currentCount = null;
+    let currentCount = 0;
 
-    // いいね数を更新したい投稿の取得処理
+    // // いいね数を更新したい投稿の取得処理
     await firebase
     .firestore()
-    .collection('LinkedIdea')
+    .collection('AllIdea')
     .doc(id)
     .get()
     .then(doc => {
@@ -115,10 +115,10 @@ export const changeGoodCount = async (id: string) => {
     // いいね数の更新処理
     await firebase
     .firestore()
-    .collection('LinkedIdea')
+    .collection('AllIdea')
     .doc(id)
     .update({
-      goodCount: currentCount ? currentCount + 1 : 666
+      goodCount: currentCount + 1
     }).catch(error => {
       throw new Error(error.message);
     });
@@ -171,7 +171,7 @@ export const getIdeasByGood = async () => {
     const ideas: Models.PostIdea[] = [];
     await firebase
     .firestore()
-    .collection('LinkedIdea')
+    .collection('AllIdea')
     .orderBy('goodCount', 'desc')
     .get()
     .then(snapShot => {

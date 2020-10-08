@@ -34,7 +34,7 @@ const SubmitButton = styled(Button)`
   height: 38px;
   padding: 0 20px;
   box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
-`
+`;
 
 const StyledTextField = styled(TextareaAutosize)`
   width: 100%;
@@ -82,7 +82,6 @@ interface StateProps {
 
 type DefaultProps = DispatchProps & Props & StateProps;
 
-
 const PostIdeaContainer: FC<DefaultProps> = ({
   isLoading,
   content,
@@ -112,9 +111,7 @@ const PostIdeaContainer: FC<DefaultProps> = ({
       createdAt: createDate instanceof Date ? createDate : new Date(),
       updatedAt: updateDate === null ? null : new Date(),
     }
-
     await createIdea(payload);
-
     setIdeaContent('');
     setTitle('');
     setPostFlag(true)
@@ -130,7 +127,6 @@ const PostIdeaContainer: FC<DefaultProps> = ({
          <h2>Now Sending...</h2>
        </TextFieldWapper>
      ) : (
-      <>
         <TextFieldWapper>
           <TitleLabel>投稿内容</TitleLabel>
             <ContentLabel>アイディアタイトル</ContentLabel>
@@ -163,7 +159,6 @@ const PostIdeaContainer: FC<DefaultProps> = ({
             </SubmitButton>
           </ButtonWapper>
         </TextFieldWapper>
-      </>
      )}
     </>
   )

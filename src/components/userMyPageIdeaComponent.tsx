@@ -1,6 +1,13 @@
 import React , { FC } from 'react';
 import styled from 'styled-components';
 
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
 import * as Models from '../models/ideaModel';
 import { CREATED_AT } from '../constants/textIndex';
 import { 
@@ -10,15 +17,11 @@ import {
 import LinkComponent from '../components/LinkComponest';
 import { deleteIdeaAction } from '../actions/ideaAction';
 import { connect } from 'react-redux';
-import { AppState } from '../models';
 import { Dispatch, bindActionCreators } from 'redux';
 
-const IdeaBox = styled.div`
-  height: 250px;
-`;
-
-const DateBox = styled.div`
-  display: flex;
+const IdeaBox = styled(Card)`
+  min-width: 200px;
+  margin-bottom: 25px;
 `;
 
 interface StateProps {
@@ -41,31 +44,40 @@ const UserMyPageIdeaComponent: FC<StateProps> = ({
   return (
     <>
       <IdeaBox>
-        <LinkComponent src={`/show/${idea.ideaId}`}>
-          <h3>{characterLimit(idea.content)}</h3>
-        </LinkComponent>
-        <LinkComponent src={`/edit/${idea.ideaId}`}>Edit</LinkComponent>
-        <button onClick={handleOnDelete}>Delete</button>
-        <DateBox>
-          <h4>{CREATED_AT} :</h4>
-          <h4>{dateToString(idea.createdAt)}</h4>
-        </DateBox>
-        <label>Good</label>
-        <h3>{idea.goodCount ? idea.goodCount : 0}</h3>
+        <CardContent>
+          <Typography variant="h5" component="h2">
+            <LinkComponent src={`/show/${idea.ideaId}`}>
+              <h3>{characterLimit(idea.content)}</h3>
+            </LinkComponent>
+          </Typography>
+
+          <Typography variant="body2" component="p">
+            {CREATED_AT}: {dateToString(idea.createdAt)}
+          </Typography>
+
+          <Typography variant="body2" component="h4">
+              Good : {idea.goodCount ? idea.goodCount : 0}
+          </Typography>
+        </CardContent>
+        
+        <CardActions>
+          <Button size="small" onClick={handleOnDelete}>Delete</Button>
+          <Button size="small">
+            <LinkComponent src={`/edit/${idea.ideaId}`}>Edit</LinkComponent>
+          </Button>
+        </CardActions>
       </IdeaBox>
     </>
   )
 };
 
 const mapStateToProps = () => ({
-
 })
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
     deleteIdeaAction: id => deleteIdeaAction.start(id)
   }, dispatch);
-
 
 export default connect(
   mapStateToProps,

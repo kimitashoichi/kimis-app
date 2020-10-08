@@ -1,6 +1,5 @@
 import firebase from '../utils/firebase';
 import * as Models from '../models/userModels';
-import { firestore } from 'firebase';
 
 function setUserInfo(fuser: firebase.User | null): Models.LoginUser | null {
   if (!fuser) {

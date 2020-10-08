@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 
-// material ui
-
 // file
 import { getUserInformation } from '../../actions/userAction';
 import * as Models from '../../models/userModels';
@@ -13,10 +11,10 @@ import { AppState } from '../../models';
 const UserProf = styled.div`
   width: 60%;
   margin: 0 auto;
-`
+`;
 
 interface Props {
-  userInfromation?: Models.LoginUser
+  userInfromation?: Models.LoginUser;
 }
 
 interface DispatchProps {
@@ -45,12 +43,12 @@ const IdeaShowUserProfile: FC<DefaultProps> = ({
     <>
       { userInfromation ? 
           ( <UserProf>
-              <h3>{userInfromation.userName}</h3>
-              <h4>{userInfromation.userId}</h4>
-              <h5>{userInfromation.introduce}</h5>
+              <h4>Name: {userInfromation.userName}</h4>
+              <h4>UID: {userInfromation.userId}</h4>
+              <h4>INTRO: {userInfromation.introduce}</h4>
             </UserProf> 
           ) : (
-            <div>No Data</div>
+            null
           )
       }
     </>

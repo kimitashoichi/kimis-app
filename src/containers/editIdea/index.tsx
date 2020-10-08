@@ -8,7 +8,6 @@ import { getIdeabyId } from '../../actions/ideaAction';
 import { alreadyLoginUserAction } from '../../actions/userAction';
 import * as Models from '../../models/ideaModel';
 import * as UModels from '../../models/userModels';
-import * as TextIndex from '../../constants/textIndex';
 import { AppState } from '../../models'
 import { connect } from 'react-redux';
 
@@ -37,7 +36,6 @@ const EditContainer: FC<DefaultProps> = ({
   userInfo,
   isLoading
 }) => {
-
   useEffect(() => {
     alreadyLogin()
     getIdeabyId(getUrlId())
@@ -59,7 +57,7 @@ const mapStateToProps = (state: AppState) => ({
   idea: state.postIdea.postIdea,
   userInfo: state.userInfromation.loginUser,
   isLoading: state.postIdea.isLoading
-})
+});
 
 const mapDispatchToProps = (dispatch: Dispatch) => 
   bindActionCreators({

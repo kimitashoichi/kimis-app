@@ -4,6 +4,8 @@ import { bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components'
 
 import Button from '@material-ui/core/Button'
+import Card from '@material-ui/core/Card';
+import Typography from '@material-ui/core/Typography';
 
 // file
 import * as Models from '../../models/ideaModel';
@@ -37,7 +39,12 @@ const SubmitButton = styled(Button)`
   height: 38px;
   padding: 0 30px;
   box-shadow: 0 3px 5px 2px rgba(0,153,255, .3);
-`
+`;
+
+const IdeaBox = styled(Card)`
+  min-width: 200px;
+  min-height: 200px;
+`;
 
 
 interface Props {
@@ -45,12 +52,12 @@ interface Props {
 }
 
 interface StateProps {
-  isLoading?: boolean;
+  isLoading: boolean;
 }
 
 interface DispatchProps {
   getIdeabyId: (ideaId: string) => void;
-  chagneGoodCount: () => void;
+  changeGoodCount: (ideaId: string) => void;
 }
 
 type DefaultProps = Props & StateProps & DispatchProps;
@@ -58,7 +65,7 @@ type DefaultProps = Props & StateProps & DispatchProps;
 const ShowIdeabyIdContainer: FC<DefaultProps> = ({
   isLoading,
   getIdeabyId,
-  chagneGoodCount,
+  changeGoodCount,
   idea
 }) => {
 
@@ -68,7 +75,9 @@ const ShowIdeabyIdContainer: FC<DefaultProps> = ({
 
   const handleOnGoodCount = async (e: FormEvent) => {
     e.preventDefault();
-    await chagneGoodCount();
+    if(idea.ideaId){
+      await changeGoodCount(idea.ideaId);
+    }
     await getIdeabyId(getUrlId());
   }
 
@@ -78,10 +87,10 @@ const ShowIdeabyIdContainer: FC<DefaultProps> = ({
         <IdeaContent>
           <h5>{CREATED_AT + ' ' + dateToString(idea.createdAt) }</h5>
           <h5>{ idea.updatedAt ? UPDATED_AT + ' ' + dateToString(idea.updatedAt) : '' }</h5>
-          <div>
-            { idea.content }
-          </div>
-          <h1>{ idea.goodCount }</h1>
+          <IdeaBox>
+            <Typography variant="h5" component="h2">{ idea.content }</Typography>
+          </IdeaBox>
+          <h2>{ idea.goodCount }</h2>
           <SubmitButton onClick={(e) => handleOnGoodCount(e)}>いいね</SubmitButton>
         </IdeaContent>
       ): (<IdeaContent>{NOT_FOUND_IDEA}</IdeaContent>)}
@@ -94,13 +103,13 @@ const mapStateToProps = (state: AppState) => ({
   idea: state.postIdea.postIdea
 });
 
-const mapDisoatchToProps = (dispatch: Dispatch) => 
+const mapDispatchToProps = (dispatch: Dispatch) => 
   bindActionCreators({
-    getIdeabyId: (ideaId: string) => getIdeabyId.start(ideaId),
-    chagneGoodCount: () => chagneGoodCount.start()
+    getIdeabyId: ideaId => getIdeabyId.start(ideaId),
+    changeGoodCount: ideaId => chagneGoodCount.start(ideaId)
   }, dispatch)
 
 export default connect(
   mapStateToProps,
-  mapDisoatchToProps
+  mapDispatchToProps
 )(ShowIdeabyIdContainer);

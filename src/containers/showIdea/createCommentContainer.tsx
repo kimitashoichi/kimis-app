@@ -5,24 +5,13 @@ import styled from 'styled-components'
 
 // material-ui
 import Button from '@material-ui/core/Button';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
+import TextField from '@material-ui/core/TextField';
 
 // file
 import * as Models from '../../models/commentModel';
 import * as TextIndex from '../../constants/textIndex';
 import { createComment } from '../../actions/commentAction';
 import { AppState } from '../../models';
-
-const StyledButton = styled(Button)`
-  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
-  border-radius: 3px;
-  border: 0;
-  color: white;
-  height: 48px;
-  padding: 0 30px;
-  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
-  margin-right: 20px;
-`;
 
 const SubmitButton = styled(Button)`
   background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
@@ -32,24 +21,28 @@ const SubmitButton = styled(Button)`
   height: 38px;
   padding: 0 30px;
   box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
-`
+`;
 
-const StyledTextField = styled(TextareaAutosize)`
+const StyledTextField = styled(TextField)`
   height: 60%;
-  width: 60%;
+  width: 100%;
+  margin: 0 auto;
 `;
 
 const TextFieldWapper = styled.div`
   margin: 0 auto;
+  text-align: center;
+  width: 45%;
+`;
+
+const TextFieldLabel = styled.h3`
   text-align: left;
-  width: 60%;
 `;
 
 const ButtonWapper = styled.div`
   padding-top: 20px;
-  text-align: left;
+  text-align: right;
 `;
-
 
 interface StateProps {
   isLoading?: boolean;
@@ -65,7 +58,6 @@ const CreateCommentContainer: FC<DefautProps> = ({
   isLoading,
   createComment,
 }) => {
-
   const [content, setContent] = useState<string>('');
   const [createDate, setCrateDate] = useState<Date | null>(new Date());
 
@@ -76,9 +68,7 @@ const CreateCommentContainer: FC<DefautProps> = ({
       userName: 'test user',
       createdAt: createDate instanceof Date ? createDate : new Date()
     }
-
     await createComment(payload);
-
     setContent('');
     setCrateDate(new Date());
   }
@@ -88,20 +78,16 @@ const CreateCommentContainer: FC<DefautProps> = ({
      { isLoading ? (
        <div>Now Loading</div>
      ) : (
-      <>
-      <div>
-        
         <TextFieldWapper>
-          <h3>コメント投稿</h3>
-          <div>
+          <TextFieldLabel>コメント投稿</TextFieldLabel>
             <StyledTextField
               className="standard-textarea"
-              placeholder="コメントを投稿しよう！"
+              placeholder="投稿する！"
               value={content}
-              rowsMax={5}
-              onChange={(e) => setContent(e.target.value)}
-            />
-          </div>
+              rows={5}
+              multiline
+              variant="outlined"
+              onChange={(e) => setContent(e.target.value)} />
           <ButtonWapper>
             <SubmitButton
               className='idea-post-button'
@@ -112,9 +98,6 @@ const CreateCommentContainer: FC<DefautProps> = ({
             </SubmitButton>
           </ButtonWapper>
         </TextFieldWapper>
-
-      </div>
-      </>
      )}
     </>
   )

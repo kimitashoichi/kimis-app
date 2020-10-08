@@ -41,8 +41,6 @@ export const deleteIdeaAction = {
 };
 
 export const getIdeabyId = {
-  // MUST TODO: start action need idea id, beacuse for show pages one idea specific.
-  // dummy start action is not id now.
   start: (ideaId: string) => ({
     type: ActionTypes.GET_IDEA_START as typeof ActionTypes.GET_IDEA_START,
     payload: ideaId
@@ -58,8 +56,9 @@ export const getIdeabyId = {
 }
 
 export const chagneGoodCount =  {
-  start: () => ({
+  start: (ideaId: string) => ({
     type: ActionTypes.GOOD_COUNT_CHANGE_START as typeof ActionTypes.GOOD_COUNT_CHANGE_START,
+    payload: ideaId
   }),
   success: () => ({
     type: ActionTypes.GOOD_COUNT_CHANGE_SUCCESS as typeof ActionTypes.GOOD_COUNT_CHANGE_SUCCESS
