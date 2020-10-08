@@ -143,7 +143,6 @@ export const getIdeasByLatest = async () => {
         return;
       }
       snapShot.forEach(doc => {
-        console.log('doc', doc.data());
         ideas.push({
           ideaId: doc.id,
           uid: doc.data().uid ? doc.data().uid : 'empty',
@@ -168,18 +167,18 @@ export const getIdeasByLatest = async () => {
 // アイディアのいいね順取得
 export const getIdeasByGood = async () => {
   try {
+    console.log('idea good count')
     const ideas: Models.PostIdea[] = [];
     await firebase
     .firestore()
     .collection('AllIdea')
-    .where('postFlag', '==', true)
     .orderBy('goodCount', 'desc')
+    .where('postFlag', '==', true)
     .get()
     .then(snapShot => {
       if(snapShot.empty){
         return;
       }
-      console.log('snapShot', snapShot)
       snapShot.forEach(doc => {
         ideas.push({
           ideaId: doc.id,
