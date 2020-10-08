@@ -18,36 +18,6 @@ export const createComment = async (data: Models.Comment) => {
   };
 };
 
-
-// 今回はこれは使用しない定数関数になりそう
-// 一回実装してみてテストして使用しなければ全削除する
-export const getCommentbyId = async (id: string) => {
-  try {
-    let comment = null;
-    await firebase
-    .firestore()
-    .collection('comments')
-    .doc(id)
-    .get()
-    .then(doc => {
-      if(!doc.exists) {
-        console.log('comment dose not exist');
-        return;
-      }
-      const data = Object.assign({}, doc.data());
-      data.createdAt = data.createdAt.toDate();
-      comment = data;
-    }).catch(error => {
-      throw new Error(error.message);
-    })
-    return { comment };
-  } catch(error) {
-    return { error };
-  }
-}
-
-
-//  これが今現在使用されているコメント取得処理
 export const getAllComment = async (ideaId: string) => {
   try {
     console.log('idea Id API', ideaId);
@@ -78,5 +48,24 @@ export const getAllComment = async (ideaId: string) => {
     return { comments };
   } catch(error) {
     return { error };
+  }
+}
+
+export const deleteComment = async(commentId: string) => 
+{
+  console.log('comment delete API', commentId)
+  try {
+    await firebase
+    .firestore()
+    .collection('comments')
+    .doc(commentId)
+    .delete()
+    .catch(error => {
+      throw new Error(error.message);
+    })
+    const success = {success: '200 OK, success'};
+    return {success}
+  } catch(error) {
+    return {error}
   }
 }

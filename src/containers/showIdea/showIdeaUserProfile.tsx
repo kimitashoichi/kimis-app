@@ -56,8 +56,7 @@ const IdeaShowUserProfile: FC<DefaultProps> = ({
 }
 
 const mapStateToProps = (state: AppState) => ({
-  isLoading: state.userInfromation.isLoading,
-  userInfromation: state.userInfromation.loginUser
+  isLoading: state.userInfromation.isLoading
 })
 
 const mapDispatchToState = (dispatch: Dispatch) => 

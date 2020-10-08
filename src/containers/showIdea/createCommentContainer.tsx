@@ -112,8 +112,7 @@ const CreateCommentContainer: FC<DefautProps> = ({
 };
 
 const mapStateToProps = (state: AppState) => ({
-  isLoading: state.comment.isLoading,
-  userInfo: state.userInfromation.loginUser
+  isLoading: state.comment.isLoading
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>

@@ -28,8 +28,6 @@ export function* runPostIdea(actions: Models.PostIdeaStart) {
   }
 }
 
-// TODO: arg is change for idea id.
-// Temporary support Under development.
 export function* runGetIdeaById(action: Models.GetIdeaStart) {
    const ideaId = action.payload;
    const handler = API.getIdeabyId;

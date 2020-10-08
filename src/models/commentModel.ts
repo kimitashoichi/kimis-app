@@ -53,10 +53,27 @@ export interface GetCommentFailure {
   type: typeof ActionTypes.GET_COMMENT_FAILURE;
 }
 
+// delete comment 
+export interface DeleteCommentStart {
+  type: typeof ActionTypes.DELETE_COMMENT_START;
+  payload: string;
+}
+
+export interface DeleteCommentSuccess {
+  type: typeof ActionTypes.DELETE_COMMENT_SUCCESS;
+}
+
+export interface DeleteCommentFailure {
+  type: typeof ActionTypes.DELETE_COMMENT_FAILURE;
+}
+
 export type CommentAction = 
   | CreateCommentStart
   | CreateCommentSuccess
   | CreateCommentFailure
   | GetCommentStart
   | GetCommentSuccess
-  | GetCommentFailure;
+  | GetCommentFailure
+  | DeleteCommentStart
+  | DeleteCommentSuccess
+  | DeleteCommentFailure;
