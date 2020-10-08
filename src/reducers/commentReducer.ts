@@ -6,6 +6,8 @@ import * as ActionTypes from '../constants/actionTypes';
 const initialState = {
   isLoading: false,
   comment: {
+    userId: '',
+    ideaId: '',
     content: '',
     userName: 'test taro',
     createdAt: new Date()

@@ -43,6 +43,8 @@ export const getCommentbyId = async (id: string) => {
   }
 }
 
+
+//  これが今現在使用されているコメント取得処理
 export const getAllComment = async () => {
   try {
     const comments: Models.Comment[] = [];
@@ -55,11 +57,13 @@ export const getAllComment = async () => {
         console.log('comment dose not exist');
         return;
       }
-      snapShot.forEach(com => {
+      snapShot.forEach(doc => {
         comments.push({
-          content: com.data().content ? com.data().content : 'no content',
-          userName: com.data().userName ? com.data().userName: 'no author',
-          createdAt: com.data().createdAt ? com.data().createdAt.toDate() : null
+          userId: doc.data().userId ? doc.data().userId: 'dummyUserId',
+          ideaId: doc.data().ideaId ? doc.data().ideaId : 'dummyIdeaId',
+          content: doc.data().content ? doc.data().content : 'no content',
+          userName: doc.data().userName ? doc.data().userName: 'no author',
+          createdAt: doc.data().createdAt ? doc.data().createdAt.toDate() : null
         });
       });
     }).catch(error => {

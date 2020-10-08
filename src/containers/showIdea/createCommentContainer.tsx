@@ -9,9 +9,11 @@ import TextField from '@material-ui/core/TextField';
 
 // file
 import * as Models from '../../models/commentModel';
+import * as UModel from '../../models/userModels';
 import * as TextIndex from '../../constants/textIndex';
 import { createComment } from '../../actions/commentAction';
 import { AppState } from '../../models';
+import { getUrlId } from '../../utils/utilFunctions';
 
 const SubmitButton = styled(Button)`
   background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
@@ -46,6 +48,7 @@ const ButtonWapper = styled.div`
 
 interface StateProps {
   isLoading?: boolean;
+  userInfo?: UModel.LoginUser;
 }
 
 interface DispatchProps {
@@ -56,6 +59,7 @@ type DefautProps = StateProps & DispatchProps;
 
 const CreateCommentContainer: FC<DefautProps> = ({
   isLoading,
+  userInfo,
   createComment,
 }) => {
   const [content, setContent] = useState<string>('');
@@ -64,8 +68,12 @@ const CreateCommentContainer: FC<DefautProps> = ({
   const handleOnSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const payload = {
+      userId: userInfo ? userInfo.userId : 'no user Id',
+      ideaId: getUrlId(),
       content: content,
-      userName: 'test user',
+      //  無理やりキャストして'string'型にしてるけどTS的にかなり良くない
+      //  UserModel本体のプロパティを見直すのが早い（リファクタリングで対応する）
+      userName: userInfo ? userInfo.userName as string: 'no author',
       createdAt: createDate instanceof Date ? createDate : new Date()
     }
     await createComment(payload);
@@ -104,7 +112,8 @@ const CreateCommentContainer: FC<DefautProps> = ({
 };
 
 const mapStateToProps = (state: AppState) => ({
-  isLoading: state.comment.isLoading
+  isLoading: state.comment.isLoading,
+  userInfo: state.userInfromation.loginUser
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>

@@ -1,12 +1,11 @@
 import * as ActionTypes from '../constants/actionTypes';
 
 export interface Comment {
+  userId: string;
+  ideaId: string;
   content: string;
-  // when under implements, allow null. 
-  // TODO: not allow null, instead loged in userName.
-  userName: string | null;
+  userName: string;
   createdAt: Date;
-  // TODO: add prop, idea id, beacuse comments is Linking idea.
 }
 
 export interface CommentState {
