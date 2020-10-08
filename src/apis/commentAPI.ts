@@ -18,6 +18,9 @@ export const createComment = async (data: Models.Comment) => {
   };
 };
 
+
+// 今回はこれは使用しない定数関数になりそう
+// 一回実装してみてテストして使用しなければ全削除する
 export const getCommentbyId = async (id: string) => {
   try {
     let comment = null;
@@ -45,12 +48,14 @@ export const getCommentbyId = async (id: string) => {
 
 
 //  これが今現在使用されているコメント取得処理
-export const getAllComment = async () => {
+export const getAllComment = async (ideaId: string) => {
   try {
-    const comments: Models.Comment[] = [];
+    console.log('idea Id API', ideaId);
+    const comments: Models.GetCommentState[] = [];
     await firebase
     .firestore()
     .collection('comments')
+    .where('ideaId', '==', ideaId)
     .get()
     .then(snapShot => {
       if(snapShot.empty) {
@@ -59,11 +64,12 @@ export const getAllComment = async () => {
       }
       snapShot.forEach(doc => {
         comments.push({
-          userId: doc.data().userId ? doc.data().userId: 'dummyUserId',
-          ideaId: doc.data().ideaId ? doc.data().ideaId : 'dummyIdeaId',
-          content: doc.data().content ? doc.data().content : 'no content',
-          userName: doc.data().userName ? doc.data().userName: 'no author',
-          createdAt: doc.data().createdAt ? doc.data().createdAt.toDate() : null
+          commentId: doc.id,
+          userId: doc.data().userId,
+          ideaId: doc.data().ideaId,
+          content: doc.data().content,
+          userName: doc.data().userName,
+          createdAt: doc.data().createdAt
         });
       });
     }).catch(error => {

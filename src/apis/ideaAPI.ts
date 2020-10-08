@@ -172,6 +172,7 @@ export const getIdeasByGood = async () => {
     await firebase
     .firestore()
     .collection('AllIdea')
+    .where('postFlag', '==', true)
     .orderBy('goodCount', 'desc')
     .get()
     .then(snapShot => {

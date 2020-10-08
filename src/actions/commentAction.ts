@@ -17,9 +17,9 @@ export const createComment = {
 };
 
 export const getCommentById = {
-  // TODO: get comment by idea id
-  start: () => ({
-    type: ActionTypes.GET_COMMENT_START as typeof ActionTypes.GET_COMMENT_START
+  start: (ideaId: string) => ({
+    type: ActionTypes.GET_COMMENT_START as typeof ActionTypes.GET_COMMENT_START,
+    payload: ideaId
   }),
 
   success: (payload: Models.Comment[]) => ({

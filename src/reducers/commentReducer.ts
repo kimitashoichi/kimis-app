@@ -12,7 +12,8 @@ const initialState = {
     userName: 'test taro',
     createdAt: new Date()
   },
-  comments: [] 
+  comments: [] ,
+  commentbyId: []
 }
 
 const comment: Reducer<
@@ -47,7 +48,7 @@ const comment: Reducer<
         return {
           ...state,
           isLoading: false,
-          comments: action.payload
+          commentbyId: action.payload
         }
       case ActionTypes.GET_COMMENT_FAILURE:
         return {

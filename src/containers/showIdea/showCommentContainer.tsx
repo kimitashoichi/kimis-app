@@ -10,7 +10,10 @@ import Paper from '@material-ui/core/Paper';
 import * as Models from '../../models/commentModel';
 import { getCommentById } from '../../actions/commentAction';
 import { AppState } from '../../models';
-import { dateToString } from '../../utils/utilFunctions';
+import { 
+  dateToString,
+  getUrlId 
+} from '../../utils/utilFunctions';
 
 // texts
 import {
@@ -33,11 +36,11 @@ const CommentCard = styled(Paper)`
 `;
 
 interface Props {
-  comments: Models.Comment[];
+  comments: Models.GetCommentState[];
 };
 
 interface DispatchProps {
-  getCommentById: () => void;
+  getCommentById: (ideaId: string) => void;
 };
 
 interface StateProps {
@@ -52,7 +55,7 @@ const ShowCommentContainer: FC<DefaultProps> = ({
   getCommentById
 }) => {
   useEffect(() => {
-    getCommentById()
+    getCommentById(getUrlId())
   }, []);
 
   return (
@@ -61,10 +64,10 @@ const ShowCommentContainer: FC<DefaultProps> = ({
         <>
           { comments.map(comment => {
             return (
-              <IdeaContent>
+              <IdeaContent key={comment.commentId}>
                 <div style={{marginRight: '30px'}}>
                   <h5>{ comment.userName }</h5>
-                  <h5>{ CREATED_AT + ' ' + dateToString(comment.createdAt) }</h5>
+                  {/* <h5>{ CREATED_AT + ' ' + dateToString(comment.createdAt) }</h5> */}
                 </div>
                 <CommentCard>
                   { comment.content }
@@ -80,12 +83,12 @@ const ShowCommentContainer: FC<DefaultProps> = ({
 
 const mapStateToProps = (state: AppState) => ({
   isLoading: state.comment.isLoading,
-  comments: state.comment.comments
+  comments: state.comment.commentbyId
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
   bindActionCreators({
-    getCommentById: () => getCommentById.start()
+    getCommentById: ideaId => getCommentById.start(ideaId)
   }, dispatch);
 
 export default connect(

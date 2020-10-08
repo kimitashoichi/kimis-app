@@ -21,10 +21,10 @@ export function* runCretaeComment(action: Models.CreateCommentStart) {
   }
 }
 
-// TODO: get comment by idea id
-export function* runGetCommentById() {
+export function* runGetCommentById(action: Models.GetCommentStart) {
+  const ideaId = action.payload;
   const handler = API.getAllComment;
-  const {comments, error} = yield call(handler);
+  const {comments, error} = yield call(handler, ideaId);
   if(comments && !error) {
     console.log('OK commentSaga get');
     yield put(getCommentById.success(comments));
