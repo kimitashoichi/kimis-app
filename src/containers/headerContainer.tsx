@@ -91,7 +91,7 @@ const HeaderContainer: FC<DefaultProps> = ({
       { userInfo ? (
         <HeaderBox>
           <LoginInfo>
-            <h3>Product Logo</h3>
+            <LinkComponent src={'/'}>Product Logo</LinkComponent>
             <SearchFiled id="outlined-basic" label="serch word" variant="outlined" />
             <LoginInfoNav>{userInfo.displayName}</LoginInfoNav>
             <LoginInfoNav>{userInfo.userId}</LoginInfoNav>
@@ -99,6 +99,11 @@ const HeaderContainer: FC<DefaultProps> = ({
               <Navli>
                 <LinkComponent src={'/create'}>
                   <Button color="primary" variant="contained">Create</Button>
+                </LinkComponent>
+              </Navli>
+              <Navli>
+                <LinkComponent src={`/useredit/${userInfo.userId}`}>
+                  <Button color="primary" variant="contained">Edit Profile</Button>
                 </LinkComponent>
               </Navli>
               <Navli>
@@ -110,7 +115,7 @@ const HeaderContainer: FC<DefaultProps> = ({
       ) : (
         <HeaderBox>
           <LoginInfo>
-            <h3>Product Logo</h3>
+            <LinkComponent src={'/'}>Product Logo</LinkComponent>
             <SearchFiled id="outlined-basic" label="serch word" variant="outlined" />
             <Navli>
               <SessionButton 

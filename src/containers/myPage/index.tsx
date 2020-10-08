@@ -1,8 +1,10 @@
 import React, { FC, useState, useEffect } from 'react';
 
+// material UI
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Button from '@material-ui/core/Button'
 
 import UserMyPageDraftedIdeas from './userMyPageDrafedIdeaComponent';
 import UserMyPagePostedIdeas from './userMyPagePostedIdeaComponent';
@@ -46,7 +48,13 @@ const UserMyPage: FC<DefaultProps> = ({
     <>
       <IdeaShowUserProfile />
       <div className={Styles.useStyles().root}>
-      <LinkComponent src={`/useredit/${userInfo.userId}`}>Edit</LinkComponent>
+
+      { userInfo ? (
+          <LinkComponent src={`/useredit/${userInfo.userId}`}>
+            <Button variant="contained" >Edit</Button>
+          </LinkComponent>
+        ) : (null)}
+      
         <AppBar position="static">
           <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
             <Tab label="投稿アイディア" {...Styles.a11yProps(0)} />
