@@ -18,48 +18,28 @@ export const createComment = async (data: Models.Comment) => {
   };
 };
 
-export const getCommentbyId = async (id: string) => {
+export const getAllComment = async (ideaId: string) => {
   try {
-    let comment = null;
+    console.log('idea Id API', ideaId);
+    const comments: Models.GetCommentState[] = [];
     await firebase
     .firestore()
     .collection('comments')
-    .doc(id)
-    .get()
-    .then(doc => {
-      if(!doc.exists) {
-        console.log('comment dose not exist');
-        return;
-      }
-      const data = Object.assign({}, doc.data());
-      data.createdAt = data.createdAt.toDate();
-      comment = data;
-    }).catch(error => {
-      throw new Error(error.message);
-    })
-    return { comment };
-  } catch(error) {
-    return { error };
-  }
-}
-
-export const getAllComment = async () => {
-  try {
-    const comments: Models.Comment[] = [];
-    await firebase
-    .firestore()
-    .collection('comments')
+    .where('ideaId', '==', ideaId)
     .get()
     .then(snapShot => {
       if(snapShot.empty) {
         console.log('comment dose not exist');
         return;
       }
-      snapShot.forEach(com => {
+      snapShot.forEach(doc => {
         comments.push({
-          content: com.data().content ? com.data().content : 'no content',
-          userName: com.data().userName ? com.data().userName: 'no author',
-          createdAt: com.data().createdAt ? com.data().createdAt.toDate() : null
+          commentId: doc.id,
+          userId: doc.data().userId,
+          ideaId: doc.data().ideaId,
+          content: doc.data().content,
+          userName: doc.data().userName,
+          createdAt: doc.data().createdAt
         });
       });
     }).catch(error => {
@@ -68,5 +48,24 @@ export const getAllComment = async () => {
     return { comments };
   } catch(error) {
     return { error };
+  }
+}
+
+export const deleteComment = async(commentId: string) => 
+{
+  console.log('comment delete API', commentId)
+  try {
+    await firebase
+    .firestore()
+    .collection('comments')
+    .doc(commentId)
+    .delete()
+    .catch(error => {
+      throw new Error(error.message);
+    })
+    const success = {success: '200 OK, success'};
+    return {success}
+  } catch(error) {
+    return {error}
   }
 }

@@ -5,7 +5,8 @@ import * as ActionTypes from '../constants/actionTypes';
 import * as API from '../apis/commentAPI';
 import { 
   createComment,
-  getCommentById
+  getCommentById,
+  deleteComment
  } from '../actions/commentAction';
 
 export function* runCretaeComment(action: Models.CreateCommentStart) {
@@ -21,10 +22,10 @@ export function* runCretaeComment(action: Models.CreateCommentStart) {
   }
 }
 
-// TODO: get comment by idea id
-export function* runGetCommentById() {
+export function* runGetCommentById(action: Models.GetCommentStart) {
+  const commentId = action.payload;
   const handler = API.getAllComment;
-  const {comments, error} = yield call(handler);
+  const {comments, error} = yield call(handler, commentId);
   if(comments && !error) {
     console.log('OK commentSaga get');
     yield put(getCommentById.success(comments));
@@ -34,10 +35,24 @@ export function* runGetCommentById() {
   }
 }
 
+export function* runDeleteCommentSaga(action: Models.DeleteCommentStart) {
+  const commentId = action.payload;
+  const handler = API.deleteComment;
+  const { success, error } = yield call(handler, commentId);
+  if(success && !error){
+    console.log('OK runDeleteCommentSaga');
+    yield put(deleteComment.success())
+  } else {
+    console.log('NG runDeleteCommentSaga');
+    yield put(deleteComment.failure())
+  }
+}
+
 
 export function* watchComments() {
   yield takeEvery(ActionTypes.CREATE_COMMENT_START, runCretaeComment);
   yield takeEvery(ActionTypes.GET_COMMENT_START, runGetCommentById);
+  yield takeEvery(ActionTypes.DELETE_COMMENT_START, runDeleteCommentSaga);
 }
 
 

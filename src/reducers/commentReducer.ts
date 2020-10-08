@@ -6,11 +6,14 @@ import * as ActionTypes from '../constants/actionTypes';
 const initialState = {
   isLoading: false,
   comment: {
+    userId: '',
+    ideaId: '',
     content: '',
     userName: 'test taro',
     createdAt: new Date()
   },
-  comments: [] 
+  comments: [] ,
+  commentbyId: []
 }
 
 const comment: Reducer<
@@ -36,7 +39,7 @@ const comment: Reducer<
           ...state,
           isLoading: false
         };
-      case ActionTypes.CREATE_COMMENT_SUCCESS:
+      case ActionTypes.GET_COMMENT_START:
         return {
           ...state,
           isLoading: true
@@ -45,9 +48,24 @@ const comment: Reducer<
         return {
           ...state,
           isLoading: false,
-          comments: action.payload
+          commentbyId: action.payload
         }
       case ActionTypes.GET_COMMENT_FAILURE:
+        return {
+          ...state,
+          isLoading: false
+        }
+      case ActionTypes.DELETE_COMMENT_START:
+        return {
+          ...state,
+          isLoading: true
+        }
+      case ActionTypes.DELETE_COMMENT_SUCCESS:
+        return {
+          ...state,
+          isLoading: false
+        }
+      case ActionTypes.DELETE_COMMENT_FAILURE:
         return {
           ...state,
           isLoading: false
