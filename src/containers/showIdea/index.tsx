@@ -7,11 +7,10 @@ import IdeaShowUserProfile from './showIdeaUserProfile';
 import ShowCommentContainer from './showCommentContainer';
 import CreateCommentContainer from './createCommentContainer';
 
-
 const ShowPageWarpper = styled.div`
   width: 50%
   margin: 0 auto;
-`
+`;
 // 投稿一覧画面から遷移した時に指定の投稿データの詳細を表示するために投稿に関するIDを全て取得しなければいけない
 interface StateProps {
   ideaId: number;

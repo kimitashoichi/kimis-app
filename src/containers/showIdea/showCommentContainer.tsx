@@ -4,6 +4,7 @@ import { bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 
 // material ui
+import Paper from '@material-ui/core/Paper';
 
 // file
 import * as Models from '../../models/commentModel';
@@ -22,7 +23,14 @@ const IdeaContent = styled.div`
   width: 60%;
   margin: 0 auto;
   display: flex;
-`
+`;
+
+const CommentCard = styled(Paper)`
+  min-width: 600px;
+  max-width: 800px;
+  min-height: 70px;
+  margin: 20px 0px;
+`;
 
 interface Props {
   comments: Models.Comment[];
@@ -43,7 +51,6 @@ const ShowCommentContainer: FC<DefaultProps> = ({
   comments,
   getCommentById
 }) => {
-
   useEffect(() => {
     getCommentById()
   }, []);
@@ -57,11 +64,11 @@ const ShowCommentContainer: FC<DefaultProps> = ({
               <IdeaContent>
                 <div style={{marginRight: '30px'}}>
                   <h5>{ comment.userName }</h5>
+                  <h5>{ CREATED_AT + ' ' + dateToString(comment.createdAt) }</h5>
                 </div>
-                <div>
-                  <h5>{ comment.content }</h5>
-                  <h6>{CREATED_AT + ' ' + dateToString(comment.createdAt) }</h6>
-                </div>
+                <CommentCard>
+                  { comment.content }
+                </CommentCard>
               </IdeaContent>
             )
           })}

@@ -1,7 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
 
 import * as Models from '../../models/ideaModel';
 import { AppState } from '../../models';

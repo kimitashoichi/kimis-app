@@ -24,7 +24,6 @@ const FooterMenu = styled.li`
   display: inline;
 `;
 
-
 const FooterComponent: FC = () => {
   const paths = ['administrator', 'privacy', 'terms', 'about', 'feedback']
   return (

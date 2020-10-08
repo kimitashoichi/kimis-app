@@ -19,7 +19,7 @@ const FbShareButton: FC<StateProps> = ({
         <FacebookIcon size={43} />
       </FacebookShareButton>
     </>
-  )
-}
+  );
+};
 
 export default FbShareButton;

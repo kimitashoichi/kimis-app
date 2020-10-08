@@ -7,7 +7,6 @@ import Tab from '@material-ui/core/Tab';
 
 import GoodCountIdeaComponent from './goodCountIdeaComponent';
 import LatestIdeaComponent from './latestIdeaContainer';
-import IdeaShowUserProfile from '../showIdea/showIdeaUserProfile';
 import * as Styles from '../../utils/style';
 
 //  ユーザーのログイン判定のために使用する？
@@ -17,14 +16,13 @@ interface StateProps {
 
 const TopIndexComponent: FC = ({}) => {
   const [value, setValue] = useState<number>(0);
-
+  
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
 
   return (
     <>
-     <IdeaShowUserProfile />
       <div className={Styles.useStyles().root}>
         <AppBar position="static">
           <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">

@@ -14,7 +14,6 @@ import {
  } from '../actions/userAction';
 import { AppState } from '../models';
 
-
 const SubmitButton = styled(Button)`
   background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
   border-radius: 3px;
@@ -90,37 +89,29 @@ const EditUserProfile: FC<DefaultProps> = ({
             <TitleLabel>displayName</TitleLabel>
             <StyledTextField
               value={displayName}
-              onChange={e => setDisplayName(e.target.value)}
-            />
+              onChange={e => setDisplayName(e.target.value)}/>
 
             <TitleLabel>email</TitleLabel>
             <StyledTextField
               value={email}
-              onChange={e => setEmail(e.target.value)}
-            />
+              onChange={e => setEmail(e.target.value)}/>
 
             <TitleLabel>introduce</TitleLabel>
             <StyledTextField
               value={introduce}
-              onChange={e => setIntroduce(e.target.value)}
-            />
+              onChange={e => setIntroduce(e.target.value)}/>
 
             <TitleLabel>phoneNumber</TitleLabel>
             <StyledTextField
               value={phoneNumber}
-              onChange={e => setPhoneNumber(e.target.value)}
-            />
+              onChange={e => setPhoneNumber(e.target.value)}/>
 
             <TitleLabel>userName</TitleLabel>
             <StyledTextField
               value={userName}
-              onChange={e => setUserName(e.target.value)}
-            />
+              onChange={e => setUserName(e.target.value)}/>
 
-
-            <SubmitButton
-              onClick={handleOnSubmit}
-            >更新</SubmitButton>
+            <SubmitButton onClick={handleOnSubmit}>更新</SubmitButton>
           </TextFieldWapper>
         ) : (
           <div>Login Please</div>
