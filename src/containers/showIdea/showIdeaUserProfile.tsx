@@ -1,17 +1,14 @@
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
 
 // file
 import { getUserInformation } from '../../actions/userAction';
 import * as Models from '../../models/userModels';
 import { AppState } from '../../models';
 
-const UserProf = styled.div`
-  width: 60%;
-  margin: 0 auto;
-`;
+// ui design
+import { UserProf } from './style';
 
 interface Props {
   userInfromation?: Models.LoginUser;

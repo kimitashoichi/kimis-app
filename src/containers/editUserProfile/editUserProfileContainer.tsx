@@ -1,45 +1,23 @@
 import React, {FC, useState, useEffect, FormEvent}  from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
 
-// material ui
-import Button from '@material-ui/core/Button';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-
-import * as Models from '../models/userModels';
+import * as Models from '../../models/userModels';
 import { 
   editUserProfile,
   alreadyLoginUserAction,
- } from '../actions/userAction';
-import { AppState } from '../models';
-import { getUrlId } from '../utils/utilFunctions';
+ } from '../../actions/userAction';
+import { AppState } from '../../models';
+import { getUrlId } from '../../utils/utilFunctions';
 
-const SubmitButton = styled(Button)`
-  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
-  border-radius: 3px;
-  border: 0;
-  color: white;
-  height: 38px;
-  padding: 0 20px;
-  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
-`;
-
-const TextFieldWapper = styled.div`
-  margin: 0 auto;
-  text-align: center;
-  width: 50%;
-`;
-
-const StyledTextField = styled(TextareaAutosize)`
-  width: 100%;
-  height: 60%;
-`;
-
-const TitleLabel = styled.div`
-  text-align: left;
-`;
+// ui design
+import {
+  SubmitButton,
+  TextFieldWapper,
+  StyledTextField,
+  TitleLabel
+} from './style';
 
 interface DispatchProps {
   editUserProfile: (editData: Models.LoginUser) => void;

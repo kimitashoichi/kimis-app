@@ -1,11 +1,6 @@
 import React, { FC, useState, FormEvent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components'
-
-// material-ui
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 
 // file
 import * as Models from '../../models/commentModel';
@@ -15,36 +10,14 @@ import { createComment } from '../../actions/commentAction';
 import { AppState } from '../../models';
 import { getUrlId } from '../../utils/utilFunctions';
 
-const SubmitButton = styled(Button)`
-  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
-  border-radius: 3px;
-  border: 0;
-  color: white;
-  height: 38px;
-  padding: 0 30px;
-  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
-`;
-
-const StyledTextField = styled(TextField)`
-  height: 60%;
-  width: 100%;
-  margin: 0 auto;
-`;
-
-const TextFieldWapper = styled.div`
-  margin: 0 auto;
-  text-align: center;
-  width: 45%;
-`;
-
-const TextFieldLabel = styled.h3`
-  text-align: left;
-`;
-
-const ButtonWapper = styled.div`
-  padding-top: 20px;
-  text-align: right;
-`;
+// ui design
+import {
+  SubmitButton,
+  StyledTextField,
+  TextFieldWapper,
+  TextFieldLabel,
+  ButtonWapper
+} from './style'
 
 interface StateProps {
   isLoading?: boolean;

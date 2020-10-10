@@ -1,7 +1,6 @@
 import React, {FC, useEffect} from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
 
 // file
 import ShowIdeabyIdContainer from './showIdeaContainer';
@@ -11,12 +10,8 @@ import CreateCommentContainer from './createCommentContainer';
 import { getUserInformation } from '../../actions/userAction';
 import * as Models from '../../models/userModels';
 import { AppState } from '../../models';
+import { ShowPageWarpper } from './style';
 
-const ShowPageWarpper = styled.div`
-  width: 50%
-  margin: 0 auto;
-`;
-// 投稿一覧画面から遷移した時に指定の投稿データの詳細を表示するために投稿に関するIDを全て取得しなければいけない
 interface StateProps {
   userInfromation?: Models.LoginUser;
   isLoading?: boolean;
@@ -39,6 +34,15 @@ const ShowIdeaContainer: FC<DefaultProps> = ({
     }
   }, [])
 
+  let uid: string;
+  function currentUserCheck(): boolean {
+    if(userInfromation){
+      if(userInfromation.userId !== '') {
+        return true;
+      }
+    }
+    return false;
+  }
 
   return (
     <>
@@ -46,7 +50,11 @@ const ShowIdeaContainer: FC<DefaultProps> = ({
         <IdeaShowUserProfile userInfromation={userInfromation} />
         <ShowIdeabyIdContainer />
         <ShowCommentContainer userInfo={userInfromation} />
-        <CreateCommentContainer userInfo={userInfromation} />
+
+        { currentUserCheck() ? (
+          <CreateCommentContainer userInfo={userInfromation} />
+          ) : (null) }
+          
       </ShowPageWarpper>
     </>
   );

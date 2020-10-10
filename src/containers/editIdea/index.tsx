@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
 import { Redirect } from 'react-router-dom';
 
 import EditingIdeasContainer from './editIdeaContainer';
@@ -12,10 +11,8 @@ import * as UModels from '../../models/userModels';
 import { AppState } from '../../models'
 import { connect } from 'react-redux';
 
-const IdeaEditWarapper = styled.div`
-  width: 60%
-  margin: 0 auto;
-`;
+// ui design
+import { IdeaEditWarapper } from './style';
 
 interface DispathcProps {
   alreadyLogin: () => void;
