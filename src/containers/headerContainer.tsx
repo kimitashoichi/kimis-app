@@ -79,8 +79,7 @@ const HeaderContainer: FC<DefaultProps> = ({
   useEffect(() => {
     alreadyLogin()
     getloginUserInfo(userInfo.userId);
-    console.log(userInfo.userId);
-  }, []);
+  }, [userInfo.userId]);
 
   if(userInfo){
     console.log(userInfo.userId ? userInfo.userId : 'nothing user id');
@@ -88,7 +87,7 @@ const HeaderContainer: FC<DefaultProps> = ({
 
   return (
     <>
-      { userInfo ? (
+      { userInfo.userId ? (
         <HeaderBox>
           <LoginInfo>
             <LinkComponent src={'/'}>Product Logo</LinkComponent>

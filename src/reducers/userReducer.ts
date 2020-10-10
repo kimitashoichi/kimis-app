@@ -6,7 +6,14 @@ import * as Models from '../models/userModels';
 
 const InitialState: Models.LoginUserState = {
   isLoading: false,
-  loginUser: { userId: '' }
+  loginUser: {
+    userId: '',
+    email: '',
+    displayName: '',
+    phoneNumber: '',
+    userName: '',
+    introduce: ''
+  }
 };
 
 const user: Reducer<
@@ -57,6 +64,7 @@ const user: Reducer<
     case ActionTypes.USER_LOGOUT_SUCCESS:
         return {
           ...state,
+          loginUser : InitialState.loginUser,
           isLoading: false
         }
     case ActionTypes.USER_LOGOUT_FAILURE:

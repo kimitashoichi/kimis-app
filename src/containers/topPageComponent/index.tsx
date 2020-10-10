@@ -1,4 +1,4 @@
-import React, { FC, useState,  } from  'react';
+import React, { FC, useState } from  'react';
 
 // material ui
 import AppBar from '@material-ui/core/AppBar';
@@ -9,14 +9,8 @@ import GoodCountIdeaComponent from './goodCountIdeaComponent';
 import LatestIdeaComponent from './latestIdeaContainer';
 import * as Styles from '../../utils/style';
 
-//  ユーザーのログイン判定のために使用する？
-interface StateProps {
-  isLoading: boolean;
-}
-
 const TopIndexComponent: FC = ({}) => {
   const [value, setValue] = useState<number>(0);
-  
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
   };
@@ -37,12 +31,9 @@ const TopIndexComponent: FC = ({}) => {
         <Styles.TabPanel value={value} index={1}>
           <GoodCountIdeaComponent />
         </Styles.TabPanel>
-        <Styles.TabPanel value={value} index={2}>
-          フォロー中のユーザーの投稿が表示される
-        </Styles.TabPanel>
       </div>
     </>
   );
 };
 
-export default TopIndexComponent;
+  export default TopIndexComponent;

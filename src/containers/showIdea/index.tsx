@@ -1,4 +1,6 @@
 import React, {FC, useEffect} from 'react';
+import { bindActionCreators, Dispatch } from 'redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 // file
@@ -9,8 +11,6 @@ import CreateCommentContainer from './createCommentContainer';
 import { getUserInformation } from '../../actions/userAction';
 import * as Models from '../../models/userModels';
 import { AppState } from '../../models';
-import { bindActionCreators, Dispatch } from 'redux';
-import { connect } from 'react-redux';
 
 const ShowPageWarpper = styled.div`
   width: 50%

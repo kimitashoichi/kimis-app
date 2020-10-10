@@ -38,7 +38,7 @@ export const logoutUserAction = {
   }),
 
   success: () => ({
-    type: ActionTypes.USER_LOGIN_SUCCESS as typeof ActionTypes.USER_LOGOUT_SUCCESS
+    type: ActionTypes.USER_LOGOUT_SUCCESS as typeof ActionTypes.USER_LOGOUT_SUCCESS
   }),
 
   failure: () => ({
