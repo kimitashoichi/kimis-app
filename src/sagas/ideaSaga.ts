@@ -70,10 +70,10 @@ export function* runGetIdeasByLatest() {
 
 export function* runGetIdeasByGood() {
   const handler = API.getIdeasByGood;
-  const {ideas, error} = yield call(handler);
-  if(ideas && !error) {
+  const {resultIdeas, error} = yield call(handler);
+  if(resultIdeas && !error) {
     console.log('OK GetGoodIdeas Saga');
-    yield put(getIdeasByGoodCount.success(ideas));
+    yield put(getIdeasByGoodCount.success(resultIdeas));
   } else {
     console.log('NG GetGoodIdeas Saga');
     yield put(getIdeasByGoodCount.failure());

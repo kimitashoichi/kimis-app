@@ -169,23 +169,23 @@ export const getIdeasByGood = async () => {
   try {
     console.log('idea good count')
     const ideas: Models.PostIdea[] = [];
+    let resultIdeas: Models.PostIdea[] = [];
     await firebase
     .firestore()
     .collection('AllIdea')
     .orderBy('goodCount', 'desc')
-    .where('postFlag', '==', true)
     .get()
     .then(snapShot => {
       if(snapShot.empty){
         return;
       }
-      snapShot.forEach(doc => {
+      snapShot.forEach((doc) => {
         ideas.push({
           ideaId: doc.id,
           title: doc.data().title ? doc.data().title : 'not title',
           content: doc.data().content,
           uid: doc.data().uid,
-          authorName: doc.data().uid,
+          authorName: doc.data().authorName ? doc.data().authorName : 'no author',
           postFlag: doc.data().postFlag,
           createdAt: doc.data().createdAt.toDate(),
           updatedAt: doc.data().updatedAt ? doc.data().updatedAt.toDate() : null,
@@ -195,7 +195,10 @@ export const getIdeasByGood = async () => {
     }).catch(error => {
       throw new Error(error.message);
     })
-    return { ideas };
+    resultIdeas = ideas.filter(postData => 
+      postData.postFlag === true
+    )
+    return { resultIdeas };
   } catch(error) {
     return { error };
   }
