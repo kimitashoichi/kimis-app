@@ -1,6 +1,4 @@
 // initialize firebase
-
-
 import firebase from 'firebase';
 import 'firebase/auth';
 
@@ -19,5 +17,4 @@ firebase.initializeApp(config);
 
 export const db = firebase.firestore();
 export const functions = firebase.functions();
-
 export default firebase;

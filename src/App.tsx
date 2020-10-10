@@ -1,4 +1,3 @@
-// TODO: Component sepalete, According to the layout
 import * as React from 'react';
 import { StylesProvider } from '@material-ui/styles';
 import { 
@@ -14,14 +13,11 @@ import IdeaEditContainer from './containers/editIdea';
 import EditUserProfile from './containers/editUserProfile/editUserProfileContainer'
 import HeaderContainer from './containers/header/headerContainer';
 import FooterComponent from './components/footer';
-
 // footer Menu Compoent
-import AboutAdministrator from './components/footerMenu/aboutAdministrator'
-import Privacy from './components/footerMenu/privacy'
-import Feedback from './components/footerMenu/feedback'
-import Contact from './components/footerMenu/contact'
-
-
+import AboutAdministrator from './components/footerMenu/aboutAdministrator';
+import Privacy from './components/footerMenu/privacy';
+import Feedback from './components/footerMenu/feedback';
+import Contact from './components/footerMenu/contact';
 
 const App: React.FC = () => {
   return (

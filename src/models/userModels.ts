@@ -7,7 +7,6 @@ export interface LoginUser {
   phoneNumber?: string;
   userName?: string;
   introduce?: string;
-  // add any properties
 };
 
 export interface LoginUserState {
@@ -46,16 +45,16 @@ export interface LoginFailure {
 };
 
 // user already login action
-export interface alreadyLoginStart {
+export interface AlreadyLoginStart {
   type: typeof ActionTypes.USER_ALREADY_LOGIN_START
 };
 
-export interface alreadyLoginSuccess {
+export interface AlreadyLoginSuccess {
   type: typeof ActionTypes.USER_ALREADY_LOGIN_SUCCESS
   payload: LoginUser
 };
 
-export interface alreadyLoginFailure {
+export interface AlreadyLoginFailure {
   type: typeof ActionTypes.USER_ALREADY_LOGIN_FAILURE
 };
 
@@ -73,16 +72,16 @@ export interface LogoutFailure {
 };
 
 // user edit profile
-export interface editProfileStart {
+export interface EditProfileStart {
   type: typeof ActionTypes.USER_PROFILE_EDIT_START
   payload: LoginUser
 };
 
-export interface editProfileSuccess {
+export interface EditProfileSuccess {
   type: typeof ActionTypes.USER_PROFILE_EDIT_SUCCESS
 };
 
-export interface editProfileSFailure {
+export interface EditProfileSFailure {
   type: typeof ActionTypes.USER_PROFILE_EDIT_FAILURE
 };
 
@@ -96,10 +95,10 @@ export type getUserAction =
   | LogoutStart
   | LogoutSuccess
   | LogoutFailure
-  | alreadyLoginStart
-  | alreadyLoginSuccess
-  | alreadyLoginFailure
-  | editProfileStart
-  | editProfileSuccess
-  | editProfileSFailure;
+  | AlreadyLoginStart
+  | AlreadyLoginSuccess
+  | AlreadyLoginFailure
+  | EditProfileStart
+  | EditProfileSuccess
+  | EditProfileSFailure;
 

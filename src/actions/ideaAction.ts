@@ -45,7 +45,6 @@ export const getIdeabyId = {
     type: ActionTypes.GET_IDEA_START as typeof ActionTypes.GET_IDEA_START,
     payload: ideaId
   }),
-  // TODO: rename 'PostIdea', beacuse anywhere use 'PostIdea' interface
   success: (payload: Models.PostIdea) => ({
     type: ActionTypes.GET_IDEA_SUCCESS as typeof ActionTypes.GET_IDEA_SUCCESS,
     payload: payload

@@ -3,14 +3,14 @@ import * as ActionTypes from '../constants/actionTypes';
 // オプショナルなプロパティはできるだけ無くしたい
 export interface PostIdea {
   ideaId?: string;
-  uid?: string;
+  uid: string;
   title?: string;
   authorName?: string;
   content: string;
   createdAt: Date;
   postFlag: boolean;
   updatedAt: Date | null;
-  goodCount?: number;
+  goodCount: number;
   // TODO: before implements
   // uid: string
   // tags: []

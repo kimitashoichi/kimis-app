@@ -10,12 +10,9 @@ import { compose } from '@material-ui/system';
 declare var window: ExtendedWindow;
 
 export default function configureStore(history: History) {
-
   const sagaMiddleware = createSagaMiddleware();
   const composeReduxDevToolExtension = typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-
   const enhanser = composeReduxDevToolExtension(applyMiddleware(sagaMiddleware));
-
   const store = createStore(
     rootReducer(history),
     enhanser
