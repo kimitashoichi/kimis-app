@@ -16,6 +16,7 @@ import { Dispatch, bindActionCreators } from 'redux';
 import { alreadyLoginUserAction } from '../../actions/userAction';
 import { connect } from 'react-redux';
 import * as UModels from '../../models/userModels';
+import { getUrlId } from '../../utils/utilFunctions';
 
 interface StateProps {
   isLoading?: boolean;
@@ -35,6 +36,7 @@ const UserMyPage: FC<DefaultProps> = ({
   userInfo
 }) => {
   const [value, setValue] = useState<number>(0);
+  const [currentUrl, setCurrentUrl] = useState<string>(getUrlId());
   const [userId, setUserId] = useState<string | null>(userInfo ? userInfo.userId : null);
   
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
@@ -50,7 +52,7 @@ const UserMyPage: FC<DefaultProps> = ({
       <IdeaShowUserProfile />
       <div className={Styles.useStyles().root}>
 
-      { userInfo ? (
+      { userInfo.userId === currentUrl ? (
           <LinkComponent src={`/useredit/${userInfo.userId}`}>
             <Button variant="contained" >Edit</Button>
           </LinkComponent>
@@ -59,16 +61,26 @@ const UserMyPage: FC<DefaultProps> = ({
         <AppBar position="static">
           <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
             <Tab label="投稿アイディア" {...Styles.a11yProps(0)} />
-            <Tab label="下書きアイディア" {...Styles.a11yProps(1)} />
+
+            {/* 下書きアイディアは投稿者しかみることができないようにするため */}
+            { userInfo.userId === currentUrl ? (
+              <Tab label="下書きアイディア" {...Styles.a11yProps(1)} />
+            ) : (null)}
+
             <Tab label="作りたいアイディア" {...Styles.a11yProps(2)} />
           </Tabs>
         </AppBar>
         <Styles.TabPanel value={value} index={0}>
           <UserMyPagePostedIdeas userId={userId}/>
         </Styles.TabPanel>
-        <Styles.TabPanel value={value} index={1}>
-          <UserMyPageDraftedIdeas />
-        </Styles.TabPanel>
+
+        {/* 下書きアイディアは投稿者しかみることができないようにするため */}
+        { userInfo.userId === getUrlId() ? (
+          <Styles.TabPanel value={value} index={1}>
+            <UserMyPageDraftedIdeas />
+          </Styles.TabPanel>
+        ) : (null)}
+
         <Styles.TabPanel value={value} index={2}>
           Item Three
         </Styles.TabPanel>
