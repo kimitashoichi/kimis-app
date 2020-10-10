@@ -28,7 +28,7 @@ const IdeaBox = styled(Card)`
 //  TODO: divタグで作成しているが呼び出ししている親コンポーネントで囲っている要素がpタグなのでコンソールにエラーが出ている。elemet要素を変更してエラーが出ないようにする
 
 interface StateProps {
-  idea?: Models.PostIdea
+  idea?: Models.PostIdea;
 }
 
 const IdeaSingleComponent: FC<StateProps> = ({idea}) => {
