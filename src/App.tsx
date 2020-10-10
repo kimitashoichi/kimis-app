@@ -15,6 +15,13 @@ import EditUserProfile from './containers/editUserProfileContainer'
 import HeaderContainer from './containers/headerContainer';
 import FooterComponent from './components/footer';
 
+// footer Menu Compoent
+import AboutAdministrator from './components/footerMenu/aboutAdministrator'
+import Privacy from './components/footerMenu/privacy'
+import Feedback from './components/footerMenu/feedback'
+import Contact from './components/footerMenu/contact'
+
+
 
 const App: React.FC = () => {
   return (
@@ -28,6 +35,10 @@ const App: React.FC = () => {
             <Route path='/profile/:author_name' component={UserMyPage} />
             <Route path='/edit/:ideaId' component={IdeaEditContainer} />
             <Route path='/useredit/:userId' component={EditUserProfile} />
+            <Route exact path='/administrator' component={AboutAdministrator} />
+            <Route exact path='/privacy' component={Privacy} />
+            <Route exact path='/contact' component={Feedback} />
+            <Route exact path='/feedback' component={Contact} />
           <FooterComponent />
         </Router>
      </StylesProvider>
