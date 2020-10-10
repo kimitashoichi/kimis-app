@@ -13,10 +13,7 @@ import { AppState } from '../../models';
 import { getUrlId } from '../../utils/utilFunctions';
 
 // texts
-import {
-  NOT_FOUND_IDEA,
-  CREATED_AT
-} from '../../constants/textIndex';
+import { NOT_FOUND_IDEA } from '../../constants/textIndex';
 
 // ui design
 import {

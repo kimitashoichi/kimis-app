@@ -60,7 +60,7 @@ export function* runLogout() {
   }
 }
 
-export function* runEditProfile(action: Models.editProfileStart) {
+export function* runEditProfile(action: Models.EditProfileStart) {
   const data = action.payload;
   console.log('runEditProfile', data);
   const handler = API.editProfile;

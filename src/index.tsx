@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createBrowserHistory } from 'history'
+import { createBrowserHistory } from 'history';
 
 import './index.css';
 import App from './App';
@@ -9,8 +9,7 @@ import * as serviceWorker from './serviceWorker';
 import configureStore from './configureStore';
 
 const history = createBrowserHistory();
-const store = configureStore(history)
-
+const store = configureStore(history);
 
 ReactDOM.render(
   <Provider store={store}>

@@ -44,7 +44,7 @@ const EditingIdeasContainer: FC<DefaultProps> = ({
   const [title, setTitle] = useState<string | undefined>(idea ? idea.title : '');
   const [ideaContent, setIdeaContent] = useState<string>(idea ? idea.content : '');
   const [createDate, setCrateDate] = useState<Date>(idea ? idea.createdAt: new Date());
-  const [goodCount, setGoodCount] = useState<number | undefined>(idea ? idea.goodCount : 0);
+  const [goodCount, setGoodCount] = useState<number>(idea ? idea.goodCount : 0);
   const [postFlag, setPostFlag] = useState<boolean>(true);
 
   const history = useHistory();

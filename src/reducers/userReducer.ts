@@ -3,7 +3,6 @@ import { Reducer } from 'redux';
 import * as ActionTypes from '../constants/actionTypes';
 import * as Models from '../models/userModels';
 
-
 const InitialState: Models.LoginUserState = {
   isLoading: false,
   loginUser: {
@@ -62,16 +61,16 @@ const user: Reducer<
         isLoading: true
       }
     case ActionTypes.USER_LOGOUT_SUCCESS:
-        return {
-          ...state,
-          loginUser : InitialState.loginUser,
-          isLoading: false
-        }
+      return {
+        ...state,
+        loginUser : InitialState.loginUser,
+        isLoading: false
+      }
     case ActionTypes.USER_LOGOUT_FAILURE:
-        return {
-          ...state,
-          isLoading: false
-        }
+      return {
+        ...state,
+        isLoading: false
+      }
     case ActionTypes.USER_ALREADY_LOGIN_START:
       return {
         ...state,
@@ -89,11 +88,11 @@ const user: Reducer<
         isLoading: false
       }
     case ActionTypes.USER_PROFILE_EDIT_START:
-        return {
-          ...state,
-          isLoading: true,
-          loginUser: action.payload
-        }
+      return {
+        ...state,
+        isLoading: true,
+        loginUser: action.payload
+      }
     case ActionTypes.USER_PROFILE_EDIT_SUCCESS:
       return {
         ...state,

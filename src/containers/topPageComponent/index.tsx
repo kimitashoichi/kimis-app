@@ -9,7 +9,7 @@ import GoodCountIdeaComponent from './goodCountIdeaComponent';
 import LatestIdeaComponent from './latestIdeaContainer';
 import * as Styles from '../../utils/style';
 
-const TopIndexComponent: FC = ({}) => {
+const TopIndexComponent: FC = () => {
   const [value, setValue] = useState<number>(0);
   const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
     setValue(newValue);
