@@ -11,8 +11,8 @@ import TopIndexComponent from './containers/topPageComponent';
 import ShowIdeaContainer from './containers/showIdea';
 import IdeaCreateContainer from './containers/createIdea';
 import IdeaEditContainer from './containers/editIdea';
-import EditUserProfile from './containers/editUserProfileContainer'
-import HeaderContainer from './containers/headerContainer';
+import EditUserProfile from './containers/editUserProfile/editUserProfileContainer'
+import HeaderContainer from './containers/header/headerContainer';
 import FooterComponent from './components/footer';
 
 // footer Menu Compoent

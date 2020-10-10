@@ -1,21 +1,37 @@
 import React, { FC } from 'react';
-import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 
 import PostIdeaContainer from './ideaPostContainer';
+import { IdeaCreateAndEditWarapper } from './style';
+import { AppState } from '../../models';
+import * as Models from '../../models/userModels';
 
-const IdeaCreateAndEditWarapper = styled.div`
-  width: 60%
-  margin: 0 auto;
-`;
+interface StateProps {
+  isLoading?: boolean;
+  userInfo: Models.LoginUser;
+}
 
-const IdeaCreateContainer: FC = () => {
+const IdeaCreateContainer: FC<StateProps> = ({
+  isLoading,
+  userInfo
+}) => {
   return (
     <>
-      <IdeaCreateAndEditWarapper>
-        <PostIdeaContainer />
-      </IdeaCreateAndEditWarapper>
+      { userInfo.userId ? (
+        <IdeaCreateAndEditWarapper>
+          <PostIdeaContainer />
+        </IdeaCreateAndEditWarapper>
+      ) : (<Redirect to='/' />)}
     </>
   );
 };
 
-export default IdeaCreateContainer;
+const mapStateToProps = (state: AppState) => ({
+  userInfo: state.userInfromation.loginUser,
+  isLoading: state.userInfromation.isLoading
+})
+
+export default connect(
+  mapStateToProps
+)(IdeaCreateContainer);

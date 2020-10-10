@@ -4,10 +4,6 @@ import { bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 
-//  material-ui
-import Button from '@material-ui/core/Button';
-import TextareaAutosize from '@material-ui/core/TextareaAutosize';
-
 //  file
 import { updateIdeaAction } from '../../actions/ideaAction';
 import * as Models from '../../models/ideaModel';
@@ -15,55 +11,17 @@ import * as UModels from '../../models/userModels';
 import * as TextIndex from '../../constants/textIndex';
 import { AppState } from '../../models'
 
-const StyledButton = styled(Button)`
-  background: linear-gradient(45deg, #808080 30%, #a9a9a9 90%);
-  border-radius: 3px;
-  border: 0;
-  color: white;
-  height: 38px;
-  padding: 0 20px;
-  box-shadow: 0 3px 5px 2px rgba(0, 0, 0, 0.2);
-  margin-right: 20px;
-`;
-
-const SubmitButton = styled(Button)`
-  background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
-  border-radius: 3px;
-  border: 0;
-  color: white;
-  height: 38px;
-  padding: 0 20px;
-  box-shadow: 0 3px 5px 2px rgba(255, 105, 135, .3);
-`;
-
-const StyledTextField = styled(TextareaAutosize)`
-  width: 100%;
-  height: 60%;
-`;
-
-const StyledTitleField = styled(TextareaAutosize)`
-  width: 100%;
-  height: 30%;
-`;
-
-const TextFieldWapper = styled.div`
-  margin: 0 auto;
-  text-align: center;
-  width: 50%;
-`;
-
-const ButtonWapper = styled.div`
-  padding-top: 20px;
-  text-align: right;
-`;
-
-const TitleLabel = styled.h3`
-  text-align: left;
-`;
-
-const ContentLabel = styled.h4`
-  text-align: left;
-`;
+// ui design
+import {
+  StyledButton,
+  SubmitButton,
+  StyledTextField,
+  StyledTitleField,
+  TextFieldWapper,
+  ButtonWapper,
+  TitleLabel,
+  ContentLabel
+} from './style'
 
 interface DispatchProps {
   updateIdea: (payload: Models.PostIdea) => void;

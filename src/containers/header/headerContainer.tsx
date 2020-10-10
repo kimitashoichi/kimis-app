@@ -1,58 +1,32 @@
 import React, {FC, useEffect} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
-
-// material ui
-import Button from '@material-ui/core/Button'
 
 // file
-import * as Models from '../models/userModels';
+import * as Models from '../../models/userModels';
 import { 
   loginUserAction,
   logoutUserAction,
   alreadyLoginUserAction,
   getUserInformation
- } from '../actions/userAction';
-import { AppState } from '../models';
-import LinkComponent from '../components/LinkComponest';
-import TextField from '@material-ui/core/TextField/TextField';
+ } from '../../actions/userAction';
+import { AppState } from '../../models';
+import LinkComponent from '../../components/LinkComponest';
 
-const HeaderBox = styled.div`
-  height: 70px;
-  align-items: center;
-  justify-content: center;
-`;
+// ui design
+import Button from '@material-ui/core/Button'
+import {
+  HeaderBox,
+  LoginInfo,
+  LoginInfoNav,
+  SessionButton,
+  Navli,
+  SearchFiled
+} from './style';
 
-const LoginInfo = styled.ul`
-  display: flex;
-`;
-
-const LoginInfoNav = styled.li`
-  text-align: center;
-  height: 50px;
-  line-height: 50px;
-  margin-right: 30px;
-  margin-left: 20px;
-  display: inline-block;
-`;
-
-const SessionButton = styled(Button)`
-  margin-left: auto;
-  margin-right: 200px;
-`;
-
-const Navli = styled.li`
-  margin: 10px;
-  display: inline-block;
-`;
-
-const SearchFiled = styled(TextField)`
-  margin-left: 30px;
-`;
 
 interface Props {
-  userInfo: Models.LoginUser
+  userInfo: Models.LoginUser;
 }
 
 interface StateProps {
@@ -80,10 +54,6 @@ const HeaderContainer: FC<DefaultProps> = ({
     alreadyLogin()
     getloginUserInfo(userInfo.userId);
   }, [userInfo.userId]);
-
-  if(userInfo){
-    console.log(userInfo.userId ? userInfo.userId : 'nothing user id');
-  }
 
   return (
     <>

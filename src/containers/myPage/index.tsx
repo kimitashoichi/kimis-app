@@ -1,4 +1,6 @@
 import React, { FC, useState, useEffect } from 'react';
+import { Dispatch, bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 // material UI
 import AppBar from '@material-ui/core/AppBar';
@@ -12,9 +14,7 @@ import IdeaShowUserProfile from '../showIdea/showIdeaUserProfile';
 import * as Styles from '../../utils/style';
 import LinkComponent from '../../components/LinkComponest';
 import { AppState } from '../../models';
-import { Dispatch, bindActionCreators } from 'redux';
 import { alreadyLoginUserAction } from '../../actions/userAction';
-import { connect } from 'react-redux';
 import * as UModels from '../../models/userModels';
 import { getUrlId } from '../../utils/utilFunctions';
 

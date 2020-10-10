@@ -1,12 +1,6 @@
 import React, { FC, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components';
-
-// material ui
-import Card from '@material-ui/core/Card';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 
 // file
 import * as Models from '../../models/commentModel';
@@ -16,10 +10,7 @@ import {
   deleteComment
  } from '../../actions/commentAction';
 import { AppState } from '../../models';
-import { 
-  dateToString,
-  getUrlId 
-} from '../../utils/utilFunctions';
+import { getUrlId } from '../../utils/utilFunctions';
 
 // texts
 import {
@@ -27,23 +18,13 @@ import {
   CREATED_AT
 } from '../../constants/textIndex';
 
-// styled elements
-const CommentContent = styled.div`
-  width: 60%;
-  margin: 0 auto;
-  display: flex;
-`;
-
-const CommentCard = styled(Card)`
-  min-width: 600px;
-  max-width: 800px;
-  min-height: 70px;
-  margin: 20px 0px;
-`;
-
-const DeleteButton = styled(Button)`
-  margin-left: 85%;
-`;
+// ui design
+import {
+  CommentContent,
+  CommentCard,
+  DeleteButton
+} from './style';
+import Typography from '@material-ui/core/Typography';
 
 interface Props {
   comments: Models.GetCommentState[];

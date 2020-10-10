@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from  'react';
+import React, { FC, useEffect } from  'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 
@@ -8,8 +8,8 @@ import { getIdeasByLatest } from '../../actions/ideaAction';
 import IdeaSingleComponent from '../../components/ideaSingleComponent';
 
 interface StateProps {
-  ideas: Models.PostIdea[]
-  isLoading: boolean
+  ideas: Models.PostIdea[];
+  isLoading: boolean;
 };
 
 interface DispatchProps {
@@ -29,10 +29,9 @@ const LatestIdeaComponent: FC<DefaultProps> = ({
 
   return (
     <>
-      {/* TODO: add key to  IdeaSingleComponent */}
       { ideas.map(idea => {
         return (
-          <IdeaSingleComponent idea={idea} key={idea.content.length}/>
+          <IdeaSingleComponent idea={idea} key={idea.ideaId}/>
         )
       })}
     </>

@@ -1,11 +1,6 @@
 import React, {FC, useEffect, FormEvent} from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
-import styled from 'styled-components'
-
-import Button from '@material-ui/core/Button'
-import Card from '@material-ui/core/Card';
-import Typography from '@material-ui/core/Typography';
 
 // file
 import * as Models from '../../models/ideaModel';
@@ -26,29 +21,16 @@ import {
   UPDATED_AT
 } from '../../constants/textIndex';
 
-// styled elements
-const IdeaContent = styled.div`
-  width: 60%;
-  margin: 0 auto;
-`
-const SubmitButton = styled(Button)`
-  background: linear-gradient(45deg, #6babfe 30%, #6b6dfe 90%);
-  border-radius: 3px;
-  border: 0;
-  color: white;
-  height: 38px;
-  padding: 0 30px;
-  box-shadow: 0 3px 5px 2px rgba(0,153,255, .3);
-`;
-
-const IdeaBox = styled(Card)`
-  min-width: 200px;
-  min-height: 200px;
-`;
-
+// ui design
+import {
+  IdeaContent,
+  ShowIdeaSubmitButton,
+  IdeaBox
+} from './style';
+import Typography from '@material-ui/core/Typography';
 
 interface Props {
-  idea: Models.PostIdea
+  idea: Models.PostIdea;
 }
 
 interface StateProps {
@@ -91,7 +73,7 @@ const ShowIdeabyIdContainer: FC<DefaultProps> = ({
             <Typography variant="h5" component="h2">{ idea.content }</Typography>
           </IdeaBox>
           <h2>{ idea.goodCount }</h2>
-          <SubmitButton onClick={(e) => handleOnGoodCount(e)}>いいね</SubmitButton>
+          <ShowIdeaSubmitButton onClick={(e) => handleOnGoodCount(e)}>いいね</ShowIdeaSubmitButton>
         </IdeaContent>
       ): (<IdeaContent>{NOT_FOUND_IDEA}</IdeaContent>)}
     </>
