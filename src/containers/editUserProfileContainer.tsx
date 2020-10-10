@@ -2,6 +2,7 @@ import React, {FC, useState, useEffect, FormEvent}  from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
+import { Redirect } from 'react-router-dom';
 
 // material ui
 import Button from '@material-ui/core/Button';
@@ -13,6 +14,7 @@ import {
   alreadyLoginUserAction,
  } from '../actions/userAction';
 import { AppState } from '../models';
+import { getUrlId } from '../utils/utilFunctions';
 
 const SubmitButton = styled(Button)`
   background: linear-gradient(45deg, #fe6b8b 30%, #ff8e53 90%);
@@ -62,6 +64,7 @@ const EditUserProfile: FC<DefaultProps> = ({
   const [introduce, setIntroduce] = useState<string | undefined>(loginUser ? loginUser.introduce : '');
   const [phoneNumber, setPhoneNumber] = useState<string | undefined>(loginUser ? loginUser.phoneNumber : '');
   const [userName, setUserName] = useState<string | undefined>(loginUser ? loginUser.userName : '');
+  const [currentUrl, setCurrentUrl] = useState<string>(getUrlId());
 
   useEffect(() => {
     alreadyLoginUserAction();
@@ -83,7 +86,7 @@ const EditUserProfile: FC<DefaultProps> = ({
 
   return (
     <>
-      { loginUser ? 
+      { loginUser.userId === currentUrl ? 
         (
           <TextFieldWapper>
             <TitleLabel>displayName</TitleLabel>
@@ -114,7 +117,7 @@ const EditUserProfile: FC<DefaultProps> = ({
             <SubmitButton onClick={handleOnSubmit}>更新</SubmitButton>
           </TextFieldWapper>
         ) : (
-          <div>Login Please</div>
+          <Redirect to='/' />
         )
       }
     </>

@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from 'react';
 import { bindActionCreators, Dispatch } from 'redux';
 import styled from 'styled-components';
+import { Redirect } from 'react-router-dom';
 
 import EditingIdeasContainer from './editIdeaContainer';
 import { getUrlId } from '../../utils/utilFunctions';
@@ -43,12 +44,14 @@ const EditContainer: FC<DefaultProps> = ({
 
   return (
     <>
-      { isLoading ? (<div>Loading</div>) : ( idea && (
-        <IdeaEditWarapper>
-          <EditingIdeasContainer idea={idea} userInfo={userInfo} />
-        </IdeaEditWarapper>
-       )
-      )}
+      { idea.uid === userInfo.userId ? 
+        ( idea && (
+          <IdeaEditWarapper>
+            <EditingIdeasContainer idea={idea} userInfo={userInfo} />
+          </IdeaEditWarapper>
+         ))
+      : (<Redirect to='/' />) 
+      }
     </>
   );
 };
