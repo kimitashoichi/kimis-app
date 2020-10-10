@@ -1,9 +1,7 @@
-// TODO: when login function implements, rename file for loginSaga.ts
-
 import { all, call, fork, put, takeEvery, takeLatest } from 'redux-saga/effects';
 
 import * as ActionTypes from '../constants/actionTypes';
-import * as API from '../apis/userAPI'; // TODO: implemets get user infromation API
+import * as API from '../apis/userAPI';
 import * as Models from '../models/userModels';
 import {
   getUserInformation,
