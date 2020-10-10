@@ -25,7 +25,7 @@ const FooterMenu = styled.li`
 `;
 
 const FooterComponent: FC = () => {
-  const paths = ['administrator', 'privacy', 'terms', 'about', 'feedback']
+  const paths = ['/', 'administrator', 'privacy', 'contact', 'feedback']
   return (
     <>
       <Footer>
